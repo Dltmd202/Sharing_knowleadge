@@ -17,6 +17,10 @@
 * `git branch [브랜치 이름]`
 * `git checkout [브랜치 이름]`
 * `git push -u origin [브랜치 이름]`
+
+## 필요한 것들
+* `pip install django`
+
   
 ## 개발
 * `source venv/Scripts/activate`

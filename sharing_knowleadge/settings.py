@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'answer',
     'category',
     'question',
-    'user'
+    'user',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,7 @@ STATICFILES_DIRS = [
     Path(BASE_DIR, 'category', 'static'),
     Path(BASE_DIR, 'question', 'static'),
     Path(BASE_DIR, 'user', 'static'),
+    Path(BASE_DIR, 'home', 'static')
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

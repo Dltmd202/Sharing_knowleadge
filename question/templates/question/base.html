@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{% block head_title %}Question{% endblock %}</title>
+</head>
+<body>
+{% include 'question/header.html' %}
+
+{% block main_area %}
+{% endblock %}
+
+{% include 'question/footer.html'%}
+</body>
+</html>

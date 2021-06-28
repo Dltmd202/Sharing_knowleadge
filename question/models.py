@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from category.models import Category
 
 
+#User 모델 완성 후 수정할 것
 class Question(models.Model):
     user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     category_id = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)

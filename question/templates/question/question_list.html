@@ -6,7 +6,10 @@
 
 
 {% block main_area %}
-    <div>
-
-    </div>
+    {% for q in object_list %}
+        <hr/>
+        <h2><a href="{{ q.get_absolute_url }}">{{ q.ques_title }}</a></h2>
+        <h4>{{ q.post_date }}</h4>
+        <p>{{ q.ques_desc }}</p>
+    {% endfor %}
 {% endblock %}

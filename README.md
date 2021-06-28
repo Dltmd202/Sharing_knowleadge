@@ -4,10 +4,13 @@
 * main
 
 # 토픽 브랜치
-* user -
-* category -
-* question -
-* answer -
+* user - 승훈님
+* category - 예은님
+* question - 승환님
+* answer - 예은님
+* certificate - 승환님
+* university - 채호님
+* company - 채호님
 
 ## 초기화
 * `git clone https://github.com/Dltmd202/Sharing_knowleadge`

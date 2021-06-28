@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils import timezone
 from .models import Answer, answer
-# Create your views here.
 
-def edit(request):
+
+def home(request):
     answers = Answer.objects.all()
     return render(request, 'edit.html', {'answers':answers})
 
@@ -12,8 +12,8 @@ def new(request):
 
 def create(request):
     new_answer= Answer()
-    new_answer.editor = request.POST['editor']
-    new_answer.body = request.POST['body']
+    new_answer.answer_title = request.POST['editor']
+    new_answer.answer_desc = request.POST['body']
     new_answer.answer_date = timezone.now()
     new_answer.save()
     return redirect('edit', new_answer.id)

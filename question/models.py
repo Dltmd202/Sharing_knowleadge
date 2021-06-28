@@ -10,3 +10,9 @@ class Question(models.Model):
     modify_date = models.DateTimeField(auto_now=True)
     ques_desc = models.TextField()
     ques_title = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.pk
+
+    def get_absolute_url(self):
+        return f'/question/{self.pk}/'

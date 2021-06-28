@@ -1,10 +1,10 @@
 from django.db import models
-from user.models import User
+from django.contrib.auth.models import User
 from category.models import Category
 
 
 class Question(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL)
+    user_id = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     category_id = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
     post_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)

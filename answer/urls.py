@@ -1,7 +1,6 @@
-from . import create, edit,  new
+from .views import create, edit, new
 from django.contrib import admin
 from django.urls import path
-from . import *
 
 urlpatterns = [
     path('new/', new, name="new"),

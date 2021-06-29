@@ -1,18 +1,14 @@
 {% extends 'question/base.html' %}
 
-{% block head_title %}
-
-{% endblock %}
-
+{% block head_title %}Create Question{% endblock %}
 
 {% block main_area %}
-    <h1>질문하기</h1>
-
-    <form method="post">
-    {% csrf_token %}
+  <h1>Create New Question</h1>
+  <hr />
+  <form method="post" enctype="multipart/form-data">{% csrf_token %}
     <table>
-        {{ form }}
+      {{ form }}
     </table>
-    <button type="submit">Submit</button>
-    </form>
+    <button type="submit" class="btn btn-primary float-right">Submit</button>
+  </form>
 {% endblock %}

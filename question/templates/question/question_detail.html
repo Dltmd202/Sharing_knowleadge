@@ -31,9 +31,9 @@
         {% endif %}
         <hr>
     </div>
-    {% if question.head_image %}
+    {% if question.head_img %}
         <hr>
-        <img class="img-fluid rounded" src="{{ question.head_image.url }}" alt="">
+        <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
     {% endif %}
     <!-- Post Content -->
     <p>{{ question.ques_desc | safe }}</p>

@@ -8,4 +8,4 @@ class university(models.Model):
     uni_major = models.CharField(max_length=50)
     enter_date = models.DateTimeField(auto_now=True)
     grad_date = models.DateTimeField()
-    is_attending = models.BooleanField(default=false)
+    is_attending = models.BooleanField(default=False)

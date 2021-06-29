@@ -1,4 +1,4 @@
-{% load static %}
+{% load  static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,113 +6,48 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>지식 인사이트</title>
+        <title>지식인</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'home/favicon.ico' %}" />
-        <!-- Bootstrap Icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
         <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
-        <!-- SimpleLightbox plugin CSS-->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'home/css/styles.css' %}" rel="stylesheet" />
     </head>
-    <body id="page-top">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#page-top">지식 인사이트</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#question">질문하러가기</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#answer">답변하러가기</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <body>
+        <!-- Navigation-->
+        {% include 'question/navbar.html' %}
         <!-- Masthead-->
-        <header class="masthead" id="question">
-            <div class="container px-4 px-lg-5 h-100">
-                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-                    <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">궁금한 것이 있으신가요</h1>
-                        <hr class="divider" />
-                    </div>
-                    <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">질문해보세요 프로들의 답변을 드립니다</p>
-                        <a class="btn btn-primary btn-xl" href="#">질문하러가기</a>
+        <header class="masthead">
+            <div class="container position-relative">
+                <div class="row justify-content-center">
+                    <div class="col-xl-6">
+                        <div class="text-center text-white">
+                            <!-- Page heading-->
+                            <h1 class="mb-5">질문하세요!</h1>
+                            <!-- Signup form-->
+                            <form>
+                                <div class="input-group input-group-lg">
+                                    <input class="form-control" type="text" placeholder="Enter your email..." aria-label="Enter your email..." aria-describedby="button-submit" />
+                                    <button class="btn btn-primary" id="button-submit" type="button">Sign up!</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
-        <!-- About-->
-        <section class="page-section bg-primary" id="answer">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-lg-8 text-center">
-                        <h2 class="text-white mt-0">지식을 공유하고 싶으신가요?</h2>
-                        <hr class="divider divider-light" />
-                        <p class="text-white-75 mb-4">금액을 지불하고서라도 당신이 알고싶은 것을 필요로 하는 사람들이 당신을 기다리고 있습니다.</p>
-                        <a class="btn btn-light btn-xl" href="#">답변하러가기</a>
-                    </div>
-                </div>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-light">
+            <div class="container">
+                <p class="m-0 text-center text-dark">Copyright &copy; Your Website 2020</p>
             </div>
-        </section>
-        <!-- Services-->
-        <section class="page-section" id="services">
-            <div class="container px-4 px-lg-5">
-                <h2 class="text-center mt-0">At Your Service</h2>
-                <hr class="divider" />
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Sturdy Themes</h3>
-                            <p class="text-muted mb-0">Our themes are updated regularly to keep them bug free!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Up to Date</h3>
-                            <p class="text-muted mb-0">All dependencies are kept current to keep things fresh.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Ready to Publish</h3>
-                            <p class="text-muted mb-0">You can use this design as is, or you can make changes!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 text-center">
-                        <div class="mt-5">
-                            <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
-                            <h3 class="h4 mb-2">Made with Love</h3>
-                            <p class="text-muted mb-0">Is it really open source if it's not made with love?</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Call to action-->
-        <section class="page-section bg-dark text-white" id="login">
-            <div class="container px-4 px-lg-5 text-center">
-                <!----- 멘트 좀 수정하기ㅠㅠㅠ ----->
-                <h2 class="mb-4">우리의 회원이 되어 보세요</h2>
-                <!----- 회원가입 페이지로 Url 반영해 주 ----->
-                <a class="btn btn-light btn-xl" href="#login">시작하기</a>
-            </div>
-        </section>
-        <footer class="bg-light py-5">
-            <div class="container px-4 px-lg-5"><div class="small text-center text-muted">Copyright &copy; 2021 - Knowledge Insight</div></div>
         </footer>
+        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+        <!-- Core theme JS-->
         <script src="{% static 'home/js/scripts.js' %}"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
     </body>
 </html>

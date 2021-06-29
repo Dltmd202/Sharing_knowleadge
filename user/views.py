@@ -5,7 +5,7 @@ from .models import CustomUser
 from .forms import UserCreationForm1, UserCreationForm2
 
 # 한 페이지에서 여러 폼을 다루기 위해서 formtools를 설치해서 Session Wizard View를 특별히 사용합니다
-# pip install formtools
+# pip install django-formtools
 class UserRegisterView(SessionWizardView):
     template_name = "../templates/register.html" # 회원가입 템플릿 위치
     form_list = [UserCreationForm1, UserCreationForm2] # 사용할 폼 종류

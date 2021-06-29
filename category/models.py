@@ -1,11 +1,8 @@
 from django.db import models
-
+from user.models import CustomUser
 # Create your models here.
 
 
 class Category(models.Model):
-    user_id = models.IntegerField(null=True, blank=True, on_delete=models.SET_NULL)
-    post_date = models.DateField(null=False, blank=False)
-    modify_date = models.DateField(null=False, blank=False)
-    ques_desc = models.CharField(null=True, max_length=50)
-    
+    name = models.CharField(max_length=30, unique=True)
+    slug = models.SlugField(max_length=1200, unique=True, allow_unicode=True)

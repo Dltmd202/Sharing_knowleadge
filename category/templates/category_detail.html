@@ -1,0 +1,20 @@
+{% extends 'ca /base.html' %}
+
+{% block head_title %}
+
+{% endblock %}
+
+{% block main_area %}
+    <h1> Q&A </h1>
+    <div><a href="{% url 'question_detail' %}"> 질문하기 </a></div>
+    <div><a href="{%url 'answer_detail' %}"> 답변하기 </a></div>
+    <hr>
+    <p>Search for the academic keyword you are interested in.</p>
+    <div>
+        <form action="" method="GET">
+            <input type="text" name="search" placeholder="검색할 내용을 작성하세요.">
+            <input type="submit">
+        </form>
+    </div>
+    
+{% endblock %}

@@ -4,4 +4,8 @@ from django.db import models
 
 
 class Category(models.Model):
-    pass
+    user_id = models.IntegerField(null=True, blank=True, on_delete=models.SET_NULL)
+    post_date = models.DateField(null=False, blank=False)
+    modify_date = models.DateField(null=False, blank=False)
+    ques_desc = models.CharField(null=True, max_length=50)
+    

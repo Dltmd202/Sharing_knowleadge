@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head_title %}로그인{% endblock %}
+
+{% block main_area %}
+    <!-- 여기에 로고 추가 -->
+
+    <h2>로그인</h2>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{form.username}}
+        {{form.password}}
+        <button type="submit" value="submit">로그인</button>
+    </form>
+{% endblock %}

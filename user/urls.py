@@ -1,4 +1,9 @@
+from django.contrib.auth.models import User
+from django.urls import path
+from . import views
+from .forms import UserCreationForm1, UserCreationForm2
 
-from django.urls import path, include
-
-urlpatterns = []
+urlpatterns = [
+    path('register/', views.UserRegisterView.as_view([UserCreationForm1, UserCreationForm2]), 
+        name="register"),
+]

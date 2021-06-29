@@ -16,6 +16,12 @@ class QuestionList(ListView):
     ordering = '-pk'
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(QuestionList, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
+        return context
+
 
 # 작동 문제 없음
 class QuestionDetail(DetailView):

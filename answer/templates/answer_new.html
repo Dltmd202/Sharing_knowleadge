@@ -1,0 +1,17 @@
+{% extends 'answer/base.html' %}
+
+{% block head_title %}
+
+{% endblock %}
+
+{% block main_area %}
+    <h1>Answer</h1>
+
+    <form action="{%url 'create'%}" method="post">
+        {%csrf_token%}
+        답변자: <input type="text" name="editor">
+        <button type="menu"> 목록 </button>
+        <button type="submit"> 답변하기 </button>
+        <textarea name="body" id="" cols="200" rows="300"></textarea>
+    </form>
+{% endblock %}

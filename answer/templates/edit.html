@@ -1,9 +1,0 @@
-<h1>수정하기</h1>
-
-<form action="{%url 'create'%}" method="post">
-    {%csrf_token%}
-    <p>답변자: <input type="text" name="editor" value="{{answer.answer_title}}"></p>
-    <button type="menu"> 목록 </button>
-    <button type="submit"> 답변하기 </button>
-    <textarea name="body" id="" cols="200" rows="300">{{answer.answer_desc}}</textarea>
-</form>

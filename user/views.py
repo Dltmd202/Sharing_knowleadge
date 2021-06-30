@@ -1,5 +1,7 @@
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
 from .forms import UserCreationForm1, UserCreationForm2
@@ -26,6 +28,27 @@ class UserRegisterView(SessionWizardView):
         email = form_data["email"]
         user = CustomUser(username=username, password=password, user_desc=user_desc, 
             birth_date=birth_date, email=email)
+        user.set_password(password) # 비밀번호를 해쉬값으로 저장
         user.save()
                 
         return render(self.request, 'user/done.html')
+
+
+def loginView(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        print(form.is_valid())
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request=request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+    else: 
+        form = AuthenticationForm()
+    return render(request, 'user/login.html', {'form':form})
+
+def logoutView(request):
+    logout(request)
+    return redirect('/')

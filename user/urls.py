@@ -6,4 +6,6 @@ from .forms import UserCreationForm1, UserCreationForm2
 urlpatterns = [
     path('register/', views.UserRegisterView.as_view([UserCreationForm1, UserCreationForm2]), 
         name="register"),
+    path('login/', views.loginView, name="login"),
+    path('logout/', views.logoutView, name="logout"),
 ]

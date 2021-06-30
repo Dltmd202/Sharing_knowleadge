@@ -11,10 +11,11 @@ class Question(models.Model):
     post_date = models.DateTimeField(auto_now_add=True)
     modify_date = models.DateTimeField(auto_now=True)
     ques_desc = models.TextField()
+    ques_point = models.IntegerField(null=True, blank=True)
     head_img = models.FileField(upload_to='question/images/%Y/%m/%d/', blank=True)
 
     def __str__(self):
-        return str(self.pk)
+        return str(self.pk) + ': ' + self.ques_title
 
     def brief(self):
         return self.ques_desc[:8] + '...'

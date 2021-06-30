@@ -13,9 +13,13 @@
             </ul>
         </div>
         <ul class="navbar-nav ml-auto float-right">
+            {% if user.is_authenticated %}
+                <p>{{ user }}</p>
+            {% else %}
             <li class="nav-item">
-                <a class="nav-link" href="#">Log In</a>
+                <a class="nav-link" href="{% url 'register' %}">Log In</a>
             </li>
+            {% endif %}
         </ul>
     </div>
 </nav>

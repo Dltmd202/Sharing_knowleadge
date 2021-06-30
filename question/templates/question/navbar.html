@@ -1,43 +1,124 @@
-{% load static %}
 
-<head> <!-- navbar collapse 작동용 -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="/">지식인</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/question/">질문하기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/answer/">답변하기</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'mypage' %}">{{ user.username }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
-                    </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'register' %}">회원가입</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">로그인</a>
-                </li>
-                {% endif %}
-            </ul>
+<style>
+    .nav-custom{
+        padding-top: 1em;
+    }
+
+    .nav-custom-brand{
+        position: relative;
+        display: flex;
+    }
+
+    .nav-custom-brand :link .nav-link :link .navbar-brand :link{
+        color: black;
+        text-decoration: none;
+    }
+
+    .nav-custom-brand :hover .nav-link :hover{
+        color: #0c89aa;
+        text-decoration: none;
+    }
+
+    .nav-custom-brand :visited .nav-link :visited .navbar-brand :visited{
+        color: black;
+        text-decoration: none;
+    }
+    
+    .nav-custom-branch-a{
+        size: 10px;
+    }
+
+    .search-box{
+        width: 400px;
+        height: 35px;
+        border-style: solid;
+        border-width: 3px;
+        border-color: #0c89aa;
+        border-radius: 5px 10px;
+        padding-left: 5px;
+        padding-top: 2px;
+    }
+
+    .fa-search{
+        color: #0c89aa;
+    }
+
+    .nav-link{
+        color: black;
+    }
+
+    .navbar-brand :hover{
+        color: #0c89aa;
+    }
+
+    #nav-search-input{
+        border:none;
+        border-right:0px;
+        border-top:0px;
+        boder-left:0px;
+        boder-bottom:0px;
+        width: 300px;
+        margin-left: 3px;
+    }
+</style>
+
+<script>
+    function navSearchQuestion() {
+    let serachValue = document.getElementById('nav-search-input').value.trim()
+    if (serachValue.length > 1) {
+        location.href = "question/search/" + serachValue +"/"
+    } else {
+        alert("검색어가 짧습니다");
+    }
+}
+
+document.getElementById('nav-search-input').addEventListener('keyup',
+    function (event){
+    if(event.key === 'Enter'){
+        searchQuestion()
+    }
+    });
+</script>
+
+<nav>
+    <div class="nav-custom">
+        <div class="container">
+            <div class="row">
+                <div class="nav-custom-brand col-1">
+                    <a class="navbar-brand" href="/" style="color: black">지식인</a>
+                </div>
+                <div class="col-8">
+                    <div class="search-box row">
+                        <div>
+                            <i class="fas fa-search" onclick="navSearchQuestion()"></i>
+                            <input type="text" id="nav-search-input"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    {% if user.is_authenticated %}
+                        <div class="row">
+                            <div class="nav-item col-5" style="float: right">
+                                <a class="nav-link" href="">{{ user.username }}</a>
+                            </div>
+                            <div class="nav-item col-7" style="float: right">
+                                <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="nav-item col-6" style="float: right">
+                                <a class="nav-link" href="{% url 'register' %}">회원가입</a>
+                            </div>
+                            <div class="nav-item col-6" style="float: right">
+                                <a class="nav-link" href="{% url 'login' %}">로그인</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 </nav>
+<hr>

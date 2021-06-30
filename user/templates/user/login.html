@@ -8,6 +8,11 @@
     <h2>로그인</h2>
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
+        {% if form.errors %}
+            {% for field, errors in form.errors.items %}
+                {{ errors }}
+            {% endfor %}
+        {% endif %}
         {{form.username}}
         {{form.password}}
         <button type="submit" value="submit">로그인</button>

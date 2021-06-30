@@ -16,7 +16,7 @@ class QuestionList(ListView):
     model = Question
     template_name = 'question/question_list.html'
     ordering = '-pk'
-    paginate_by = 5
+    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(QuestionList, self).get_context_data()
@@ -29,6 +29,12 @@ class QuestionList(ListView):
 class QuestionDetail(DetailView):
     model = Question
     template_name = 'question/question_detail.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(QuestionDetail, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
+        return context
 
 
 # 작동 문제 없음
@@ -52,6 +58,12 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
             return super(QuestionCreate, self).form_valid(form)
         else:
             return redirect('/question')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(QuestionCreate, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
+        return context
 
 
 # 작동 문제 없음

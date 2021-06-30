@@ -1,4 +1,4 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -52,3 +52,9 @@ def loginView(request):
 def logoutView(request):
     logout(request)
     return redirect('/')
+
+def mypageView(request):
+    if request.user.is_authenticated:
+        return render(request, 'user/mypage.html')
+    else:
+        return HttpResponseForbidden()

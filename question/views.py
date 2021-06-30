@@ -7,6 +7,8 @@ from .models import Question
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from category.models import Category
+from user.models import CustomUser
+from django.db import models
 
 
 # 작동 문제 없음
@@ -32,18 +34,27 @@ class QuestionDetail(DetailView):
 # 작동 문제 없음
 class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     model = Question
-    fields = ['ques_title', 'category_id', 'ques_desc', 'head_img']
+    fields = ['ques_title', 'category_id', 'ques_point', 'ques_desc', 'head_img']
     template_name = 'question/question_form.html'
 
     def form_valid(self, form):
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.author = current_user
+            ques_point_str = self.request.POST.get('ques_point')
+            ques_point_str = form.fields['ques_point']
+            new_ques = CustomUser()
+            if ques_point_str:
+                user = CustomUser.objects.get(username=current_user)
+
+                user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
+                user.save()
             return super(QuestionCreate, self).form_valid(form)
         else:
             return redirect('/question')
 
 
+# 작동 문제 없음
 class QuestionUpdate(LoginRequiredMixin, UpdateView):
     model = Question
     fields = ['ques_title', 'category_id', 'ques_desc', 'head_img']
@@ -56,6 +67,7 @@ class QuestionUpdate(LoginRequiredMixin, UpdateView):
             raise PermissionDenied
 
 
+# 작동 문제 없음
 class QuestionSearch(QuestionList):
     paginate_by = None
 

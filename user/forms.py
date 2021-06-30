@@ -2,6 +2,7 @@ from django import forms
 from django.forms.widgets import TextInput, PasswordInput
 from .models import CustomUser
 
+
 class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼(아이디, 비번)
     password_again = forms.CharField(
         widget=forms.PasswordInput(attrs={"placeholder":"비밀번호 재입력"})
@@ -23,6 +24,7 @@ class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼
             raise forms.ValidationError("패스워드가 서로 일치하지 않습니다!")
 
         return cleaned_data
+
 
 class UserCreationForm2(forms.ModelForm): # 회원가입 두번째 페이지 폼(닉네임, 이메일, 생년월일)
     class Meta:

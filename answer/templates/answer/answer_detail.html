@@ -1,11 +1,9 @@
 {% extends 'answer/base.html' %}
 
-{% block head_title %}
-
-{% endblock %}
+{% block head_title %} 답변 작성하기 {% endblock %}
 
 {% block main_area %}
-    <h1>Answer</h1>
+    <h1>답변하기</h1>
     <div><a href="{% url 'answer_new' %}">답변 작성하기</a></div>
     <div>
     {% for answer in answers %}

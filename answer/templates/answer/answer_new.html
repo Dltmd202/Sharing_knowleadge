@@ -1,11 +1,9 @@
 {% extends 'answer/base.html' %}
 
-{% block head_title %}
-
-{% endblock %}
+{% block head_title %} 새로운 답변 {% endblock %}
 
 {% block main_area %}
-    <h1>Answer</h1>
+    <h1>다른 답변하기</h1>
 
     <form action="{%url 'create'%}" method="post">
         {%csrf_token%}

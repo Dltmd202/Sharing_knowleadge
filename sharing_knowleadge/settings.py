@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'formtools',
     'answer',
     'category',
     'question',
@@ -130,8 +131,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    Path(BASE_DIR, 'answer', 'static'),
-    Path(BASE_DIR, 'category', 'static'),
     Path(BASE_DIR, 'question', 'static'),
     Path(BASE_DIR, 'user', 'static'),
     Path(BASE_DIR, 'home', 'static')

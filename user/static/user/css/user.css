@@ -1,0 +1,40 @@
+.profilebox {
+    border: 1px solid #3BA3FB;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 10px 15px;
+    min-height: 220px;
+}
+
+.bignumber {
+    font-size: 80px; 
+    font-weight: bold;
+    color: #7FC4FD;
+    margin-top: 10px;
+}
+
+.blank-userpic, .blank-userpic-small {
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #F1F9FF;
+}
+
+.blank-userpic-small {
+    width: 100px;
+    height: 100px;
+}
+
+.input-inside {
+    position: relative;
+}
+
+.btn.input-space {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    z-index: 9;
+}

@@ -11,6 +11,8 @@ urlpatterns = [
     path('company/', include('company.urls')),
     path('question/', include('question.urls')),
     path('university/', include('university.urls')),
+    path('user/', include('user.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

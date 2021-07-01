@@ -7,51 +7,51 @@
 
 {% block main_area %}
 
-<div id="post-area">
-    {% if question.category_id %}
-        <span class="badge badge-secondary float-right">{{ question.category_id }}</span>
-    {% else %}
-        <span class="badge badge-secondary float-right">미분류</span>
-    {% endif %}
-    <h1 class="mt-4">{{ question.ques_title }}</h1>
-    <p class="lead">
-    by
-        <a href="#">{{ question.user_id | upper }}</a>
-    </p>
-    <hr>
-    <div class="row">
-        <div class="col-10">
-        <p>Posted on {{ question.post_date }}</p>
-        </div>
-        {% if user.is_authenticated and user == question.user_id %}
-            <div class="col-2">
-                <a class="btn btn-info btn-sm float-right" href="/question/update_question/{{ question.pk }}/" role="button">
-                    <i class="fas fa-pen"></i> Edit Post</a>
-            </div>
+    <div id="post-area" class="custom-contentview px-5">
+        {% if question.category_id %}
+            <span class="badge badge-secondary float-right">{{ question.category_id }}</span>
+        {% else %}
+            <span class="badge badge-secondary float-right">미분류</span>
         {% endif %}
-        <hr>
+        <h1 class="mt-2">{{ question.ques_title }}</h1>
+        <p class="lead">
+        by
+            <a href="#" class="a-user-info">{{ question.user_id | upper }}</a>
+        </p>
+        <hr style="margin-right: 30px">
+        <div class="row">
+            <div class="col-10">
+                <p>Posted on {{ question.post_date }}</p>
+            </div>
+            {% if user.is_authenticated and user == question.user_id %}
+                <div class="col-2">
+                    <a class="btn btn-info btn-sm float-right" href="/question/update_question/{{ question.pk }}/" role="button">
+                        <i class="fas fa-pen"></i> Edit Post</a>
+                </div>
+            {% endif %}
+        </div>
+        <hr style=" margin-right: 30px;">
+        {% if question.head_img %}
+            <hr>
+            <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
+        {% endif %}
+        <!-- Post Content -->
+        <p>{{ question.ques_desc | safe }}</p>
+        <br />
+        <br />
     </div>
-    {% if question.head_image %}
-        <hr>
-        <img class="img-fluid rounded" src="{{ question.head_image.url }}" alt="">
-    {% endif %}
-    <!-- Post Content -->
-    <p>{{ question.ques_desc | safe }}</p>
-    <br />
-    <br />
-</div>
 <hr>
 <div class="comment-area" id="comment-area">
   <!-- Comments Form -->
-    <div class="card my-4">
-        <h5 class="card-header">Leave a Comment:</h5>
-        <div class="card-body">
+    <div class="custom-contentview my-4" style="padding: 20px">
+        <h5 class="mx-3 my-3">답변 작성하기</h5>
+        <div class="search-box" style="width: 800px; height: 55px; padding-left: 30px">
             {% if user.is_authenticated %}
-            <form id="comment-form" method="POST" action="{{ post.get_absolute_url }}new_comment/">
+            <form id="comment-form" method="POST" action="{{ answer.get_absolute_url }}new_comment/">
                 {% csrf_token %}
                 <div class="form-group">
                 </div>
-                <button type="submit" class="btn btn-primary">작성하러가기</button>
+                <a type="submit" style="float:right;"><i class="fas fa-pen px-3 my-3" style="color: #0c89aa"></i></a>
             </form>
             {% else %}
                 <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#"
@@ -59,83 +59,41 @@
             {% endif %}
         </div>
     </div>
-  {% if object.answer_set.exists %}
-      {% for answer in object.answer_set.iterator %}
-          <!-- Single Comment -->
-          <div class="media mb-4" id="comment-{{ answer.pk }}">
-            <img class="d-flex mr-3 rounded-circle" src="{{ answer.get_avatar_url }}" alt="{{ answer }}" width="60px">
-            <div class="media-body">
-                {% if user.is_authenticated and comment.author == user %}
-                    <div class="float-right">
-                        <a role="button" class="btn btn-sm btn-info float-right"
-                           id="comment-{{ comment.pk }}-update-btn"
-                           href="/blog/update_comment/{{ comment.pk }}/">
-                        edit
-                        </a>
-                        <a role="button" href="#" id="comment-{{ comment.pk }}-delete-modal-btn"
-                           class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">
+    {% if object.answer_set.exists %}
+        {% for answer in object.answer_set.iterator %}
+        <!-- Single Comment -->
+        <div class="media mb-4" id="answer-{{ answer.pk }}">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="{{ answer }}">
+                <div class="media-body">
+                    {% if user.is_authenticated and comment.author == user %}
+                        <div class="float-right">
+                            <a role="button" class="btn btn-sm btn-info float-right"
+                                id="comment-{{ answer.pk }}-update-btn"
+                                href="/blog/update_comment/{{ answer.pk }}/">
+                                edit
+                            </a>
+                            <a role="button" href="#" id="comment-{{ answer.pk }}-delete-modal-btn"
+                                class="btn btn-sm btn-danger" data-toggle="modal"
+                               data-target="#deleteCommentModal-{{ answer.pk }}">
                             delete
-                        </a>
-                    </div>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1" role="dialog"
-                         aria-labelledby="deleteCommentModalLabel" aria-hidden="true">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Are You Sure?</h5>
-                                    <button type="button" class="clone" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                            </a>
+                        </div>
+                    {% endif %}
+                        <div class="row">
+                            <div class="col-9">
+                                <h5 class="mt-0">{{ answer.user_id }}&nbsp;&nbsp</h5>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <a role="button" class="btn btn-danger" href="/blog/delete_comment/{{ comment.pk }}/">
-                                    Delete
-                                </a>
+                            <div class="col-3">
+                                <small class="text-muted">{{ answer.answer_date }}</small>
                             </div>
+                            <p>{{ answer.answer_desc | linebreaks }}</p>
                         </div>
                     </div>
-                {% endif %}
-                <h5 class="mt-0">{{ comment.author.username }}&nbsp;&nbsp;
-                    <small class="text-muted">{{ comment.created_at }}</small>
-                </h5>
-                <p>{{ comment.content | linebreaks }}</p>
-                {% if comment.created_at != comment.modified_at %}
-                    <p class="text-muted float-right"><small>Updated: {{ comment.modified_at }}</small></p>
-                {% endif %}
-            </div>
-          </div>
-      {% endfor %}
-  {% endif %}
+                </div>
+        {% endfor %}
+    {% endif %}
 </div>
-<hr />
 
 
-  <!-- Comment with nested comments -->
-  <div class="media mb-4">
-    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-    <div class="media-body">
-      <h5 class="mt-0">Commenter Name</h5>
-      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-      <div class="media mt-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-          <h5 class="mt-0">Commenter Name</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-      </div>
-
-      <div class="media mt-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-          <h5 class="mt-0">Commenter Name</h5>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-      </div>
-
-    </div>
-  </div>
 
 {% endblock %}

@@ -24,6 +24,7 @@
 ## 필요한 것들
 * `pip install django`
 * `pip install pillow`
+* `pip install django-formtools`
 
   
 ## 개발

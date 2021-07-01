@@ -40,7 +40,11 @@
                 <div class="my-3">{{ wizard.form.password_again }}</div>
             {% elif wizard.steps.step1 == 2 %}
                 <div class="my-3">{{ wizard.form.user_desc }}</div>
-                <div class="my-3">{{ wizard.form.birth_date }}</div>
+                <div class="row my-3">
+                    <div class="col">{{ wizard.form.birth_year }}</div>
+                    <div class="col">{{ wizard.form.birth_month }}</div>
+                    <div class="col">{{ wizard.form.birth_day }}</div>
+                </div>
                 <div class="border-top border-2 my-4"></div>
                 <div class="my-3 input-group input-inside">
                     {{ wizard.form.email }}

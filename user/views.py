@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
 from .forms import UserCreationForm1, UserCreationForm2, CustomLoginForm
+import datetime
 
 
 # 한 페이지에서 여러 폼을 다루기 위해서 formtools를 설치해서 Session Wizard View를 특별히 사용합니다
@@ -24,8 +25,13 @@ class UserRegisterView(SessionWizardView):
         username = form_data["username"]
         password = form_data["password"]
         user_desc = form_data["user_desc"]
-        birth_date = form_data["birth_date"]
+        birth_year = form_data["birth_year"]
+        birth_month = form_data["birth_month"]
+        birth_day = form_data["birth_day"]
         email = form_data["email"]
+
+        dateString = birth_year + "-" + birth_month + "-" + birth_day
+        birth_date = datetime.datetime.strptime(dateString, "%Y-%m-%d")
         user = CustomUser(username=username, password=password, user_desc=user_desc, 
             birth_date=birth_date, email=email)
         user.set_password(password) # 비밀번호를 해쉬값으로 저장

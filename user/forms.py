@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import TextInput, PasswordInput
 from .models import CustomUser
+import datetime
 
 classValue = "form-control"
 styleValue = "background-color: #F1F9FF; height: 3rem;"
@@ -14,6 +15,7 @@ class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼
             "placeholder":"비밀번호 재입력", "class":classValue+" password-input", "style":styleValue
         })
     )
+
     class Meta:
         model = CustomUser
         fields = ['username', 'password']
@@ -38,21 +40,57 @@ class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼
 
 
 class UserCreationForm2(forms.ModelForm): # 회원가입 두번째 페이지 폼(닉네임, 이메일, 생년월일)
+    MONTH_CHOICE = ((i, '{}월'.format(i)) for i in range(1, 13))
+    DAY_CHOICE = ((i, '{}일'.format(i)) for i in range(1, 32))
+
+    birth_year = forms.CharField(
+        widget=forms.TextInput(attrs={
+            "placeholder": "생년", "class":classValue, "style":styleValue
+        })
+    )
+    birth_month = forms.CharField(
+        widget=forms.Select(choices=MONTH_CHOICE, attrs={
+            "placeholder": "생월", "class":classValue+" form-select", "style":styleValue
+        })
+    )
+    birth_day = forms.CharField(
+        widget=forms.Select(choices=DAY_CHOICE, attrs={
+            "placeholder": "생일", "class":classValue+" form-select", "style":styleValue
+        })
+    )
+
     class Meta:
         model = CustomUser
-        fields = ['user_desc', 'birth_date', 'email']
+        fields = ['user_desc', 'email']
 
         widgets = {
             "user_desc": TextInput(attrs={
                 "placeholder":"닉네임 입력", "class":classValue, "style":styleValue
             }),
-            "birth_date": TextInput(attrs={
-                "placeholder":"생년월일 입력", "type":"date", "class":classValue, "style":styleValue
-            }),
             "email": TextInput(attrs={
                 "placeholder":"이메일 입력", "class":classValue, "style":styleValue
             }),
         }
+
+    def clean(self):
+        cleaned_data = super(UserCreationForm2, self).clean()
+        try:
+            year = cleaned_data.get("birth_year")
+            intYear = int(year)
+            if intYear < 1950 or intYear > int(datetime.datetime.today().year):
+                raise AssertionError
+            month = cleaned_data.get("birth_month")
+            day = cleaned_data.get("birth_day")
+            dateString = year + "-" + month + "-" + day
+            datetime.datetime.strptime(dateString, "%Y-%m-%d")
+        except ValueError:
+            raise forms.ValidationError("날짜 형식이 맞지 않습니다.")
+        except TypeError:
+            raise forms.ValidationError("연도 형식이 맞지 않습니다.")
+        except AssertionError:
+            raise forms.ValidationError("연도 범위를 초과했습니다.")
+
+        return cleaned_data
 
 class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

@@ -1,4 +1,6 @@
+from typing import Text
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import TextInput, PasswordInput
 from .models import CustomUser
 
@@ -35,3 +37,16 @@ class UserCreationForm2(forms.ModelForm): # 회원가입 두번째 페이지 폼
             "birth_date": TextInput(attrs={"placeholder":"생년월일 입력", "type":"date"}),
             "email": TextInput(attrs={"placeholder":"이메일 입력"}),
         }
+
+class CustomLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
+
+    classValue = "form-control"
+    styleValue = "background-color: #F1F9FF; height: 3rem;"
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        "placeholder":"아이디 입력", "class":classValue, "style":styleValue
+    }))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={
+        "placeholder":"비밀번호 입력", "class":classValue, "style":styleValue
+    }))

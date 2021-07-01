@@ -11,7 +11,7 @@ styleValue = "background-color: #F1F9FF; height: 3rem;"
 class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼(아이디, 비번)
     password_again = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            "placeholder":"비밀번호 재입력", "class":classValue, "style":styleValue
+            "placeholder":"비밀번호 재입력", "class":classValue+" password-input", "style":styleValue
         })
     )
     class Meta:
@@ -22,7 +22,7 @@ class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼
                 "placeholder":"아이디 입력", "class":classValue, "style":styleValue
             }),
             "password": PasswordInput(attrs={
-                "placeholder":"비밀번호 입력", "class":classValue, "style":styleValue
+                "placeholder":"비밀번호 입력", "class":classValue+" password-input", "style":styleValue
             })
         }
     
@@ -62,6 +62,5 @@ class CustomLoginForm(AuthenticationForm):
         "placeholder":"아이디 입력", "class":classValue, "style":styleValue
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        "placeholder":"비밀번호 입력", "class":classValue, "style":styleValue,
-        "id":"password-input"
+        "placeholder":"비밀번호 입력", "class":classValue+" password-input", "style":styleValue,
     }))

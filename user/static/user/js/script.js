@@ -5,14 +5,17 @@ window.addEventListener("DOMContentLoaded", (e) => {
 })
 
 function showPassword() {
-    var input = document.getElementById("password-input");
+    var inputs = document.getElementsByClassName("password-input");
     document.getElementById("show-password-btn").addEventListener("click", (e) => {
         e.preventDefault();
-        if (input.type === "password") {
-            input.type = "text";
-        } else {
-            input.type = "password";
+        for (var i = 0; i < inputs.length; ++i) {
+            if (inputs[i].type === "password") {
+                inputs[i].type = "text";
+            } else {
+                inputs[i].type = "password";
+            }
         }
+        
     });
 }
 

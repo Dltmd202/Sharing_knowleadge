@@ -13,11 +13,28 @@
     margin-top: 10px;
 }
 
-.blank-userpic {
+.blank-userpic, .blank-userpic-small {
     width: 200px;
     height: 200px;
     -webkit-border-radius: 100px;
     -moz-border-radius: 100px;
     border-radius: 100px;
     background: #F1F9FF;
+}
+
+.blank-userpic-small {
+    width: 100px;
+    height: 100px;
+}
+
+.input-inside {
+    position: relative;
+}
+
+.btn.input-space {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    z-index: 9;
 }

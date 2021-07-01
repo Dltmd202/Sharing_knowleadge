@@ -4,7 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
-from .forms import UserCreationForm1, UserCreationForm2
+from .forms import UserCreationForm1, UserCreationForm2, CustomLoginForm
 
 
 # 한 페이지에서 여러 폼을 다루기 위해서 formtools를 설치해서 Session Wizard View를 특별히 사용합니다
@@ -36,7 +36,7 @@ class UserRegisterView(SessionWizardView):
 
 def loginView(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
+        form = CustomLoginForm(request=request, data=request.POST)
         print(form.is_valid())
         if form.is_valid():
             username = form.cleaned_data.get("username")
@@ -46,7 +46,7 @@ def loginView(request):
                 login(request, user)
                 return redirect('/')
     else: 
-        form = AuthenticationForm()
+        form = CustomLoginForm()
     return render(request, 'user/login.html', {'form':form})
 
 def logoutView(request):

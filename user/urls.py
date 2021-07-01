@@ -10,3 +10,4 @@ urlpatterns = [
     path('logout/', views.logoutView, name="logout"),
     path('mypage/', views.mypageView, name="mypage"),
 ]
+

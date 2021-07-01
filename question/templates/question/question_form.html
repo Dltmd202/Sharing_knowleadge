@@ -3,17 +3,54 @@
 {% block head_title %}Create Question{% endblock %}
 
 {% block main_area %}
-  <h1>Create New Question</h1>
-    <div class="row">
-        <div class="col-3">
-            <p>질문 포인트: {{ user.ques_point }}</p>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <div class="row">
+            <div class="col-9">
+                <h1>Q & A</h1>
+            </div>
+            <div class="col-3 my-2">
+                <button type="submit" class="btn btn-primary float-right">제출하기</button>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+        <div class="col-2">
+            <label for="제목">제 목</label>
+        </div>
+        <div class="col-9">
+            {{ form.ques_title }}
         </div>
     </div>
-  <hr />
-  <form method="post" enctype="multipart/form-data">{% csrf_token %}
-    <table>
-      {{ form }}
-    </table>
-    <button type="submit" class="btn btn-primary float-right">Submit</button>
+    <hr>
+      <div class="row">
+        <div class="col-2">
+            <label for="카테고리">카테고리</label>
+        </div>
+        <div class="col-9">
+            {{ form.category_id }}
+        </div>
+    </div>
+    <hr>
+      <div class="row">
+        <div class="col-2">
+            <label for="질문포인트">질문포인트</label>
+        </div>
+        <div class="col-9">
+            {{ form.ques_point }}
+        </div>
+    </div>
+    <hr>
+      <div class="row">
+        <div class="col-2">
+            <label for="질문포인트">이미지</label>
+        </div>
+        <div class="col-9">
+            {{ form.head_img }}
+        </div>
+    </div>
+    <hr>
+      <div class="row">
+            {{ form.ques_desc }}
+    </div>
   </form>
 {% endblock %}

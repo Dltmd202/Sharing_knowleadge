@@ -48,5 +48,6 @@ class CustomLoginForm(AuthenticationForm):
         "placeholder":"아이디 입력", "class":classValue, "style":styleValue
     }))
     password = forms.CharField(widget=forms.PasswordInput(attrs={
-        "placeholder":"비밀번호 입력", "class":classValue, "style":styleValue
+        "placeholder":"비밀번호 입력", "class":classValue, "style":styleValue,
+        "id":"password-input"
     }))

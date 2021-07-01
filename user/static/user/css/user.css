@@ -26,3 +26,15 @@
     width: 100px;
     height: 100px;
 }
+
+.input-inside {
+    position: relative;
+}
+
+.btn.input-space {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    bottom: 4px;
+    z-index: 9;
+}

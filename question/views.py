@@ -55,7 +55,7 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     def form_valid(self, form):
         current_user = self.request.user
         if current_user.is_authenticated:
-            form.instance.author = current_user
+            form.instance.user_id = current_user
             ques_point_str = self.request.POST.get('ques_point')
             ques_point_str = form.fields['ques_point']
             new_ques = CustomUser()

@@ -41,23 +41,44 @@
                 {% endblock %}
             </div>
             <div class="col-md-4 col-lg-3">
-                <div class="custom-cardview">
+                <div class="custom-contentview">
                     <div class="row">
                         {% if user.is_authenticated %}
-                            <div class="col-3" style="padding: 20px;">
+                            <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
                                 <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                             </div>
-                            <div class="col-9" style="padding: 15px">
+                            <div class="col-7" style="padding-left: 15px;">
+                                    <p style="font-weight: bold; margin-top: 20px">{{ user }}</p>
+                                <a href="#" class="my-page" style="margin-top: 10px">마이페이지></a>
+                            </div>
+                            <div class="px-5">
+                                <hr>
+                            </div>
+                            <div class="px-1">
+                                <ul class="ul-user-status">
+                                    <li>
+                                        <p class="user-status">질문 포인트 |    {{ user.ques_point }} Point</p>
+                                    </li>
+                                    <li>
+                                        <p class="user-status">답변 포인트 |    {{ user.answer_point }} Point</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            </div>
+                            <div class="col-7" style="padding-left: 15px; padding-top: 15px">
                                 <div class="row">
-                                    <p style="font-weight: bold">{{ user }}</p>
+                                    <!----- 로그인 연결할 것 ----->
+                                    <a href="#" style="font-weight: bold">로그인</a>
                                 </div>
                                 <a href="#" class="my-page">마이페이지></a>
                             </div>
-                        {% else %}
                         {% endif %}
                     </div>
                 </div>
-                <div class="custom-cardview my-4" id="categories-card">
+                <div class="custom-contentview my-4" id="categories-card">
                     <h5 style="margin: 10px;">카테고리</h5>
                     <div class="card-body">
                         <div class="row">

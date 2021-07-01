@@ -48,6 +48,7 @@ body {
    margin:0;
    padding:0;
    height:100%;
+    background-color: #fafbfd;
 }
 #main-container {
    min-height:100%;
@@ -67,10 +68,39 @@ footer {
 .custom-cardview{
     border-style: solid;
     border-width: 3px;
-    border-color: #0c89aa;
+    border-color: #e9ebee;
     border-radius: 5px 10px;
     padding-left: 5px;
     padding-top: 2px;
+    background-color: white;
+    transition: 0.3s;
+    color: black;
+    text-decoration: none;
+}
+
+
+
+.custom-contentview{
+    border-style: solid;
+    border-width: 2px;
+    border-color: #e9ebee;
+    border-radius: 5px 10px;
+    padding-left: 5px;
+    padding-top: 2px;
+    background-color: white;
+}
+.custom-cardview:hover {
+    text-decoration: none;
+    box-shadow: 0 0 16px 0 rgba(0,0,0,0.2);
+}
+
+.custom-cardview:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.custom-contentview-head{
+    background-color: #e9ebee;
 }
 
 
@@ -108,4 +138,29 @@ footer {
 .category-list:visited{
     text-decoration: none;
     color: black;
+}
+
+.a-user-info:link{
+    text-decoration: none;
+    color: #0c89aa;
+}
+
+.a-user-info:hover{
+    text-decoration: none;
+    color: #0c89aa;
+}
+
+.a-user-info:visited{
+    text-decoration: none;
+    color: #0c89aa;
+}
+
+.user-status{
+    font-size: small;
+    color: #969696;
+}
+
+.ul-user-status{
+    list-style: none;
+    line-height: 50%;
 }

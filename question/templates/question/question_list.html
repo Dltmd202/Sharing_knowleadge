@@ -7,45 +7,38 @@ Question
 
 
 {% block main_area %}
-        {% if search_info %}<small class="text-muted">{{ search_info }}</small>{% endif %}
+        {% if search_info %}{% endif %}
         {% if category %}<span class="badge badge-secondary">{{ category }}</span>{% endif %}
-        {% if tag %}<span class="badge badge-list"><i class="fas fa-tags"></i>{{ tag }} ({{ tag.post_set.count }}
-        </span>{% endif %}
         <section class="content-box my-2">
             <div class="px-3 px-lg-3">
                 <div class="row">
                     <div class="col-10">
                         <h1>Q & A</h1>
                     </div>
-                    <div class="col-2">
                         {% if user.is_authenticated %}
-                            {% if user.is_superuser or user.is_staff %}
-                                <a class="btn btn-sm float-right" href="/question/create_question/" role="button"
-                                style="padding: 10px; background-color: #ffffff;">
-                                    <i class="fas fa-pen"></i> 질문하러가기</a>
-                            {% endif %}
+                            <div class="col-2 custom-contentview " style="padding-top: 10px">
+                                <a class="my-page" href="/question/create_question/" role="button">
+                                      <i class="fas fa-pen mx-2"></i>질문하러가기</a>
+                            </div>
                         {% endif %}
-                    </div>
                 </div>
                 <hr>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% for q in object_list %}
-                        <div class="col mb-5">
-                            <div class="card h-100">
-                                <!-- Product image-->
+                        <div class="col" style="padding: 10px">
+                            <div class="custom-cardview card px-3 py-3">
+                                <h5 class="fw-bolder">{{ q.ques_title }}</h5>
                                 {% if q.head_img %}
                                     <img class="card-img-top" src="{{ q.head_img.url }}" alt="..." width="30" height="120"/>
                                 {% else %}
                                     <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                 {% endif %}
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center">
+                                <div class="card-body">
+                                    <div class="text-right">
                                         <!-- Product name-->
-                                        <h5 class="fw-bolder">{{ q.ques_title }}</h5>
                                         <!-- Product price-->
                                         <p class="card-text">{{ q.brief }}</p>
-                                        <p class="card-text">{{ q.ques_point }} Point</p>
+                                        <p class="card-text" style="float: right">{{ q.ques_point }} Point</p>
                                     </div>
                                 </div>
                                 <!-- Product actions-->

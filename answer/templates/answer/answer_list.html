@@ -4,13 +4,70 @@
 
 
 {% block main_area %}
-<h1> Q & A </h1> 
-<hr>
-<span>
-Qustion
-</span>
-<div>{{answer.answer_date}}
-    {{answer.question.id}}
-    {{question.ques_title}}
+<div class="page">
+    <div class="inner">
+        <br>
+    <h1 style="text-align: center;"> Q & A </h1> 
+    <div id="line"></div>
+    <div id="container">
+    {% for answer in answers %}
+    <div class="item">
+        <span id="sb1"><p>업로드 시간:{{answer.answer_date}}</p> </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <div id="img"><img src="likelion.png" alt="사진" class="img-circle"></div> 
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+        <div id="sb5">좋아요{{answer.vote_count}}</div>
+    </div>
+    {% endfor %}
+
+    <div class="item">
+        <span id="sb1"><p>업로드 시간:{{answer.answer_date}}</p> </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <div id="img"><img src="likelion.png" alt="사진" class="img-circle"></div>
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+        <div id="sb5">좋아요</div>
+    </div>
+    <div class="item">
+        <span id="sb1">업로드 시간:{{answer.answer_date}} </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <div id="img"><img src="likelion.png" alt="사진" class="img-circle"></div>
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+    </div><div class="item">
+        <span id="sb1">업로드 시간:{{answer.answer_date}} </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <img src="likelion.png" alt="사진" class="img-circle">
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+    </div><div class="item">
+        <span id="sb1">업로드 시간:{{answer.answer_date}} </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <img src="likelion.png" alt="사진" class="img-circle">
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+    </div><div class="item">
+        <span id="sb1">업로드 시간:{{answer.answer_date}} </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <img src="likelion.png" alt="사진" class="img-circle">
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+    </div><div class="item">
+        <span id="sb1">업로드 시간:{{answer.answer_date}} </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <img src="likelion.png" alt="사진" class="img-circle">
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+    </div><div class="item">
+        <span id="sb1">업로드 시간:{{answer.answer_date}} </span>
+        <div id="sb2">질문 내용:{{question.ques_title}} </div>
+        <img src="likelion.png" alt="사진" class="img-circle">
+        <div id="sb3">아이디:{{answer.question.id}} </div>
+        <div id="sb4"> </div>
+    </div>
+
+
+</div>
 </div>
 {% endblock %}

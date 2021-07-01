@@ -7,7 +7,7 @@
 
 {% block container_main_area %}
     <div class="row justify-content-center my-5">
-        {% for _ in ''|center:wizard.steps.count %}
+        {% for _ in ''|center:wizard.steps.count|add:"1" %}
             <div class="col-auto mx-2">
                 {% if wizard.steps.step1 >= forloop.counter %}
                     <div class="blank-userpic-smallest-fill">{{ forloop.counter }}</div>

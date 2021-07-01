@@ -31,7 +31,7 @@ class UserRegisterView(SessionWizardView):
         user.set_password(password) # 비밀번호를 해쉬값으로 저장
         user.save()
                 
-        return render(self.request, 'user/done.html')
+        return render(self.request, 'user/done.html', {'form':form_data, 'count':len(form_list)})
 
 
 def loginView(request):

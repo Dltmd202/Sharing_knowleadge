@@ -102,3 +102,6 @@ class CustomLoginForm(AuthenticationForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={
         "placeholder":"비밀번호 입력", "class":classValue+" password-input", "style":styleValue,
     }))
+    stay_logged_in = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={
+        "class":"form-check-input", "id":"loginCheck"
+    }))

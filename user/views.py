@@ -43,13 +43,15 @@ class UserRegisterView(SessionWizardView):
 def loginView(request):
     if request.method == 'POST':
         form = CustomLoginForm(request=request, data=request.POST)
-        print(form.is_valid())
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
+            stayLoggedIn = form.cleaned_data.get("stay_logged_in")
             user = authenticate(request=request, username=username, password=password)
             if user is not None:
                 login(request, user)
+                if stayLoggedIn:
+                    request.session.set_expiry(100000)
                 return redirect('/')
     else: 
         form = CustomLoginForm()

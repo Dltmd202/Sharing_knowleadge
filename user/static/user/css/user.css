@@ -13,7 +13,7 @@
     margin-top: 10px;
 }
 
-.blank-userpic, .blank-userpic-small {
+.blank-userpic, .blank-userpic-small, .blank-userpic-smallest, .blank-userpic-smallest-fill {
     width: 200px;
     height: 200px;
     -webkit-border-radius: 100px;
@@ -25,6 +25,22 @@
 .blank-userpic-small {
     width: 100px;
     height: 100px;
+}
+
+.blank-userpic-smallest, .blank-userpic-smallest-fill {
+    width: 30px;
+    height: 30px;
+    background: lightblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blank-userpic-smallest-fill {
+    background: dodgerblue;
+    color: white;
+    border: none;
 }
 
 .input-inside {

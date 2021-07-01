@@ -4,17 +4,26 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import TextInput, PasswordInput
 from .models import CustomUser
 
+classValue = "form-control"
+styleValue = "background-color: #F1F9FF; height: 3rem;"
+
 
 class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼(아이디, 비번)
     password_again = forms.CharField(
-        widget=forms.PasswordInput(attrs={"placeholder":"비밀번호 재입력"})
+        widget=forms.PasswordInput(attrs={
+            "placeholder":"비밀번호 재입력", "class":classValue, "style":styleValue
+        })
     )
     class Meta:
         model = CustomUser
         fields = ['username', 'password']
         widgets = {
-            "username": TextInput(attrs={"placeholder":"아이디 입력"}),
-            "password": PasswordInput(attrs={"placeholder":"비밀번호 입력"})
+            "username": TextInput(attrs={
+                "placeholder":"아이디 입력", "class":classValue, "style":styleValue
+            }),
+            "password": PasswordInput(attrs={
+                "placeholder":"비밀번호 입력", "class":classValue, "style":styleValue
+            })
         }
     
     def clean(self): # 비밀번호 재입력 검사 메소드
@@ -32,18 +41,23 @@ class UserCreationForm2(forms.ModelForm): # 회원가입 두번째 페이지 폼
     class Meta:
         model = CustomUser
         fields = ['user_desc', 'birth_date', 'email']
+
         widgets = {
-            "user_desc": TextInput(attrs={"placeholder":"닉네임 입력"}),
-            "birth_date": TextInput(attrs={"placeholder":"생년월일 입력", "type":"date"}),
-            "email": TextInput(attrs={"placeholder":"이메일 입력"}),
+            "user_desc": TextInput(attrs={
+                "placeholder":"닉네임 입력", "class":classValue, "style":styleValue
+            }),
+            "birth_date": TextInput(attrs={
+                "placeholder":"생년월일 입력", "type":"date", "class":classValue, "style":styleValue
+            }),
+            "email": TextInput(attrs={
+                "placeholder":"이메일 입력", "class":classValue, "style":styleValue
+            }),
         }
 
 class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
 
-    classValue = "form-control"
-    styleValue = "background-color: #F1F9FF; height: 3rem;"
     username = forms.CharField(widget=forms.TextInput(attrs={
         "placeholder":"아이디 입력", "class":classValue, "style":styleValue
     }))

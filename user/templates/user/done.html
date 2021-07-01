@@ -1,10 +1,22 @@
-{% extends 'user/base.html' %}
-{% load i18n %} 
+{% extends 'user/base_form.html' %}
 
 {% block head_title %}회원가입 완료!{% endblock %}
 
-{% block main_area %}
+{% block body_title %}회원가입 완료!{% endblock %}
+
+{% block container_main_area %}
+    <div class="row justify-content-center my-5">
+        {% for _ in ''|center:count|add:"1" %}
+            <div class="col-auto mx-2">
+                <div class="blank-userpic-smallest-fill">{{ forloop.counter }}</div>
+            </div>
+        {% endfor %}
+    </div>
     <div>
-        <h1>DONE!!</h1>
+        <div class="display-5 my-5">환영합니다, {{ form.user_desc }}님!</div>
+    </div>
+    <div class="d-grid mx-5 mt-4 pb-5">
+        <a href="{% url 'login' %}" class="btn btn-lg btn-primary my-2">로그인 페이지로 이동</a>
+        <a href="/" class="btn btn-lg btn-danger my-2">홈으로 이동</a>
     </div>
 {% endblock %}

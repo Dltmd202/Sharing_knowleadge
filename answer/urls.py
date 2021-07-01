@@ -1,9 +1,11 @@
-from .views import create, edit, new
-from django.contrib import admin
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    path('new/', new, name="new"),
-    path('create/', create, name="create"),
-    path('edit/<str:id>', edit, name="edit")
+    path('', views.AnswerList.as_view()),
+    path('<int:pk>/', views.AnswerDetail.as_view(), name='res'),
+    path('new_answer/', views.AnswerNew.as_view()),
+    path('edit_answer/', views.AnswerEdit.as_view()),
+    path('answer/search/<str:q>/', views.AnswerSearch.as_view()),
+    path('answer/search/<str:q>/<str:pk>', views.AnswerDetail.as_view()),
 ]

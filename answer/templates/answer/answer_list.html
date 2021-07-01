@@ -1,0 +1,16 @@
+{% extends 'answer/base.html' %}
+
+{% block head_title %} 답변 페이지 {% endblock %}
+
+
+{% block main_area %}
+<h1> Q & A </h1> 
+<hr>
+<span>
+Qustion
+</span>
+<div>{{answer.answer_date}}
+    {{answer.question.id}}
+    {{question.ques_title}}
+</div>
+{% endblock %}

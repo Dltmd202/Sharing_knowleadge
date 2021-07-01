@@ -27,8 +27,10 @@
                     {{ wizard.management_form }}
                     {% if wizard.form.errors %}
                         {{ wizard.form.management_form }}
-                        {% for field, error in wizard.form.errors.items %}
-                            {{ error }}
+                        {% for field, errors in wizard.form.errors.items %}
+                            {% for error in errors %}
+                                <div class="alert alert-danger">{{ error }}</div>
+                            {% endfor %}
                         {% endfor %}
                     {% endif %}
                     {% if wizard.steps.step1 == 1 %}

@@ -11,42 +11,64 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'question/css/style.css' %}">
 
+    <script>
+        function navSearchQuestion() {
+            let serachValue = document.getElementById('nav-search-input').value.trim()
+            if (serachValue.length > 1) {
+                location.href = "question/search/" + serachValue +"/"
+            } else {
+                alert("검색어가 짧습니다");
+            }
+        }
+
+        document.getElementById('nav-search-input').addEventListener('keyup',
+            function (event){
+            if(event.key === 'Enter'){
+                searchQuestion()
+            }});
+    </script>
 
 </head>
 <body>
 {% include 'question/navbar.html' %}
 
-<div class="container">
+<div class="container" id="main-container">
         <div class="row">
             <div class ="col-md-8 col-lg-9" id="main-area">
                 {% block main_area %}
                 {% endblock %}
             </div>
             <div class="col-md-4 col-lg-3">
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for..." id="search-input"/>
-                                <span class="input-group-append">
-                                    <button class="btn btn-secondary" type="button" onclick="searchQuestion()">Go!</button>
-                                </span>
-                        </div>
+                <div class="custom-cardview">
+                    <div class="row">
+                        {% if user.is_authenticated %}
+                            <div class="col-3" style="padding: 20px;">
+                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            </div>
+                            <div class="col-9" style="padding: 15px">
+                                <div class="row">
+                                    <p style="font-weight: bold">{{ user }}</p>
+                                </div>
+                                <a href="#" class="my-page">마이페이지></a>
+                            </div>
+                        {% else %}
+                        {% endif %}
                     </div>
                 </div>
-                <div class="card my-4" id="categories-card">
-                    <h5 class="card-header">Categories</h5>
+                <div class="custom-cardview my-4" id="categories-card">
+                    <h5 style="margin: 10px;">카테고리</h5>
                     <div class="card-body">
                         <div class="row">
                             <ul class="list-unstyled mb-0">
                                 {% for c in category %}
                                 <li>
-                                    <a href="{{ c.get_absolute_path }}">{{ c }} ({{ c.question_set.count }})</a>
+                                    <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} ({{ c.question_set.count }})</a>
                                 </li>
                                 {% endfor %}
                                 <li>
-                                    <a href="/category/no_category">미분류 ({{ no_category_question_count }})</a>
+                                    <a href="/category/no_category" class="category-list">미분류 ({{ no_category_question_count }})</a>
                                 </li>
                             </ul>
                         </div>

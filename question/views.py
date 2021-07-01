@@ -3,6 +3,8 @@ from abc import ABC
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms import ModelForm, TextInput, EmailInput, NumberInput
+from django.forms import formset_factory
 from .models import Question
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
@@ -42,6 +44,13 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     model = Question
     fields = ['ques_title', 'category_id', 'ques_point', 'ques_desc', 'head_img']
     template_name = 'question/question_form.html'
+    widgets = {
+        'ques_title': TextInput(attrs={
+            'class': "form-control",
+            'style': 'max-width: 300px;',
+            'placeholder': 'Name'
+        })
+    }
 
     def form_valid(self, form):
         current_user = self.request.user

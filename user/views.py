@@ -2,6 +2,7 @@ from django.http.response import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, render
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
 from .forms import UserCreationForm1, UserCreationForm2, CustomLoginForm
@@ -63,6 +64,7 @@ def logoutView(request):
 
 def mypageView(request):
     if request.user.is_authenticated:
-        return render(request, 'user/mypage.html')
+        chosen = request.user.answer_set.filter(is_chosen=True)
+        return render(request, 'user/mypage.html', {'chosen':chosen})
     else:
         return HttpResponseForbidden()

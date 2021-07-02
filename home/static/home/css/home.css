@@ -16,7 +16,7 @@ section
 {
     position: relative;
     min-height: 100vh;
-    background-image: url(night_sky.png) ;
+    background-image: url(../img/night_sky.png) ;
     background-size: cover;
     background-position: right;
     display: flex;
@@ -25,6 +25,13 @@ section
 }
 .KnowSharing h2
 {
+    font-size: 3em;
+    color: wheat;
+    font-weight: 500;
+    line-height: 1.5em;
+}
+
+.content-h2{
     font-size: 3em;
     color: wheat;
     font-weight: 500;
@@ -63,76 +70,6 @@ section
     text-decoration: none;
     letter-spacing: 2px;
     font-weight: 500;
-}
-
-/*상단 바*/
-header 
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 40px 100px;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    transition: 0.5s;
-}
-header.sticky
-{
-    background: #fff;
-    padding: 20px 100px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-header .logo
-{
-    color: #fff;
-    font-size: 24px;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
-header.sticky .logo
-{
-    color: #111;
-}
-header ul
-{
-    position: relative;
-    display: flex;
-}
-header ul li
-{
-    position: relative;
-    list-style: none;
-}
-header ul li a
-{
-    position: relative;
-    display: inline-block;
-    margin: 0 15px;
-    color: #fff;
-    text-decoration: none;
-}
-header.sticky ul li a
-{
-    color: #111;
-}
-header.sticky ul li button
-{
-    background-color:teal;
-    color:wheat;
-}
-header.sticky ul li input
-{
-    background-color: wheat;
-    color: teal;
-}
-header.sticky ul li ::placeholder
-{
-    color: teal;
 }
 
 /*궁금한 내용 질문하기 */
@@ -201,7 +138,7 @@ header.sticky ul li ::placeholder
 }
 .img
 {
-    background-image: url(moon2.jfif);
+    background-image: url(../img/moon2.jfif);
     background-size: cover;
     background-position: right;
     border-radius: 50%;
@@ -217,7 +154,7 @@ header.sticky ul li ::placeholder
 }
 .img1
 {
-    background-image: url(scope2.png);
+    background-image: url(../img/scope2.png);
     background-size: cover;
     background-position: right;
     width: 500px;
@@ -228,13 +165,10 @@ header.sticky ul li ::placeholder
 
 /*잔디*/
 .grass{
-    background-image: url(grass2.png) ;
+    background-image: url(../img/grass2.png) ;
     background-size:contain;
     background-color: #347F80;
     background-position: right;
 }
 /*하단바*/
-.black{
-    background: black;
-}
 

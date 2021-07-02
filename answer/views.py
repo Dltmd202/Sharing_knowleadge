@@ -27,6 +27,7 @@ class AnswerList(ListView):
         context['no_category_answer_count'] = Answer.objects.filter(user_id=None).count()
         return context
 
+
 class AnswerDetail(DetailView):
     model = Answer
     template_name = 'answer/answer_detail.html'
@@ -54,6 +55,22 @@ def new_answer(request, pk):
             return redirect(question.get_absolute_url())
     else:
         raise PermissionDenied
+
+
+def vote_answer(request, pk, answer_pk):
+    current_answer = Answer.objects.get(id=answer_pk)
+    question = get_object_or_404(Question, pk=pk)
+    if not request.user == current_answer.user_id:
+        current_answer.vote_count += 1
+    return redirect(question.get_absolute_url())
+
+
+def select_answer(request, pk, answer_pk):
+    current_answer = Answer.objects.get(id=answer_pk)
+    question = get_object_or_404(Question, pk=pk)
+    if not current_answer.is_chosen:
+        current_answer.is_chosen = True
+    return redirect(question.get_absolute_url())
 
 
 class AnswerEdit(LoginRequiredMixin, UpdateView):

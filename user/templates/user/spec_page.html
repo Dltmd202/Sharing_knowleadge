@@ -6,16 +6,16 @@
 
 {% block main_area %}
     <div class="container-lg mb-5 p-5 mx-auto" style="max-width: 1200px;">
-        <div class="mx-3">
+        <div class="mx-3" style="">
             <div class="row mx-3">
                 <div class="col-auto">
                     <div style="font-size: 70pt; font-weight: 0; color:#0c89aa;">스펙 목록</div>
                 </div>
             </div>
-            <div class="border-top border-3 border-primary mt-4 mb-5" style="color: #0c89aa"></div>
+            <hr style="color: #0c89aa; height: 3px; border: 0; margin-bottom: 50px">
         </div>
         <div class="row my-3 profilebox">
-            <div>학력</div>
+            <h3>학력</h3>
             <div style="margin: 20px;">
                 {% for univ in university_list %}
                 <div style="margin-bottom: 20px;">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="row my-3 profilebox">
-            <div>경력</div>
+            <h3>경력</h3>
             <div style="margin: 20px;">
                 {% for comp in company_list %}
                 <div style="margin-bottom: 20px;">

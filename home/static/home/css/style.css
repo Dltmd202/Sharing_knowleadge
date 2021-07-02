@@ -247,3 +247,21 @@ textarea:focus{
     text-decoration: none;
     color: #0c89aa;
 }
+
+footer{
+    min-height: 150px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    background-color: #0c89aa;
+}
+
+.footer-div{
+    float: left;
+    margin-left: 50px;
+}
+
+.footer-text{
+    color: white;
+    font-size: small;
+}

@@ -100,9 +100,10 @@
                         </a>
                     </div>
                     {% endif %}
-                    <div class="row">
+                    <div class="row" style="padding-top: 20px;">
                         <div class="col-1">
-                            <img class="d-flex mr-5 rounded-circle" src="http://placehold.it/50x50" alt="{{ answer }}">
+                            <img class="d-flex mr-5 rounded-circle"
+                                 src="http://placehold.it/50x50" alt="{{ answer }}">
                         </div>
                         <div class="col-8">
                             <h5 class="">{{ answer.answer_title }}</h5>
@@ -113,7 +114,8 @@
                         <div class="col-3" style="padding-top: 10px;">
                             <div>
                                 <div align="left">
-                                    <a class="recommand-button" href=""
+                                    <a class="recommand-button"
+                                       href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}"
                                        role="button" style="padding: 5px">
                                         <i class="far fa-heart"></i> 추천</a>
                                     <a class="check-button" href=""

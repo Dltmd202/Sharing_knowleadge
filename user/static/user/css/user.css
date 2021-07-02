@@ -54,3 +54,9 @@
     bottom: 4px;
     z-index: 9;
 }
+
+.mypage-title {
+    font-size: 50pt; 
+    line-height: 1rem; 
+    color:#2699FB;
+}

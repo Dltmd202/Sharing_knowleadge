@@ -84,8 +84,32 @@
             </div>
             <div class="col profilebox">
                 <div>스펙</div>
-                <div class="">
-                    
+                <div class="mt-3">
+                    {% if university %}
+                    <div>
+                        <div class="text-primary">학력</div>
+                        <div class="border-top border-1 border-primary my-1"></div>
+                        <ul>
+                        {% for uni in university %}
+                            <li class="py-1 text-secondary">{{ uni.uni_name }} {{ uni.uni_major }} {{uni.uni_degree}}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    {% if company %}
+                    <div>
+                        <div class="text-primary">경력</div>
+                        <div class="border-top border-1 border-primary my-1"></div>
+                        <ul>
+                        {% for comp in company %}
+                            <li class="py-1 text-secondary">{{ comp.comp_name }} {{ comp.comp_title }}</li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <a class="d-flex justify-content-center py-3" href="">자세히 보기...</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -93,22 +117,22 @@
             <div class="col profilebox">
                 <div>최근 답변 목록</div>
                 <div>
-                    {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
-                        <div class="row border rounded-pill my-4 px-2 py-1" style="position: relative;">
-                            <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
-                                {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
-                            </div>
-                            <div class="col my-auto" style="color: #2699FB;">
-                                {{ answer.question_id.ques_title }}
-                            </div>
-                            <div class="col my-auto d-flex justify-content-end">
-                                {% if answer.is_chosen %}
-                                    <span class="badge rounded-pill bg-primary border p-2">채택!</span>
-                                {% endif %}
-                            </div>
-                            <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
+                {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
+                    <div class="row border rounded-pill my-4 px-2 py-1" style="position: relative;">
+                        <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
+                            {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
                         </div>
-                    {% endfor %}
+                        <div class="col my-auto" style="color: #2699FB;">
+                            {{ answer.question_id.ques_title }}
+                        </div>
+                        <div class="col my-auto d-flex justify-content-end">
+                            {% if answer.is_chosen %}
+                                <span class="badge rounded-pill bg-primary border p-2">채택!</span>
+                            {% endif %}
+                        </div>
+                        <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
+                    </div>
+                {% endfor %}
                 </div>
             </div>
         </div>

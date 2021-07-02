@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
 from .forms import UserCreationForm1, UserCreationForm2, UserPasswordEditForm, CustomLoginForm
+from itertools import chain
 import datetime
 
 
@@ -64,8 +65,16 @@ def logoutView(request):
 
 def mypageView(request):
     if request.user.is_authenticated:
-        chosen = request.user.answer_set.filter(is_chosen=True)
-        return render(request, 'user/mypage.html', {'chosen':chosen})
+        user = request.user
+        chosen = user.answer_set.filter(is_chosen=True)
+        university = user.university_set.all()
+        company = user.company_set.all()
+        uni_len = len(university)
+        comp_len = len(company)
+        total_len = 6
+        return render(request, 'user/mypage.html', {'chosen':chosen, 
+            'university':university[:total_len], 'company':company[:(total_len-uni_len)]}
+        )
     else:
         return HttpResponseForbidden()
 

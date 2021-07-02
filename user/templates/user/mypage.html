@@ -9,8 +9,8 @@
         <div class="mx-3">
             <div class="row mx-3 mt-5">
                 <div class="col-auto">
-                    <div style="font-size: 70pt; line-height: 0; color:#2699FB;">
-                        {{ user }}
+                    <div class="mypage-title">
+                        {{ user.user_desc }}
                     </div>
                 </div>
                 <div class="col-auto mt-4">
@@ -108,7 +108,9 @@
                     </div>
                     {% endif %}
                     <div>
-                        <a class="d-flex justify-content-center py-3" href="">자세히 보기...</a>
+                        <a class="d-flex justify-content-center py-3" href="{% url 'spec' %}">
+                            자세히 보기...
+                        </a>
                     </div>
                 </div>
             </div>

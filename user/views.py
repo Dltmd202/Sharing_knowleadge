@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse, HttpResponseForbidden
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
@@ -120,5 +120,28 @@ def userEditPageView(request):
                     success = True
 
         return render(request, 'user/user_edit.html', {'form1':form1, 'form2':form2, 'success':success})
+    else:
+        return HttpResponseForbidden()
+
+def specView(request):
+    if request.user.is_authenticated:
+        user = request.user
+        if request.method == 'POST':
+            data = request.POST
+            type = data['form-type']
+            pk = data['primary-key']
+            if type == "university":
+                delete_uni = get_object_or_404(user.university_set, pk=pk)
+                delete_uni.delete()
+            elif type == "company":
+                delete_comp = get_object_or_404(user.company_set, pk=pk)
+                delete_comp.delete()
+            return redirect('spec')
+
+        university = user.university_set.all()
+        company = user.company_set.all()
+        return render(request, 'user/spec.html', {
+            'university':university, 'company':company
+        })
     else:
         return HttpResponseForbidden()

@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
-from .forms import UserCreationForm1, UserCreationForm2, UserPasswordEditForm, CustomLoginForm
+from .forms import UserCreationForm1, UserCreationForm2, \
+    UserPasswordEditForm, CustomLoginForm, PointExchangeForm
 from itertools import chain
 import datetime
 
@@ -143,5 +144,27 @@ def specView(request):
         return render(request, 'user/spec.html', {
             'university':university, 'company':company
         })
+    else:
+        return HttpResponseForbidden()
+
+def exchangeView(request):
+    if request.user.is_authenticated:
+        user = request.user
+        success = None
+        form = PointExchangeForm()
+        if request.method == 'POST':
+            form = PointExchangeForm(request.POST, request=request)
+            if form.is_valid():
+                point_type = form.cleaned_data['point_type']
+                point_amount = form.cleaned_data['point_amount']
+                if point_type == "question":
+                    user.ques_point -= point_amount
+                else:
+                    user.answer_point -= point_amount
+                user.account += point_amount
+                user.save()
+                success = point_amount
+
+        return render(request, 'user/exchange.html', {'form':form, 'success':success})
     else:
         return HttpResponseForbidden()

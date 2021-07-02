@@ -1,6 +1,7 @@
 {% extends 'user/base.html' %}
 
 {% load static %}
+{% load humanize %}
 
 {% block head_title %}마이페이지{% endblock %}
 
@@ -33,12 +34,12 @@
             </div>
             <div class="col profilebox">
                 <div>채택된 답변 개수</div>
-                <div class="h1 text-center bignumber">{{ chosen.count }}</div>
+                <div class="h1 text-center bignumber">{{ chosen.count|intcomma }}</div>
             </div>
             <div class="col profilebox">
                 <div>누적 득표수</div>
                 <div class="h1 text-center bignumber">
-                    {% if user.score >= 0 %}+{% endif %}{{ user.score }}
+                    {% if user.score >= 0 %}+{% endif %}{{ user.score|intcomma }}
                 </div>
             </div>
         </div>
@@ -46,19 +47,19 @@
             <div class="col profilebox">
                 <div>질문 포인트</div>
                 <div class="h1 text-center bignumber">
-                    {{ user.ques_point }}
+                    {{ user.ques_point|intcomma }}p
                 </div>
             </div>
             <div class="col profilebox">
                 <div>답변 포인트</div>
                 <div class="h1 text-center bignumber">
-                    {{ user.answer_point }}
+                    {{ user.answer_point|intcomma }}p
                 </div>
             </div>
             <div class="col profilebox">
                 <div>바로 환전 가능 금액</div>
                 <div class="h1 text-center bignumber">
-                    {{ user.account }}
+                    {{ user.account|intcomma }}￦
                 </div>
             </div>
         </div>

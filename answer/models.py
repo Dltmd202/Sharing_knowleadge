@@ -14,7 +14,7 @@ class Answer(models.Model):
     answer_desc = models.TextField(null=True)
 
     def __str__(self):
-        return str(self.pk)+ ': ' + self.answer_title
+        return str(self.pk) + ': ' + self.answer_title
 
     def get_absolute_url(self):
         return f'/answer/{self.pk}/'

@@ -8,25 +8,27 @@ Question
 
 {% block main_area %}
         {% if search_info %}{% endif %}
-        {% if category %}<span class="badge badge-secondary">{{ category }}</span>{% endif %}
         <section class="content-box my-2">
             <div class="px-3 px-lg-3">
                 <div class="row">
                     <div class="col-10">
                         <h1>Q & A</h1>
                     </div>
-                        {% if user.is_authenticated %}
-                            <div class="col-2 custom-contentview " style="padding-top: 10px">
-                                <a class="my-page" href="/question/create_question/" role="button">
-                                      <i class="fas fa-pen mx-2"></i>질문하러가기</a>
-                            </div>
-                        {% endif %}
+                    {% if user.is_authenticated %}
+                        <div class="col-2 custom-contentview">
+                            <a class="link" href="/question/create_question/">
+                                <div style="padding-top: 10px; padding-left: 10px; height: 40px">
+                                  <i class="fas fa-pen mx-2"> 질문가기</i>
+                                </div>
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
                 <hr>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% for q in object_list %}
                         <div class="col" style="padding: 10px">
-                            <div class="custom-cardview card px-3 py-3">
+                            <div class="card card px-3 py-3">
                                 <h5 class="fw-bolder">{{ q.ques_title }}</h5>
                                 {% if q.head_img %}
                                     <img class="card-img-top" src="{{ q.head_img.url }}" alt="..." width="30" height="120"/>
@@ -37,13 +39,15 @@ Question
                                     <div class="text-right">
                                         <!-- Product name-->
                                         <!-- Product price-->
-                                        <p class="card-text">{{ q.brief }}</p>
+                                        <div style="height: 50px;">
+                                            <p class="card-text">{{ q.brief }}</p>
+                                        </div>
                                         <p class="card-text" style="float: right">{{ q.ques_point }} Point</p>
                                     </div>
                                 </div>
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="../question/{{ q.pk }}">답변하러 가기</a></div>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'res' pk=q.pk %}">답변하기</a></div>
                                 </div>
                             </div>
                         </div>

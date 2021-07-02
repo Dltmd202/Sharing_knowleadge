@@ -10,13 +10,14 @@
     <script src="https://kit.fontawesome.com/fcbc9afa57.js" crossorigin="anonymous"></script>
     <script src="{% static 'user/js/script.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'user/css/user.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
 </head>
 <body>
-{% include 'question/navbar.html' %}
+{% include 'home/navbar.html' %}
 
 {% block main_area %}
 {% endblock %}
 
-{% include 'question/footer.html' %}
+{% include 'home/footer.html' %}
 </body>
 </html>

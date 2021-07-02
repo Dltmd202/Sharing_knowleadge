@@ -10,6 +10,8 @@ from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from category.models import Category
 from user.models import CustomUser
+from answer.forms import AnswerForm
+from django import forms
 from django.db import models
 
 
@@ -36,6 +38,7 @@ class QuestionDetail(DetailView):
         context = super(QuestionDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
+        context['answer_form'] = AnswerForm
         return context
 
 
@@ -45,11 +48,12 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     fields = ['ques_title', 'category_id', 'ques_point', 'ques_desc', 'head_img']
     template_name = 'question/question_form.html'
     widgets = {
-        'ques_title': TextInput(attrs={
-            'class': "form-control",
-            'style': 'max-width: 300px;',
-            'placeholder': 'Name'
-        })
+        'ques_title': forms.TextInput(
+            attrs={
+                'style': 'width: 600px;',
+                'placeholder': 'Name'
+            }
+        )
     }
 
     def form_valid(self, form):

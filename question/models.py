@@ -18,7 +18,9 @@ class Question(models.Model):
         return str(self.pk) + ': ' + self.ques_title
 
     def brief(self):
-        return self.ques_desc[:8] + '...'
+        if len(self.ques_desc) < 20:
+            return self.ques_desc
+        return self.ques_desc[:20] + '...'
 
     def get_absolute_url(self):
         return f'/question/{self.pk}/'

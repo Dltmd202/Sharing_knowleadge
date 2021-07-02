@@ -3,54 +3,58 @@
 {% block head_title %}Create Question{% endblock %}
 
 {% block main_area %}
-    <form method="post" enctype="multipart/form-data">{% csrf_token %}
-        <div class="row">
-            <div class="col-9">
-                <h1>Q & A</h1>
+
+    <section class="my-2 px-3 px-lg-3">
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="row">
+                <div class="col-10">
+                    <h1>Q & A</h1>
+                </div>
+                <div class="col-2 custom-contentview px-3 py-3">
+                    <button type="submit" class="" style="border: white; background-color: white">
+                        <i class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                </div>
             </div>
-            <div class="col-3 my-2">
-                <button type="submit" class="btn btn-primary float-right">제출하기</button>
+            <hr class="focus-hr">
+            <div class="row">
+                <div class="col-2">
+                    <label for="제목">제 목</label>
+                </div>
+                <div class="col-9">
+                    {{ form.ques_title }}
+                </div>
             </div>
-        </div>
-        <hr />
-        <div class="row">
-        <div class="col-2">
-            <label for="제목">제 목</label>
-        </div>
-        <div class="col-9">
-            {{ form.ques_title }}
-        </div>
-    </div>
-    <hr>
-      <div class="row">
-        <div class="col-2">
-            <label for="카테고리">카테고리</label>
-        </div>
-        <div class="col-9">
-            {{ form.category_id }}
-        </div>
-    </div>
-    <hr>
-      <div class="row">
-        <div class="col-2">
-            <label for="질문포인트">질문포인트</label>
-        </div>
-        <div class="col-9">
-            {{ form.ques_point }}
-        </div>
-    </div>
-    <hr>
-      <div class="row">
-        <div class="col-2">
-            <label for="질문포인트">이미지</label>
-        </div>
-        <div class="col-9">
-            {{ form.head_img }}
-        </div>
-    </div>
-    <hr>
-      <div class="row">
-            {{ form.ques_desc }}
-    </div>
-  </form>
+            <hr>
+          <div class="row my-3">
+              <div class="col-2">
+                  <label for="카테고리">카테고리</label>
+              </div>
+              <div class="col-9">
+                  {{ form.category_id }}
+              </div>
+          </div>
+            <hr>
+            <div class="row">
+                <div class="col-2">
+                    <label for="질문포인트">질문포인트</label>
+                </div>
+                <div class="col-9">
+                    {{ form.ques_point }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-2">
+                    <label for="질문포인트">이미지</label>
+                </div>
+                <div class="col-9">
+                    {{ form.head_img }}
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                {{ form.ques_desc }}
+            </div>
+      </form>
+    </section>
 {% endblock %}

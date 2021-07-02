@@ -6,7 +6,7 @@
 
 
 {% block main_area %}
-
+<div style="padding-right: 50px;">
     <div id="post-area" class="custom-contentview px-5">
         {% if question.category_id %}
             <span class="badge badge-secondary float-right">{{ question.category_id }}</span>
@@ -25,8 +25,9 @@
             </div>
             {% if user.is_authenticated and user == question.user_id %}
                 <div class="col-2">
-                    <a class="btn btn-info btn-sm float-right" href="/question/update_question/{{ question.pk }}/" role="button">
-                        <i class="fas fa-pen"></i> Edit Post</a>
+                    <a class="custom-contentview" href="/question/update_question/{{ question.pk }}/"
+                       role="button" style="padding: 5px">
+                        <i class="fas fa-pen"></i> 수정하기</a>
                 </div>
             {% endif %}
         </div>
@@ -40,60 +41,97 @@
         <br />
         <br />
     </div>
-<hr>
 <div class="comment-area" id="comment-area">
   <!-- Comments Form -->
-    <div class="custom-contentview my-4" style="padding: 20px">
-        <h5 class="mx-3 my-3">답변 작성하기</h5>
-        <div class="search-box" style="width: 800px; height: 55px; padding-left: 30px">
+    <div class="custom-contentview my-4 px-3">
+        <h5 style="margin: 20px;">답변 작성하기</h5>
+        <hr class="focus-hr" style="size: 5px; color: #3489aa;">
+        <div class="card-body">
             {% if user.is_authenticated %}
-            <form id="comment-form" method="POST" action="{{ answer.get_absolute_url }}new_comment/">
+            <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
                 {% csrf_token %}
                 <div class="form-group">
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <label for="제목">타이틀</label>
+                        </div>
+                        <div class="col-9 search-box" style="width: 600px">
+                            {{ answer_form.answer_title }}
+                        </div>
+                    </div>
+                  <div class="row my-3">
+                    <div class="col-2 text-center">
+                        <label for="내용">내용</label>
+                    </div>
+                    <div class="col-9 search-box" style="height: 330px; width: 600px;">
+                        {{ answer_form.answer_desc }}
+                    </div>
+                    </div>
                 </div>
-                <a type="submit" style="float:right;"><i class="fas fa-pen px-3 my-3" style="color: #0c89aa"></i></a>
+                <div class="" style="margin-right: 50px;" align="right">
+                    <div id="submit-button" class="col-3 custom-contentview px-3 py-3" align="center">
+                        <button type="submit" class="clear-button" style="border: white;">
+                            <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                    </div>
+                </div>
             </form>
             {% else %}
-                <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="#"
-                   data-toggle="modal" data-target="#loginModal">Log in and leave a comment</a>
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="{% url 'login' %}"
+                   data-toggle="modal" data-target="#loginModal">Log in 하기</a>
             {% endif %}
         </div>
     </div>
     {% if object.answer_set.exists %}
         {% for answer in object.answer_set.iterator %}
         <!-- Single Comment -->
-        <div class="media mb-4" id="answer-{{ answer.pk }}">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="{{ answer }}">
+            <div class="media mb-4 custom-contentview answer-size" id="answer-{{ answer.pk }}">
                 <div class="media-body">
                     {% if user.is_authenticated and comment.author == user %}
-                        <div class="float-right">
-                            <a role="button" class="btn btn-sm btn-info float-right"
-                                id="comment-{{ answer.pk }}-update-btn"
-                                href="/blog/update_comment/{{ answer.pk }}/">
-                                edit
-                            </a>
-                            <a role="button" href="#" id="comment-{{ answer.pk }}-delete-modal-btn"
-                                class="btn btn-sm btn-danger" data-toggle="modal"
-                               data-target="#deleteCommentModal-{{ answer.pk }}">
-                            delete
-                            </a>
-                        </div>
+                    <div class="float-right">
+                        <a role="button" class="btn btn-sm btn-info float-right"
+                            id="comment-{{ answer.pk }}-update-btn"
+                            href="/blog/update_comment/{{ answer.pk }}/">
+                            edit
+                        </a>
+                        <a role="button" href="#" id="comment-{{ answer.pk }}-delete-modal-btn"
+                            class="btn btn-sm btn-danger" data-toggle="modal"
+                           data-target="#deleteCommentModal-{{ answer.pk }}">
+                        delete
+                        </a>
+                    </div>
                     {% endif %}
-                        <div class="row">
-                            <div class="col-9">
-                                <h5 class="mt-0">{{ answer.user_id }}&nbsp;&nbsp</h5>
-                            </div>
-                            <div class="col-3">
-                                <small class="text-muted">{{ answer.answer_date }}</small>
-                            </div>
-                            <p>{{ answer.answer_desc | linebreaks }}</p>
+                    <div class="row">
+                        <div class="col-1">
+                            <img class="d-flex mr-5 rounded-circle" src="http://placehold.it/50x50" alt="{{ answer }}">
                         </div>
+                        <div class="col-8">
+                            <h5 class="">{{ answer.answer_title }}</h5>
+                            <p class="lead">
+                            by
+                            <a href="#" class="a-user-info">{{ answer.user_id | upper }}</a>
+                        </div>
+                        <div class="col-3" style="padding-top: 10px;">
+                            <div>
+                                <div align="left">
+                                    <a class="recommand-button" href=""
+                                       role="button" style="padding: 5px">
+                                        <i class="far fa-heart"></i> 추천</a>
+                                    <a class="check-button" href=""
+                                       role="button" style="padding: 5px">
+                                        <i class="far fa-square"></i> 채택하기</a>
+                                </div>
+                            </div>
+                            <small class="text-muted">{{ answer.answer_date }}</small>
+                        </div>
+                        <hr>
+                        <p>{{ answer.answer_desc | linebreaks }}</p>
                     </div>
                 </div>
+            </div>
         {% endfor %}
     {% endif %}
 </div>
-
+</div>
 
 
 {% endblock %}

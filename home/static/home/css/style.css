@@ -1,0 +1,244 @@
+.nav-custom{
+    padding-top: 1em;
+}
+
+.nav-custom-brand{
+    position: relative;
+    display: flex;
+}
+
+
+.nav-custom-branch-a{
+    size: 10px;
+}
+
+.search-box{
+    width: 400px;
+    height: 35px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #0c89aa;
+    border-radius: 5px 10px;
+    padding-left: 5px;
+    padding-top: 2px;
+}
+
+.fa-search{
+    color: #0c89aa;
+}
+
+.nav-link{
+    color: black;
+}
+
+.navbar-brand:hover{
+    color: #0c89aa;
+}
+
+#nav-search-input{
+    border:none;
+    border-right:0px;
+    border-top:0px;
+    boder-left:0px;
+    boder-bottom:0px;
+    width: 300px;
+    margin-left: 3px;
+}
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+    background-color: #fafbfd;
+}
+#main-container {
+   min-height:100%;
+   position:relative;
+   padding-bottom:100px;
+}
+
+
+.custom-cardview{
+    border-style: solid;
+    border-width: 3px;
+    border-color: #e9ebee;
+    border-radius: 5px 10px;
+    padding-left: 5px;
+    padding-top: 2px;
+    background-color: white;
+    transition: 0.3s;
+    color: black;
+    text-decoration: none;
+}
+
+
+.custom-contentview{
+    border-style: solid;
+    border-width: 2px;
+    border-color: #e9ebee;
+    border-radius: 5px 10px;
+    padding-left: 5px;
+    padding-top: 2px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+
+
+.clear-button{
+    background-color: rgba(255, 255, 255, 1);
+}
+
+
+.custom-contentview-button{
+    border: white;
+    background-color: white;
+}
+.custom-cardview:hover {
+    text-decoration: none;
+    box-shadow: 0 0 16px 0 rgba(0,0,0,0.2);
+}
+
+.custom-cardview:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.custom-contentview-head{
+    background-color: #e9ebee;
+}
+
+
+.my-page{
+    color: black;
+}
+
+.category-list{
+    color: black;
+}
+
+.my-page:link{
+    text-decoration: none;
+    color: black;
+}
+.category-list:link{
+    text-decoration: none;
+    color: black;
+}
+
+.my-page:hover{
+    text-decoration: none;
+    color: black;
+}
+.category-list:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.my-page:visited{
+    text-decoration: none;
+    color: black;
+}
+
+.category-list:visited{
+    text-decoration: none;
+    color: black;
+}
+
+.a-user-info:link{
+    text-decoration: none;
+    color: #0c89aa;
+}
+
+.a-user-info:hover{
+    text-decoration: none;
+    color: #0c89aa;
+}
+
+.a-user-info:visited{
+    text-decoration: none;
+    color: #0c89aa;
+}
+
+.user-status{
+    font-size: small;
+    color: #969696;
+}
+
+.ul-user-status{
+    list-style: none;
+    line-height: 50%;
+}
+
+.answer_title{
+    width: 700px;
+}
+
+.answer_title{
+    width :700px;
+}
+
+.link{
+    text-emphasis: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+.button-text{
+    text-decoration: none;
+}
+
+link{
+    outline: none;
+}
+link:hover{
+    outline: none;
+}
+link:visited{
+    outline: none;
+}
+link:active{
+    outline: none;
+}
+input:focus{
+    outline: none;
+}
+textarea:focus{
+    outline: none;
+}
+
+.focus-hr{
+    size: 3px;
+    color: #0c89aa;
+}
+
+.answer-size{
+    padding-top: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-bottom: 20px;
+}
+
+.recommand-button{
+    text-decoration: none;
+    color: black;
+}
+
+.recommand-button:hover{
+    text-decoration: none;
+    color: red;
+}
+
+.check-button{
+    text-decoration: none;
+    color: black;
+}
+
+.check-button:hover{
+    text-decoration: none;
+    color: #0c89aa;
+}

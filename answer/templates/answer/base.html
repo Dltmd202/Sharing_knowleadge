@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'static.css' %}">
+<link rel="stylesheet" href="{% static 'home/css/style.css' %}">
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -12,11 +12,11 @@
 </head>
 
 <body>
-{% include 'answer/navbar.html' %}
+{% include 'home/navbar.html' %}
 
 {% block main_area %}
 {% endblock %}  
 
-{% include 'answer/footer.html'%}
+{% include 'home/footer.html'%}
 </body>
 </html>

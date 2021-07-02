@@ -1,0 +1,43 @@
+
+
+<nav style="border-bottom: black; background-color: white">
+    <div class="nav-custom" >
+        <div class="container">
+            <div class="row">
+                <div class="nav-custom-brand col-1">
+                    <a class="navbar-brand" href="/" style="color: black">지식인</a>
+                </div>
+                <div class="col-8">
+                    <div class="search-box row">
+                        <div>
+                            <i class="fas fa-search" onclick="navSearchQuestion()"></i>
+                            <input type="text" id="nav-search-input"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    {% if user.is_authenticated %}
+                        <div class="row">
+                            <div class="nav-item col-5">
+                                <a class="nav-link" href="{% url 'mypage' %}">{{ user.username }}</a>
+                            </div>
+                            <div class="nav-item col-7">
+                                <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            <div class="nav-item col-6" style="float: right">
+                                <a class="nav-link" href="{% url 'register' %}">회원가입</a>
+                            </div>
+                            <div class="nav-item col-6" style="float: right">
+                                <a class="nav-link" href="{% url 'login' %}">로그인</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+</nav>

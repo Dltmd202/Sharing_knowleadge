@@ -1,10 +1,13 @@
 {% extends 'user/base.html' %}
 
+{% load static %}
+
 {% block main_area %}
     <div class="container-lg mt-5 mb-4 mx-auto text-center d-flex justify-content-center">
         <div class="col-md-6 my-5">
             <div>
-                <div class="blank-userpic-small mx-auto"></div>
+                <img class="mx-auto" src="{% static 'likelion.png' %}" 
+                    alt="로고" height="100" style="mix-blend-mode: multiply;" />
                 <div class="mt-3" style="font-size: 40pt; font-weight: bold;">
                     {% block body_title %}{% endblock %}
                 </div>

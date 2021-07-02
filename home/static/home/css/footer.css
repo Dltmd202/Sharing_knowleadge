@@ -1,0 +1,26 @@
+footer{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+}
+
+.footer-div{
+    float: left;
+    margin-left: 50px;
+}
+
+.footer-text{
+    color: white;
+    font-size: small;
+}
+
+.black{
+    background: black;
+}
+
+.grass{
+    background-image: url(../img/grass2.png) ;
+    background-size:contain;
+    background-color: #347F80;
+    background-position: right;
+}

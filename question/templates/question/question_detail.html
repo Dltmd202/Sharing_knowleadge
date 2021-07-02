@@ -6,34 +6,35 @@
 
 
 {% block main_area %}
-<div style="padding-right: 50px;">
+
+<section style="padding-right: 50px;">
     <div id="post-area" class="custom-contentview px-5">
         {% if question.category_id %}
-            <span class="badge badge-secondary float-right">{{ question.category_id }}</span>
+            <span class="btn badge-secondary float-right" style="float: right">{{ question.category_id }}</span>
         {% else %}
-            <span class="badge badge-secondary float-right">미분류</span>
+            <span class="custom-cardview badge-secondary float-right" style="float:right; margin: 30px; padding: 5px;">미분류</span>
         {% endif %}
-        <h1 class="mt-2">{{ question.ques_title }}</h1>
+        <h1 class="mt-2" style="color: black; margin-top: 30px;">{{ question.ques_title }}</h1>
         <p class="lead">
         by
             <a href="#" class="a-user-info">{{ question.user_id | upper }}</a>
         </p>
         <hr style="margin-right: 30px">
         <div class="row">
-            <div class="col-10">
+            <div class="col-9">
                 <p>Posted on {{ question.post_date }}</p>
             </div>
             {% if user.is_authenticated and user == question.user_id %}
-                <div class="col-2">
-                    <a class="custom-contentview" href="/question/update_question/{{ question.pk }}/"
-                       role="button" style="padding: 5px">
+                <div class="col-3">
+                    <a class="btn" href="/question/update_question/{{ question.pk }}/"
+                       role="button" style="padding-left: 10px; padding-right: 10px;">
                         <i class="fas fa-pen"></i> 수정하기</a>
                 </div>
             {% endif %}
         </div>
         <hr style=" margin-right: 30px;">
         {% if question.head_img %}
-            <hr>
+        <hr style="margin-right: 30px">
             <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
         {% endif %}
         <!-- Post Content -->
@@ -45,7 +46,7 @@
   <!-- Comments Form -->
     <div class="custom-contentview my-4 px-3">
         <h5 style="margin: 20px;">답변 작성하기</h5>
-        <hr class="focus-hr" style="size: 5px; color: #3489aa;">
+        <hr style="margin-right: 30px">
         <div class="card-body">
             {% if user.is_authenticated %}
             <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
@@ -69,8 +70,8 @@
                     </div>
                 </div>
                 <div class="" style="margin-right: 50px;" align="right">
-                    <div id="submit-button" class="col-3 custom-contentview px-3 py-3" align="center">
-                        <button type="submit" class="clear-button" style="border: white;">
+                    <div id="" class="col-3 px-3 py-3" align="center">
+                        <button type="submit" class="btn" style="border: white;">
                             <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
     {% if object.answer_set.exists %}
         {% for answer in object.answer_set.iterator %}
         <!-- Single Comment -->
-            <div class="media mb-4 custom-contentview answer-size" id="answer-{{ answer.pk }}">
+            <section class="media mb-4 custom-contentview answer-size px-5" id="answer-{{ answer.pk }}">
                 <div class="media-body">
                     {% if user.is_authenticated and comment.author == user %}
                     <div class="float-right">
@@ -129,11 +130,11 @@
                         <p>{{ answer.answer_desc | linebreaks }}</p>
                     </div>
                 </div>
-            </div>
+            </section>
         {% endfor %}
     {% endif %}
 </div>
-</div>
+</section>
 
 
 {% endblock %}

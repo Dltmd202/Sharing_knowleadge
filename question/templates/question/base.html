@@ -67,7 +67,7 @@
                 <div class="card-body">
                     <div class="row">
                         <ul class="list-unstyled mb-0">
-                            {% for c in category %}
+                            {% for c in categories %}
                             <li>
                                 <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} ({{ c.question_set.count }})</a>
                             </li>

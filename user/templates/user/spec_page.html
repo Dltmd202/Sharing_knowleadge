@@ -1,0 +1,74 @@
+{% extends 'user/base.html' %}
+
+{% load static %}
+
+{% block head_title %}스펙 페이지{% endblock %}
+
+{% block main_area %}
+    <div class="container-lg mb-5 p-5 mx-auto" style="max-width: 1200px;">
+        <div class="mx-3">
+            <div class="row mx-3">
+                <div class="col-auto">
+                    <div style="font-size: 70pt; font-weight: 0; color:#2699FB;">스펙 목록</div>
+                </div>
+            </div>
+            <div class="border-top border-3 border-primary mt-4 mb-5"></div>
+        </div>
+        <div class="row my-3 profilebox">
+            <div>학력</div>
+            <div style="margin: 20px;">
+                {% for univ in university_list %}
+                <div style="margin-bottom: 20px;">
+                    <div class="row">
+                        <div class="col-1" align="right">
+                            <i class="far fa-circle" style="color: #0c89aa"></i>
+                        </div>
+                        <div class="col-10" align="left" style="margin-top: 8px;">
+                            <p style="line-height: 10%"> {{ univ.uni_name }} {{ univ.uni_major }} {{ univ.uni_degree }}</p>
+                            <p class="user-status"
+                               style=" margin-bottom: 20px; line-height: 10%;">
+                                {{ univ.enter_date }} ~ {{ univ.grad_date }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div align="right">
+                <div class="profilebutton">
+                    <a href="{% url 'new_univ' %}">추가하기</a>
+                </div>
+            </div>
+        </div>
+        <div class="row my-3 profilebox">
+            <div>경력</div>
+            <div style="margin: 20px;">
+                {% for comp in company_list %}
+                <div style="margin-bottom: 20px;">
+                    <div class="row">
+                        <div class="col-1" align="right">
+                            <i class="far fa-circle" style="color: #0c89aa"></i>
+                        </div>
+                        <div class="col-10" align="left" style="margin-top: 8px;">
+                            <p style="line-height: 10%"> {{ comp.comp_name }} {{ comp.employ_type }}</p>
+                            <p class="user-status"
+                               style=" margin-bottom: 20px; line-height: 10%;">
+                                {{ comp.join_date }} ~
+                                {% if comp.is_working %}
+                                    현재
+                                {% else %}
+                                    {{ comp.leave_date }}
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div align="right">
+                <div class="profilebutton">
+                    <a href="{% url 'new_company' %}">추가하기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

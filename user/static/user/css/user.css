@@ -54,3 +54,10 @@
     bottom: 4px;
     z-index: 9;
 }
+
+.profilebutton {
+    border: 1px solid #3BA3FB;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 10px 15px;
+}

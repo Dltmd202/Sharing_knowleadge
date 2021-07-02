@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
 from .forms import UserCreationForm1, UserCreationForm2, CustomLoginForm
+from company.models import Company
+from university.models import University
 import datetime
 
 
@@ -55,12 +57,28 @@ def loginView(request):
         form = CustomLoginForm()
     return render(request, 'user/login.html', {'form':form})
 
+
 def logoutView(request):
     logout(request)
     return redirect('/')
 
+
 def mypageView(request):
     if request.user.is_authenticated:
         return render(request, 'user/mypage.html')
+    else:
+        return HttpResponseForbidden()
+
+
+def specView(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        university_list = University.objects.filter(user_id=current_user)
+        company_list = Company.objects.filter(user_id=current_user)
+        return render(request, 'user/spec_page.html',
+                      {
+                          'university_list': university_list,
+                          'company_list': company_list,
+                      })
     else:
         return HttpResponseForbidden()

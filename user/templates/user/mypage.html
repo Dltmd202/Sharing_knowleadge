@@ -7,16 +7,21 @@
 {% block main_area %}
     <div class="container-lg mb-5 p-5 mx-auto" style="max-width: 1200px;">
         <div class="mx-3">
-            <div class="row mx-3">
+            <div class="row mx-3 mt-5">
                 <div class="col-auto">
-                    <div style="font-size: 70pt; font-weight: 0; color:#2699FB;">{{ user }}</div>
+                    <div style="font-size: 70pt; line-height: 0; color:#2699FB;">
+                        {{ user }}
+                    </div>
                 </div>
-                <div class="col mt-auto">
-                    <a href="">유저 정보 변경</a>
+                <div class="col-auto mt-4">
+                    <a href="{% url 'edit' %}">
+                        유저 정보 변경
+                    </a>
                 </div>
             </div>
             <div class="border-top border-3 border-primary mt-4 mb-5"></div>
         </div>
+
         <div class="row my-3">
             <div class="col-3 text-center my-auto">
                 {% if user.user_pic %}

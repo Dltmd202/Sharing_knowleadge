@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
-from .forms import UserCreationForm1, UserCreationForm2, CustomLoginForm
+from .forms import UserCreationForm1, UserCreationForm2, UserPasswordEditForm, CustomLoginForm
 import datetime
 
 
@@ -66,5 +66,50 @@ def mypageView(request):
     if request.user.is_authenticated:
         chosen = request.user.answer_set.filter(is_chosen=True)
         return render(request, 'user/mypage.html', {'chosen':chosen})
+    else:
+        return HttpResponseForbidden()
+
+def userEditPageView(request):
+    if request.user.is_authenticated:
+        user = request.user
+        success = None
+
+        form1 = UserPasswordEditForm()
+        form2 = UserCreationForm2()
+        form2.initial['user_desc'] = user.user_desc
+        form2.initial['email'] = user.email
+        birth_date = user.birth_date
+        form2.initial['birth_year'] = birth_date.year
+        form2.initial['birth_month'] = birth_date.month
+        form2.initial['birth_day'] = birth_date.day
+
+        if request.method == 'POST':
+            data = request.POST
+            if data.get("password_change"):
+                form1 = UserPasswordEditForm( 
+                    data={'password':data['password'], 'password_again':data['password_again']}
+                )
+                if form1.is_valid():
+                    cleaned_data = form1.cleaned_data
+                    user.set_password(cleaned_data['password'])
+                    user.save()
+                    success = True
+            elif data.get("other_change"):
+                form2 = UserCreationForm2(
+                    data={'user_desc':data['user_desc'], 'email':data['email'], 
+                        'birth_year':data['birth_year'], 'birth_month':data['birth_month'], 
+                        'birth_day':data['birth_day']}
+                )
+                if form2.is_valid():
+                    cleaned_data = form2.cleaned_data
+                    user.user_desc = cleaned_data['user_desc']
+                    user.email = cleaned_data['email']
+                    dateString = cleaned_data['birth_year'] + "-" + \
+                        cleaned_data['birth_month'] + "-" + cleaned_data['birth_day']
+                    birth_date = datetime.datetime.strptime(dateString, "%Y-%m-%d")
+                    user.save()
+                    success = True
+
+        return render(request, 'user/user_edit.html', {'form1':form1, 'form2':form2, 'success':success})
     else:
         return HttpResponseForbidden()

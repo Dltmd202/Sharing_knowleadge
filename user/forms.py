@@ -38,7 +38,6 @@ class UserCreationForm1(forms.ModelForm): # 회원가입 첫번째 페이지 폼
 
         return cleaned_data
 
-
 class UserCreationForm2(forms.ModelForm): # 회원가입 두번째 페이지 폼(닉네임, 이메일, 생년월일)
     MONTH_CHOICE = ((i, '{}월'.format(i)) for i in range(1, 13))
     DAY_CHOICE = ((i, '{}일'.format(i)) for i in range(1, 32))
@@ -91,6 +90,16 @@ class UserCreationForm2(forms.ModelForm): # 회원가입 두번째 페이지 폼
             raise forms.ValidationError("연도 범위를 초과했습니다.")
 
         return cleaned_data
+
+class UserPasswordEditForm(UserCreationForm1):
+    class Meta:
+        model = CustomUser
+        fields = ['password']
+        widgets = {
+            "password": PasswordInput(attrs={
+                "placeholder":"비밀번호 입력", "class":classValue+" password-input", "style":styleValue
+            })
+        }
 
 class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):

@@ -115,8 +115,10 @@ class CustomLoginForm(AuthenticationForm):
         "placeholder": "비밀번호 입력", "class": classValue + " password-input", "style": styleValue,
     }))
     stay_logged_in = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={
-        "class": "form-check-input", "id": "loginCheck"
+        "class":"form-check-input", "id":"loginCheck"
     }))
+
+
 
 
 class CustomSelect(forms.Select):
@@ -126,7 +128,7 @@ class CustomSelect(forms.Select):
             option['attrs']['disabled'] = True
         if option.get('value') == 2:
             option['attrs']['disabled'] = True
-
+        
         return option
 
 
@@ -138,12 +140,13 @@ class PointExchangeForm(forms.Form):
     CHOICES = (("", "포인트 종류 선택"), ("question", "질문 포인트"), ("answer", "답변 포인트"))
     point_type = forms.CharField(
         widget=CustomSelect(choices=CHOICES, attrs={
-            "placeholder": "포인트 선택", "class": classValue + " form-select", "style": styleValue
+
+            "placeholder": "포인트 선택", "class":classValue+" form-select", "style":styleValue
         })
     )
     point_amount = forms.IntegerField(
         widget=forms.NumberInput(attrs={
-            "placeholder": "환전할 포인트", "class": classValue, "style": styleValue
+            "placeholder": "환전할 포인트", "class":classValue, "style":styleValue
         })
     )
 
@@ -160,8 +163,8 @@ class PointExchangeForm(forms.Form):
         except ValueError:
             raise forms.ValidationError("포인트 수량 형식이 맞지 않습니다.")
         if (point_type == "question" and point_amount > self.request.user.ques_point) \
-                or (point_type == "answer" and point_amount > self.request.user.answer_point):
+            or (point_type == "answer" and point_amount > self.request.user.answer_point):
             raise forms.ValidationError("환전할 포인트가 부족합니다.")
-
+            
         return cleaned_data
 

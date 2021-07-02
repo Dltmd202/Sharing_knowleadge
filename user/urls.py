@@ -13,3 +13,4 @@ urlpatterns = [
     path('spec/', views.specView, name="spec"),
     path('exchange/', views.exchangeView, name="exchange")
 ]
+

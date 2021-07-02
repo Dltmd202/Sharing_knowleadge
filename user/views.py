@@ -171,6 +171,7 @@ def exchangeView(request):
                 user.save()
                 success = point_amount
 
-        return render(request, 'user/exchange.html', {'form': form, 'success': success})
+
+        return render(request, 'user/exchange.html', {'form':form, 'success':success})
     else:
         return HttpResponseForbidden()

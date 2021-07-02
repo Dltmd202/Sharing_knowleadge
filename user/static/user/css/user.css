@@ -1,5 +1,5 @@
 .profilebox {
-    border: 1px solid #3BA3FB;
+    border: 1px solid #0c89aa;
     border-radius: 25px;
     padding: 25px;
     margin: 10px 15px;
@@ -9,7 +9,7 @@
 .bignumber {
     font-size: 80px; 
     font-weight: bold;
-    color: #7FC4FD;
+    color: #0c89aa;
     margin-top: 10px;
 }
 
@@ -56,8 +56,10 @@
 }
 
 .profilebutton {
-    border: 1px solid #3BA3FB;
-    border-radius: 25px;
-    padding: 25px;
+    border: 1px solid #0c89aa;
+    border-radius: 5px;
+    padding: 15px;
     margin: 10px 15px;
+    max-width: 150px;
+    text-align: center;
 }

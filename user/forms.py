@@ -114,3 +114,52 @@ class CustomLoginForm(AuthenticationForm):
     stay_logged_in = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={
         "class":"form-check-input", "id":"loginCheck"
     }))
+
+
+
+class CustomSelect(forms.Select):
+    def create_option(self, *args, **kwargs):
+        option = super().create_option(*args, **kwargs)
+        if not option.get('value'):
+            option['attrs']['disabled'] = True
+        if option.get('value') == 2:
+            option['attrs']['disabled'] = True
+        
+        return option
+
+class PointExchangeForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(PointExchangeForm, self).__init__(*args, **kwargs)
+
+    CHOICES = (("", "포인트 종류 선택"), ("question", "질문 포인트"), ("answer", "답변 포인트"))
+    point_type = forms.CharField(
+        widget=CustomSelect(choices=CHOICES, attrs={
+            "placeholder": "포인트 선택", "class":classValue+" form-select", "style":styleValue
+        })
+    )
+    point_amount = forms.IntegerField(
+        widget=forms.NumberInput(attrs={
+            "placeholder": "환전할 포인트", "class":classValue, "style":styleValue
+        })
+    )
+
+    def clean(self):
+        cleaned_data = super(PointExchangeForm, self).clean()
+        point_type = cleaned_data.get("point_type")
+        point_amount = cleaned_data.get("point_amount")
+
+        if point_type not in ["question", "answer"]:
+            raise forms.ValidationError("포인트 종류가 맞지 않습니다.")
+        try:
+            if type(int(point_amount)) != type(1):
+                raise ValueError
+        except ValueError:
+            raise forms.ValidationError("포인트 수량 형식이 맞지 않습니다.")
+        if (point_type == "question" and point_amount > self.request.user.ques_point) \
+            or (point_type == "answer" and point_amount > self.request.user.answer_point):
+            raise forms.ValidationError("환전할 포인트가 부족합니다.")
+            
+        return cleaned_data
+
+

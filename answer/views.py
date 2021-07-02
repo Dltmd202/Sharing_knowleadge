@@ -7,8 +7,13 @@ from .models import Answer
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404
 from category.models import Category
+from question.models import Question
+from .forms import AnswerForm
+from question import urls
 from user.models import CustomUser
+
 
 class AnswerList(ListView):
     model = Answer
@@ -33,32 +38,23 @@ class AnswerDetail(DetailView):
         return context
 
 
-class AnswerNew(LoginRequiredMixin, CreateView, ABC):
-    model = Answer
-    fields = ['answer_title', 'answer_desc', 'question_id', 'vote_count']
-    template_name = 'answer/answer_new.html'
+def new_answer(request, pk):
+    if request.user.is_authenticated:
+        question = get_object_or_404(Question, pk=pk)
 
-    def form_valid(self, form):
-        current_user = self.request.user
-        if current_user.is_authenticated:
-            form.instance.author = current_user
-            vote_count_str = self.request.POST.get('vote_count')
-            vote_count_str = form.fields['vote_count']
-            new_answer = CustomUser()
-            if vote_count_str:
-                user = CustomUser.objects.get(username=current_user)
-
-                user.answer_point = str(int(user.left_answer()) - int(self.request.POST.get('vote_count')))
-                user.save()
-            return super(AnswerNew, self).form_valid(form)
+        if request.method == 'POST':
+            answer_form = AnswerForm(request.POST)
+            if answer_form.is_valid():
+                answer = answer_form.save(commit=False)
+                answer.question_id = question
+                answer.user_id = request.user
+                answer.save()
+                return redirect(question.get_absolute_url())
         else:
-            return redirect('/answer')
+            return redirect(question.get_absolute_url())
+    else:
+        raise PermissionDenied
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(AnswerNew, self).get_context_data()
-        context['categories'] = Category.objects.all()
-        context['no_category_answer_count'] = Answer.objects.filter(category_id=None).count()
-        return context
 
 class AnswerEdit(LoginRequiredMixin, UpdateView):
     model = Answer

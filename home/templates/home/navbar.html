@@ -12,12 +12,12 @@
         <li><a href="{% url 'question_main' %}" onclick="toggleMenu()">질문</a></li>
         {% if user.is_authenticated %}
         <li><a href="" onclick="notYet()">결제</a></li>
+        <li><a href="{% url 'mypage' %}" onclick="toggleMenu()">{{ user.username }}</a></li>
         <li><a href="{% url 'logout' %}" onclick="toggleMenu()">로그아웃</a></li>
-        <li><a href="{% url 'mypage' %}" onclick="toggleMenu()">{{ user }}</a></li>
 
         {% else %}
-        <li><a href="{% url 'register' %}" onclick="toggleMenu()">회원가입</a></li>
         <li><a href="{% url 'login' %}" onclick="toggleMenu()">로그인</a></li>
+        <li><a href="{% url 'register' %}" onclick="toggleMenu()">회원가입</a></li>
         {% endif %}
     </ul>
     <script>

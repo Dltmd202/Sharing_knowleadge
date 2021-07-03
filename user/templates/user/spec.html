@@ -1,77 +1,65 @@
-{% extends 'user/base.html' %}
+{% extends 'user/base_profile.html' %}
 
 {% load static %}
 
 {% block head_title %}스펙 페이지{% endblock %}
 
-{% block main_area %}
-<div class="container-lg mb-5 p-5 mx-auto" style="max-width: 1200px;">
-    <div class="mx-3">
-        <div class="row mx-3 my-5">
-            <div class="col-auto">
-                <div class="mypage-title">
-                    스펙 목록
+{% block body_title %}스펙 목록{% endblock %}
+
+{% block container_main_area %}
+    <div class="my-3 py-4 profilebox">
+        <div class="h3 font-midnight">학력</div>
+        <ul>
+        {% for uni in university %}
+        <form action="" method="post" id="uni-delete-{{ uni.pk }}">
+            {% csrf_token %}
+            <li class="py-2 text-secondary">
+                {{ uni.uni_name }} {{ uni.uni_major }} {{uni.uni_degree}}
+                <a href="javascript:void(0)" onclick="
+                    document.getElementById('uni-delete-{{ uni.pk }}').submit();
+                ">
+                    <i class="fas fa-sm fa-times-circle"></i>
+                </a>
+                <input type="hidden" value="university" name="form-type">
+                <input type="hidden" value="{{ uni.pk }}" name="primary-key">
+                <div style="font-size:0.75rem; color:#ACABAB;">
+                    {{ uni.enter_date }} - 
+                    {% if not uni.is_attending %}{{ uni.grad_date }}{% else %}현재{% endif %}
                 </div>
-            </div>
+            </li>
+        </form>
+        {% endfor %}
+        </ul>
+        <div class="d-flex justify-content-end">
+            <a href="" class="btn btn-lg btn-outline-primary">추가하기</a>
         </div>
-
-        <div class="border-top border-3 border-primary mt-4 mb-5"></div>
-
-        <div class="my-3 py-4 profilebox">
-            <div class="h4 text-primary">학력</div>
-            <ul>
-            {% for uni in university %}
-            <form action="" method="post" id="uni-delete-{{ uni.pk }}">
+    </div>
+    <div class="my-3 profilebox">
+        <div class="h3 font-midnight">경력</div>
+        <ul>
+            {% for comp in company %}
+            <form action="" method="post" id="comp-delete-{{ comp.pk }}">
                 {% csrf_token %}
                 <li class="py-2 text-secondary">
-                    {{ uni.uni_name }} {{ uni.uni_major }} {{uni.uni_degree}}
+                    {{ comp.comp_name }} {{ comp.comp_title }}
                     <a href="javascript:void(0)" onclick="
-                        document.getElementById('uni-delete-{{ uni.pk }}').submit();
+                        document.getElementById('comp-delete-{{ comp.pk }}').submit();
                     ">
                         <i class="fas fa-sm fa-times-circle"></i>
                     </a>
-                    <input type="hidden" value="university" name="form-type">
-                    <input type="hidden" value="{{ uni.pk }}" name="primary-key">
+                    <input type="hidden" value="company" name="form-type">
+                    <input type="hidden" value="{{ comp.pk }}" name="primary-key">
                     <div style="font-size:0.75rem; color:#ACABAB;">
-                        {{ uni.enter_date }} - 
-                        {% if not uni.is_attending %}{{ uni.grad_date }}{% else %}현재{% endif %}
+                        {{ comp.join_date }} - 
+                        {% if not comp.is_working %}{{ comp.leave_date }}{% else %}현재{% endif %}
                     </div>
                 </li>
             </form>
             {% endfor %}
-            </ul>
-            <div class="d-flex justify-content-end">
-                <a href="" class="btn btn-lg btn-outline-primary">추가하기</a>
-            </div>
-        </div>
-        <div class="my-3 profilebox">
-            <div class="h4 text-primary">경력</div>
-            <ul>
-                {% for comp in company %}
-                <form action="" method="post" id="comp-delete-{{ comp.pk }}">
-                    {% csrf_token %}
-                    <li class="py-2 text-secondary">
-                        {{ comp.comp_name }} {{ comp.comp_title }}
-                        <a href="javascript:void(0)" onclick="
-                            document.getElementById('comp-delete-{{ comp.pk }}').submit();
-                        ">
-                            <i class="fas fa-sm fa-times-circle"></i>
-                        </a>
-                        <input type="hidden" value="company" name="form-type">
-                        <input type="hidden" value="{{ comp.pk }}" name="primary-key">
-                        <div style="font-size:0.75rem; color:#ACABAB;">
-                            {{ comp.join_date }} - 
-                            {% if not comp.is_working %}{{ comp.leave_date }}{% else %}현재{% endif %}
-                        </div>
-                    </li>
-                </form>
-                {% endfor %}
-                </form>
-            </ul>
-            <div class="d-flex justify-content-end">
-                <a href="" class="btn btn-lg btn-outline-primary">추가하기</a>
-            </div>
+            </form>
+        </ul>
+        <div class="d-flex justify-content-end">
+            <a href="" class="btn btn-lg btn-outline-primary">추가하기</a>
         </div>
     </div>
-</div>
 {% endblock %}

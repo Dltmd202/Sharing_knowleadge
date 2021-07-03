@@ -1,145 +1,135 @@
-{% extends 'user/base.html' %}
+{% extends 'user/base_profile.html' %}
 
 {% load static %}
 {% load humanize %}
 
 {% block head_title %}마이페이지{% endblock %}
 
-{% block main_area %}
-    <div class="container-lg mb-5 p-5 mx-auto" style="max-width: 1200px;">
-        <div class="mx-3">
-            <div class="row mx-3 mt-5">
-                <div class="col-auto">
-                    <div class="mypage-title">
-                        {{ user.user_desc }}
-                    </div>
-                </div>
-                <div class="col-auto mt-4">
-                    <a href="{% url 'edit' %}">
-                        유저 정보 변경
-                    </a>
-                </div>
-            </div>
-            <div class="border-top border-3 border-primary mt-4 mb-5"></div>
-        </div>
+{% block body_title %}{{ user.user_desc }}{% endblock %}
 
-        <div class="row my-3">
-            <div class="col-3 text-center my-auto">
-                {% if user.user_pic %}
-                    <img class="border rounded-circle" src="{{ user.user_pic.url }}"
-                        alt="유저 사진" width="200" height="200">
-                {% else %}
-                    <div class="blank-userpic mx-auto"></div>
-                {% endif %}
-            </div>
-            <div class="col profilebox">
-                <div>채택된 답변 개수</div>
-                <div class="h1 text-center bignumber">{{ chosen.count|intcomma }}</div>
-            </div>
-            <div class="col profilebox">
-                <div>누적 득표수</div>
-                <div class="h1 text-center bignumber">
-                    {% if user.score >= 0 %}+{% endif %}{{ user.score|intcomma }}
-                </div>
+{% block title_btn %}
+    <a href="{% url 'edit' %}">
+        유저 정보 변경
+    </a>
+{% endblock %}
+
+{% block container_main_area %}
+    <div class="row my-3">
+        <div class="col-3 text-center my-auto">
+            {% if user.user_pic %}
+                <img class="border rounded-circle" src="{{ user.user_pic.url }}"
+                    alt="유저 사진" width="200" height="200">
+            {% else %}
+                <div class="blank-userpic mx-auto"></div>
+            {% endif %}
+        </div>
+        <div class="col profilebox">
+            <div>채택된 답변 개수</div>
+            <div class="h1 text-center bignumber">{{ chosen.count|intcomma }}</div>
+        </div>
+        <div class="col profilebox">
+            <div>누적 득표수</div>
+            <div class="h1 text-center bignumber">
+                {% if user.score >= 0 %}+{% endif %}{{ user.score|intcomma }}
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col profilebox">
-                <div>질문 포인트</div>
-                <div class="h1 text-center bignumber">
-                    {{ user.ques_point|intcomma }}p
-                </div>
-            </div>
-            <div class="col profilebox">
-                <div>답변 포인트</div>
-                <div class="h1 text-center bignumber">
-                    {{ user.answer_point|intcomma }}p
-                </div>
-            </div>
-            <div class="col profilebox">
-                <div>현금 포인트</div>
-                <div class="h1 text-center bignumber">
-                    {{ user.account|intcomma }}￦
-                </div>
-                <div class="d-flex justify-content-end">
-                    <a href="{% url 'exchange' %}">환전하러 가기</a>
-                </div>
+    </div>
+    <div class="row my-3">
+        <div class="col profilebox">
+            <div>질문 포인트</div>
+            <div class="h1 text-center bignumber">
+                {{ user.ques_point|intcomma }}p
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col-7 profilebox">
-                <div>최근에 채택된 답변</div>
-                <div>
-                    {% for answer in chosen|dictsortreversed:"answer_date" %}
-                        <div class="row border rounded-pill my-4 px-2 py-1" style="position: relative;">
-                            <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
-                                {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
-                            </div>
-                            <div class="col my-auto" style="color: #2699FB;">
-                                {{ answer.question_id.ques_title }}
-                            </div>
-                            <div class="col my-auto d-flex justify-content-end">
-                                <span class="badge rounded-pill bg-primary border p-2">채택!</span>
-                            </div>
-                            <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="col profilebox">
-                <div>스펙</div>
-                <div class="mt-3">
-                    {% if university %}
-                    <div>
-                        <div class="text-primary">학력</div>
-                        <div class="border-top border-1 border-primary my-1"></div>
-                        <ul>
-                        {% for uni in university %}
-                            <li class="py-1 text-secondary">{{ uni.uni_name }} {{ uni.uni_major }} {{uni.uni_degree}}</li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
-                    {% if company %}
-                    <div>
-                        <div class="text-primary">경력</div>
-                        <div class="border-top border-1 border-primary my-1"></div>
-                        <ul>
-                        {% for comp in company %}
-                            <li class="py-1 text-secondary">{{ comp.comp_name }} {{ comp.comp_title }}</li>
-                        {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
-                    <div>
-                        <a class="d-flex justify-content-center py-3" href="{% url 'spec' %}">
-                            자세히 보기...
-                        </a>
-                    </div>
-                </div>
+        <div class="col profilebox">
+            <div>답변 포인트</div>
+            <div class="h1 text-center bignumber">
+                {{ user.answer_point|intcomma }}p
             </div>
         </div>
-        <div class="row my-3">
-            <div class="col profilebox">
-                <div>최근 답변 목록</div>
-                <div>
-                {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
-                    <div class="row border rounded-pill my-4 px-2 py-1" style="position: relative;">
+        <div class="col profilebox">
+            <div>현금 포인트</div>
+            <div class="h1 text-center bignumber">
+                {{ user.account|intcomma }}￦
+            </div>
+            <div class="d-flex justify-content-end">
+                <a href="{% url 'exchange' %}">환전하러 가기</a>
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-7 profilebox">
+            <div>최근에 채택된 답변</div>
+            <div class="mx-4">
+                {% for answer in chosen|dictsortreversed:"answer_date" %}
+                    <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
                         <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
                             {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
                         </div>
-                        <div class="col my-auto" style="color: #2699FB;">
+                        <div class="col my-auto">
                             {{ answer.question_id.ques_title }}
                         </div>
                         <div class="col my-auto d-flex justify-content-end">
-                            {% if answer.is_chosen %}
-                                <span class="badge rounded-pill bg-primary border p-2">채택!</span>
-                            {% endif %}
+                            <span class="badge rounded-pill bg-dark border p-2">채택!</span>
                         </div>
                         <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+        <div class="col profilebox">
+            <div>스펙</div>
+            <div class="mt-3">
+                {% if university %}
+                <div>
+                    <div class="font-teal">학력</div>
+                    <div class="border-top border-1 border-teal my-1"></div>
+                    <ul>
+                    {% for uni in university %}
+                        <li class="py-1 text-secondary">{{ uni.uni_name }} {{ uni.uni_major }} {{uni.uni_degree}}</li>
+                    {% endfor %}
+                    </ul>
                 </div>
+                {% endif %}
+                {% if company %}
+                <div>
+                    <div class="font-teal">경력</div>
+                    <div class="border-top border-1 border-teal my-1"></div>
+                    <ul>
+                    {% for comp in company %}
+                        <li class="py-1 text-secondary">{{ comp.comp_name }} {{ comp.comp_title }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div>
+                    <a class="d-flex justify-content-center py-3" href="{% url 'spec' %}">
+                        자세히 보기...
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col profilebox">
+            <div>최근 답변 목록</div>
+            <div class="mx-4">
+            {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
+                <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
+                    <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
+                        {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
+                    </div>
+                    <div class="col my-auto">
+                        {{ answer.question_id.ques_title }}
+                    </div>
+                    <div class="col my-auto d-flex justify-content-end">
+                        {% if answer.is_chosen %}
+                            <span class="badge rounded-pill bg-dark border p-2">채택!</span>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
+                </div>
+            {% endfor %}
             </div>
         </div>
     </div>

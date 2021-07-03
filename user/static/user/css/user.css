@@ -1,5 +1,5 @@
 .profilebox {
-    border: 1px solid #3BA3FB;
+    border: 2px solid teal;
     border-radius: 25px;
     padding: 25px;
     margin: 10px 15px;
@@ -9,7 +9,7 @@
 .bignumber {
     font-size: 80px;
     font-weight: bold;
-    color: #7FC4FD;
+    color: teal;
     margin-top: 10px;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .blank-userpic-smallest-fill {
-    background: dodgerblue;
+    background: teal;
     color: white;
     border: none;
 }
@@ -51,14 +51,33 @@
     position: absolute;
     z-index: 10;
     margin-top: 0 !important;
-    background-color: #d8eeff !important;
+    background-color: wheat !important;
     color: black !important;
 }
 
 .mypage-title {
     font-size: 50pt; 
-    line-height: 1rem; 
-    color:#2699FB;
+    color: midnightblue;
+}
+
+.font-teal {
+    color: teal !important;
+}
+
+.font-midnight {
+    color: midnightblue !important;
+}
+
+.font-wheat {
+    color: wheat !important;
+}
+
+.border-teal {
+    border-color: teal !important;
+}
+
+.border-midnight {
+    border-color: midnightblue !important;
 }
 
 /* 배경 */

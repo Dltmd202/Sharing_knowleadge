@@ -60,16 +60,24 @@ def new_answer(request, pk):
 def vote_answer(request, pk, answer_pk):
     current_answer = Answer.objects.get(id=answer_pk)
     question = get_object_or_404(Question, pk=pk)
+    answer_user = current_answer.user_id
     if not request.user == current_answer.user_id:
-        current_answer.vote_count += 1
+        current_answer.is_vote = not current_answer.is_vote
+        answer_user.answer_point += question.ques_point
+        answer_user.save()
+        current_answer.save()
+        question.save()
     return redirect(question.get_absolute_url())
 
 
 def select_answer(request, pk, answer_pk):
     current_answer = Answer.objects.get(id=answer_pk)
     question = get_object_or_404(Question, pk=pk)
-    if not current_answer.is_chosen:
+    if not question.who_chosen and question.user_id == request.user:
+        question.who_chosen = current_answer.user_id
         current_answer.is_chosen = True
+        current_answer.save()
+        question.save()
     return redirect(question.get_absolute_url())
 
 

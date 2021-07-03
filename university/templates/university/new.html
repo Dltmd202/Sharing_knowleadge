@@ -1,26 +1,22 @@
 {% extends 'university/base.html' %}
-
+{% load static %}
 {% block head_title %}Upadte University{% endblock %}
 
-<head>
-    <title>University</title>
-</head>
 {% block main_area %}
-<body>
-    <div class="wrapper">
+<div class="lastwrapper" style="padding-left: 10px; padding-top: 50px; padding-bottom: 50px;" >
+    <div class="wrapper" style="max-width: 1200px; padding-right: 100px; padding-left: 430px;">
         <form method="post" enctype="multipart/form-data">
-            <div class="container py-3">
+            <div class="container py-3" >
                 <h3>학력 추가</h3>
                 {% csrf_token %}
                 <hr style=" width: 60%;">
-
                     <div class="col-7">
                         <label>학교 이름:&nbsp</label>{{ form.uni_name }}
                     </div>
                     <br>
                     <div class="col-7">
-                       <label>학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp위:&nbsp</label>{{ form.uni_degree }}
-                       
+                        <label>학&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp위:&nbsp</label>{{ form.uni_degree }}
+                        
                     </div>
                     <br>
                     <div class="col-9">
@@ -45,6 +41,5 @@
             </div>
         </form>
     </div>
-
-</body>
+</div>
 {% endblock %}

@@ -1,13 +1,10 @@
 {% extends 'company/base.html' %}
-
+{% load static %}
 {% block head_title %}Upadte Company{% endblock %}
 
-<head>
-    <title>Company</title>
-</head>
 {% block main_area %}
-<body>
-    <div class="wrapper">
+<div class="lastwrapper" style="padding-left: 10px; padding-top: 50px; padding-bottom: 50px;" >
+    <div class="wrapper" style="max-width: 1200px; padding-right: 100px; padding-left: 430px;">
         <form method="post" enctype="multipart/form-data">
             <div class="container py-3">
                 <h3>경력 추가</h3>
@@ -45,6 +42,5 @@
             </div>
         </form>
     </div>
-
-</body>
+</div>
 {% endblock %}

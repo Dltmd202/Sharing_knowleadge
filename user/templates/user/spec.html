@@ -31,7 +31,7 @@
         {% endfor %}
         </ul>
         <div class="d-flex justify-content-end">
-            <a href="" class="btn btn-lg btn-outline-primary">추가하기</a>
+            <a href="{% url 'new_univ' %}" class="btn btn-lg">추가하기</a>
         </div>
     </div>
     <div class="my-3 profilebox">
@@ -59,7 +59,7 @@
             </form>
         </ul>
         <div class="d-flex justify-content-end">
-            <a href="" class="btn btn-lg btn-outline-primary">추가하기</a>
+            <a href="{% url 'new_company' %}" class="btn btn-lg">추가하기</a>
         </div>
     </div>
 {% endblock %}

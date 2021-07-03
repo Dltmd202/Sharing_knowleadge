@@ -47,10 +47,13 @@
     position: relative;
 }
 
-.input-space {
+.input-space, .input-btn-space {
     position: absolute;
     z-index: 10;
     margin-top: 0 !important;
+}
+
+.input-space {
     background-color: wheat !important;
     color: black !important;
 }

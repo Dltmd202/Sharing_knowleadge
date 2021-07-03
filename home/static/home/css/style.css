@@ -233,6 +233,16 @@ textarea:focus{
 
 .recommand-button:hover{
     text-decoration: none;
+    color: #ef7c91;
+}
+
+.report-button{
+    text-decoration: none;
+    color: black;
+}
+
+.report-button:hover{
+    text-decoration: none;
     color: red;
 }
 

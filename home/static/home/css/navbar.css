@@ -72,7 +72,7 @@ header.sticky ul li ::placeholder
     border: none;
     border-radius: 8px;
     width: 50px;
-    height: 20px;
+    height: 30px;
 }
 
 header a:hover

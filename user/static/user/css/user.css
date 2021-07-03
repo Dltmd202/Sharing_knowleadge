@@ -47,12 +47,12 @@
     position: relative;
 }
 
-.btn.input-space {
+.input-space {
     position: absolute;
-    right: 4px;
-    top: 4px;
-    bottom: 4px;
-    z-index: 9;
+    z-index: 10;
+    margin-top: 0 !important;
+    background-color: #d8eeff !important;
+    color: black !important;
 }
 
 .mypage-title {

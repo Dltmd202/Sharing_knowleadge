@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css'%}">
 </head>
 <body>
+<div class="contain-all">
 {% include 'home/navbar.html' %}
-
-<div class="container" id="main-container" style=" margin-top: 80px; ">
+<div class="container " id="main-container" style=" margin-top: 80px; ">
     <div class="row">
         <div class ="col-md-8 col-lg-9" id="main-area">
             {% block main_area %}
@@ -29,7 +29,13 @@
                 <div class="row">
                     {% if user.is_authenticated %}
                         <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        {% if user.user_pic %}
+                            <img class="d-flex mr-3 rounded-circle" src="{{ user.user_pic.url }}"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            {% else %}
+                            <img class="d-flex mr-3 rounded-circle" src="https://dummyimage.com/50x50/dee2e6/6c757d.jpg"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            {% endif %}
                         </div>
                         <div class="col-7" style="padding-left: 15px;">
                                 <p style="font-weight: bold; margin-top: 20px; color: black">{{ user }}</p>
@@ -67,13 +73,13 @@
                 <div class="card-body">
                     <div class="row">
                         <ul class="list-unstyled mb-0">
-                            {% for c in category %}
+                            {% for c in categories %}
                             <li>
-                                <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} ({{ c.question_set.count }})</a>
+                                <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} | {{ c.question_set.count }}</a>
                             </li>
                             {% endfor %}
                             <li>
-                                <a href="/category/no_category" class="category-list">미분류 ({{ no_category_question_count }})</a>
+                                <a href="/category/no_category" class="category-list">미분류 | {{ no_category_question_count }}</a>
                             </li>
                         </ul>
                     </div>
@@ -82,7 +88,8 @@
         </div>
     </div>
 </div>
+</div>
+</body>
 {% include 'home/footer.html'%}
 <script src="{% static 'home/js/scripts.js' %}"></script>
-</body>
 </html>

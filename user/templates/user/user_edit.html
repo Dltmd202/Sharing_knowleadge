@@ -46,7 +46,7 @@
                 <div class="">
                     <label class="h5">비밀번호 변경</label>
                     <div class="my-2">{{ form1.username }}</div>
-                    <div class="my-2 input-group input-inside">
+                    <div class="my-2 d-flex input-inside">
                         {{ form1.password }}
                         <button type="button" class="btn input-space" id="show-password-btn">
                             <i class="fas fa-eye"></i>
@@ -55,7 +55,7 @@
                     <div class="my-2">{{ form1.password_again }}</div>
                 </div>
                 <button type="submit" name="password_change" value=1
-                    class="col-md-8 btn-lg btn-primary mt-4">저장</button>
+                    class="col-md-8 btn btn-lg mt-4">저장</button>
             </form>
         </div>
         <div class="tab-pane container" id="other">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <button type="submit" name="other_change" value=1
-                class="col-md-8 btn-lg btn-primary mt-4">저장</button>
+                class="col-md-8 btn btn-lg mt-4">저장</button>
             </form>
         </div>
     </div>

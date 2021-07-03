@@ -1,6 +1,14 @@
-body{
-    background: linear-gradient(#B5B0E2, 60% ,#357e80);
+
+
+
+.contain-all{
+    background: linear-gradient(#fafbfc 90% ,#347F80);
 }
+
+header{
+    background: linear-gradient(#B5B0E2 45% ,#fafbfc);
+}
+
 
 .nav-custom{
     padding-top: 1em;

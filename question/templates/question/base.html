@@ -16,9 +16,9 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css'%}">
 </head>
 <body>
+<div class="contain-all">
 {% include 'home/navbar.html' %}
-
-<div class="container" id="main-container" style=" margin-top: 80px; ">
+<div class="container " id="main-container" style=" margin-top: 80px; ">
     <div class="row">
         <div class ="col-md-8 col-lg-9" id="main-area">
             {% block main_area %}
@@ -69,11 +69,11 @@
                         <ul class="list-unstyled mb-0">
                             {% for c in categories %}
                             <li>
-                                <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} ({{ c.question_set.count }})</a>
+                                <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} | {{ c.question_set.count }}</a>
                             </li>
                             {% endfor %}
                             <li>
-                                <a href="/category/no_category" class="category-list">미분류 ({{ no_category_question_count }})</a>
+                                <a href="/category/no_category" class="category-list">미분류 | {{ no_category_question_count }}</a>
                             </li>
                         </ul>
                     </div>
@@ -82,7 +82,8 @@
         </div>
     </div>
 </div>
+</div>
+</body>
 {% include 'home/footer.html'%}
 <script src="{% static 'home/js/scripts.js' %}"></script>
-</body>
 </html>

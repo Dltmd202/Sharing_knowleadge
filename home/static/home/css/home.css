@@ -74,7 +74,7 @@ section
 
 /*궁금한 내용 질문하기 */
 .질문자{
-    background: linear-gradient( #030F1D,80%, #B5B0E2)
+    background: linear-gradient( #030F1D 60%, #B5B0E2)
 }
 .ask
 {
@@ -106,7 +106,7 @@ section
 }
 /*질문자 도와주기*/
 .답변자{
-    background: linear-gradient(#B5B0E2,60%,#347F80);
+    background: linear-gradient(#B5B0E2 60%,#347F80);
 }
 .answer
 {

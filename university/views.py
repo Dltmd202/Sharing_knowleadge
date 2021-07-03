@@ -6,7 +6,7 @@ from .forms import UniversityForm
 class UnivCreate(CreateView):
     model = University
     form_class = UniversityForm
-    success_url= '/' # 성공시 연결할 페이지, 
+    success_url= 'http://127.0.0.1:8000/user/spec/' # 성공시 연결할 페이지, 
     # fields = ['uni_name', 'uni_degree', 'uni_major', 'is_attending', ]
     template_name = "university/new.html"
 

@@ -40,3 +40,8 @@
     않습니다. 자신의 코드가 모두 원격 저장소에 올라가 있다고 생각한다면 `git fetch --all`, `git reset --hard origin/main`
     으로 원격 저장소의 main 브랜치와 동기화시켜주시기 바랍니다!
 * `git push`가 작동하지 않는다면, branch를 정확히 확인해 주셨다는 가정 하에 `git push -f` 해주셔도 됩니다!   
+
+## 서버 운용
+* `python mange.py makemigrations`
+* `python mange.py migrate`
+* `python manage.py runserver`

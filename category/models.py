@@ -15,6 +15,10 @@ class Category(models.Model):
     def get_absolute_path(self):
         return f'/category/{self.slug}'
 
+    def get_simple_slug(self):
+        slugs = self.slug.split('-')
+        return slugs[-1]
+
     # 복수 명칭 변경
     class Meta:
         verbose_name_plural = 'Categories'

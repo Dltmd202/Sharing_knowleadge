@@ -19,6 +19,11 @@ class Question(models.Model):
     def __str__(self):
         return str(self.pk) + ': ' + self.ques_title
 
+    def title_brief(self):
+        if len(self.ques_desc) < 10:
+            return self.ques_desc
+        return self.ques_desc[:10] + '...'
+
     def brief(self):
         if len(self.ques_desc) < 20:
             return self.ques_desc

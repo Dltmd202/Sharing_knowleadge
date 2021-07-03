@@ -12,6 +12,7 @@ from category.models import Category
 from user.models import CustomUser
 from answer.forms import AnswerForm
 from django import forms
+from .forms import QuestionForm
 from django.db import models
 
 
@@ -45,16 +46,8 @@ class QuestionDetail(DetailView):
 # 작동 문제 없음
 class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     model = Question
-    fields = ['ques_title', 'category_id', 'ques_point', 'ques_desc', 'head_img']
+    form_class = QuestionForm
     template_name = 'question/question_form.html'
-    widgets = {
-        'ques_title': forms.TextInput(
-            attrs={
-                'style': 'width: 600px;',
-                'placeholder': 'Name'
-            }
-        )
-    }
 
     def form_valid(self, form):
         current_user = self.request.user

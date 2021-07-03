@@ -92,7 +92,7 @@ class QuestionSearch(QuestionList):
     def get_queryset(self):
         q = self.kwargs['q']
         question_list = Question.objects.filter(
-            Q(ques_title__contains=q) | Q(ques_desc__contains=q)
+            Q(ques_title__contains=q) | Q(ques_desc__contains=q) | Q(category_id__slug__contains=q)
         ).distinct()
         return question_list
 

@@ -10,9 +10,11 @@
 <section style="padding-right: 50px;">
     <div id="post-area" class="custom-contentview px-5">
         {% if question.category_id %}
-            <span class="btn badge-secondary float-right" style="float: right">{{ question.category_id }}</span>
+            <span class="custom-cardview badge-secondary float-right"
+                  style="float:right; margin: 30px; padding: 5px;">{{ question.category_id }}</span>
         {% else %}
-            <span class="custom-cardview badge-secondary float-right" style="float:right; margin: 30px; padding: 5px;">미분류</span>
+            <span class="custom-cardview badge-secondary float-right"
+                  style="float:right; margin: 30px; padding: 5px;">미분류</span>
         {% endif %}
         <h1 class="mt-2" style="color: black; margin-top: 30px;">{{ question.ques_title }}</h1>
         <p class="lead">
@@ -25,11 +27,6 @@
                 <p>Posted on {{ question.post_date }}</p>
             </div>
             {% if user.is_authenticated and user == question.user_id %}
-                <div class="col-3">
-                    <a class="btn" href="/question/update_question/{{ question.pk }}/"
-                       role="button" style="padding-left: 10px; padding-right: 10px;">
-                        <i class="fas fa-pen"></i> 수정하기</a>
-                </div>
             {% endif %}
         </div>
         <hr style=" margin-right: 30px;">

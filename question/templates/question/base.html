@@ -75,7 +75,7 @@
                         <ul class="list-unstyled mb-0">
                             {% for c in categories %}
                             <li>
-                                <a href="{{ c.get_absolute_path }}" class="category-list">- {{ c }} ( {{ c.question_set.count }} )</a>
+                                <a href="{{ c.get_absolute_path }}" class="category-list">- {{ c.get_simple_slug }} ( {{ c.question_set.count }} )</a>
                             </li>
                             {% endfor %}
                             <li>

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
 from company.models import Company
 from django.views.generic import CreateView
+from .forms import CompanyForm
 
 class CompCreate(CreateView):
     model = Company
-    fields = ['comp_name','comp_title','employ_type','join_date','leave_date','is_working']
+    form_class = CompanyForm
+    success_url= '/' # 성공시 연결할 페이지, 
     template_name = "company/new.html"

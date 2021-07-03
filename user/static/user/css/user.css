@@ -54,8 +54,10 @@
 }
 
 .input-space {
-    background-color: wheat !important;
+    background-color: transparent !important;
     color: black !important;
+    right: 10px;
+    top: 2px;
 }
 
 .mypage-title {

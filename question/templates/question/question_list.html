@@ -11,15 +11,12 @@ Question
         <section class="content-box my-2">
             <div class="px-3 px-lg-3">
                 <div class="row">
-                    <div class="col-10">
-                        <h1>Q & A</h1>
+                    <div class="col-9">
+                        <h1 style="color: black">Q & A</h1>
                     </div>
                     {% if user.is_authenticated %}
-                        <div class="col-2 custom-contentview">
-                            <a class="link" href="/question/create_question/">
-                                <div style="padding-top: 10px; padding-left: 10px; height: 40px">
-                                  <i class="fas fa-pen mx-2"> 질문가기</i>
-                                </div>
+                        <div class="col-3">
+                            <a class="btn" href="/question/create_question/"><i class="fas fa-pen mx-2"> 질문하기</i>
                             </a>
                         </div>
                     {% endif %}
@@ -28,8 +25,9 @@ Question
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     {% for q in object_list %}
                         <div class="col" style="padding: 10px">
-                            <div class="card card px-3 py-3">
-                                <h5 class="fw-bolder">{{ q.ques_title }}</h5>
+                            <div class="card card px-3">
+                                <h5 class="fw-bolder" style="margin-top: 10px">{{ q.ques_title }}</h5>
+                                <hr>
                                 {% if q.head_img %}
                                     <img class="card-img-top" src="{{ q.head_img.url }}" alt="..." width="30" height="120"/>
                                 {% else %}
@@ -46,8 +44,8 @@ Question
                                     </div>
                                 </div>
                                 <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'res' pk=q.pk %}">답변하기</a></div>
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" align="right">
+                                    <div class="text-center"><a class="btn" href="{% url 'res' pk=q.pk %}">답변하기</a></div>
                                 </div>
                             </div>
                         </div>

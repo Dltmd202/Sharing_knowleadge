@@ -1,43 +1,44 @@
 
 
-<nav style="border-bottom: black; background-color: white">
-    <div class="nav-custom" >
-        <div class="container">
-            <div class="row">
-                <div class="nav-custom-brand col-1">
-                    <a class="navbar-brand" href="/" style="color: black">지식인</a>
-                </div>
-                <div class="col-8">
-                    <div class="search-box row">
-                        <div>
-                            <i class="fas fa-search" onclick="navSearchQuestion()"></i>
-                            <input type="text" id="nav-search-input"/>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    {% if user.is_authenticated %}
-                        <div class="row">
-                            <div class="nav-item col-5">
-                                <a class="nav-link" href="{% url 'mypage' %}">{{ user.username }}</a>
-                            </div>
-                            <div class="nav-item col-7">
-                                <a class="nav-link" href="{% url 'logout' %}">로그아웃</a>
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="row">
-                            <div class="nav-item col-6" style="float: right">
-                                <a class="nav-link" href="{% url 'register' %}">회원가입</a>
-                            </div>
-                            <div class="nav-item col-6" style="float: right">
-                                <a class="nav-link" href="{% url 'login' %}">로그인</a>
-                            </div>
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-</nav>
+<header>
+    <a href="{% url 'home' %}" class="logo">KnowSharing</a>
+    <div class="toggle" onclick="toggleMenu();"></div>
+    <!--상단바 메뉴-->
+    <ul class="menu">
+        <li style="height: 30px; margin-right: 5px;">
+            <input class="form-control" id="search-input" type="search" placeholder="Search" aria-label="Search" style="vertical-align: middle; height: 20px; font-size: 16px;">
+        </li>
+        <li><button class="button search-button" onclick="searchQuestion()">검색</button></li>
+        <li><a href="{% url 'question_main' %}" onclick="toggleMenu()">질문</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="" onclick="notYet()">결제</a></li>
+        <li><a href="{% url 'logout' %}" onclick="toggleMenu()">로그아웃</a></li>
+        <li><a href="{% url 'mypage' %}" onclick="toggleMenu()">{{ user }}</a></li>
+
+        {% else %}
+        <li><a href="{% url 'register' %}" onclick="toggleMenu()">회원가입</a></li>
+        <li><a href="{% url 'login' %}" onclick="toggleMenu()">로그인</a></li>
+        {% endif %}
+    </ul>
+    <script>
+        function searchQuestion() {
+        let serachValue = document.getElementById('search-input').value.trim()
+        if (serachValue.length > 1) {
+            location.href = "{% url 'question_search_base' %}" + serachValue + "/"
+        } else {
+            alert("검색어가 짧습니다");
+        }
+        }
+
+        document.getElementById('search-input').addEventListener('keyup',
+        function (event){
+        if(event.key === 'Enter'){
+            searchQuestion()
+        }
+        });
+
+        function notYet(){
+            alert("서비스 준비중입니다.")
+        }
+    </script>
+</header>

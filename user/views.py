@@ -14,8 +14,8 @@ import datetime
 # 한 페이지에서 여러 폼을 다루기 위해서 formtools를 설치해서 Session Wizard View를 특별히 사용합니다
 # pip install django-formtools
 class UserRegisterView(SessionWizardView):
-    template_name = "user/register.html" # 회원가입 템플릿 위치
-    form_list = [UserCreationForm1, UserCreationForm2] # 사용할 폼 종류
+    template_name = "user/register.html"  # 회원가입 템플릿 위치
+    form_list = [UserCreationForm1, UserCreationForm2]  # 사용할 폼 종류
 
     # 폼 입력 완료 후 호출 메소드
     def done(self, form_list, **kwargs):
@@ -35,12 +35,12 @@ class UserRegisterView(SessionWizardView):
 
         dateString = birth_year + "-" + birth_month + "-" + birth_day
         birth_date = datetime.datetime.strptime(dateString, "%Y-%m-%d")
-        user = CustomUser(username=username, password=password, user_desc=user_desc, 
-            birth_date=birth_date, email=email)
-        user.set_password(password) # 비밀번호를 해쉬값으로 저장
+        user = CustomUser(username=username, password=password, user_desc=user_desc,
+                          birth_date=birth_date, email=email)
+        user.set_password(password)  # 비밀번호를 해쉬값으로 저장
         user.save()
-                
-        return render(self.request, 'user/done.html', {'form':form_data, 'count':len(form_list)})
+
+        return render(self.request, 'user/done.html', {'form': form_data, 'count': len(form_list)})
 
 
 def loginView(request):
@@ -56,13 +56,15 @@ def loginView(request):
                 if stayLoggedIn:
                     request.session.set_expiry(100000)
                 return redirect('/')
-    else: 
+    else:
         form = CustomLoginForm()
-    return render(request, 'user/login.html', {'form':form})
+    return render(request, 'user/login.html', {'form': form})
+
 
 def logoutView(request):
     logout(request)
     return redirect('/')
+
 
 def mypageView(request):
     if request.user.is_authenticated:
@@ -73,11 +75,13 @@ def mypageView(request):
         uni_len = len(university)
         comp_len = len(company)
         total_len = 6
-        return render(request, 'user/mypage.html', {'chosen':chosen, 
-            'university':university[:total_len], 'company':company[:(total_len-uni_len)]}
-        )
+        return render(request, 'user/mypage.html', {'chosen': chosen,
+                                                    'university': university[:total_len],
+                                                    'company': company[:(total_len - uni_len)]}
+                      )
     else:
         return HttpResponseForbidden()
+
 
 def userEditPageView(request):
     if request.user.is_authenticated:
@@ -96,8 +100,8 @@ def userEditPageView(request):
         if request.method == 'POST':
             data = request.POST
             if data.get("password_change"):
-                form1 = UserPasswordEditForm( 
-                    data={'password':data['password'], 'password_again':data['password_again']}
+                form1 = UserPasswordEditForm(
+                    data={'password': data['password'], 'password_again': data['password_again']}
                 )
                 if form1.is_valid():
                     cleaned_data = form1.cleaned_data
@@ -106,23 +110,24 @@ def userEditPageView(request):
                     success = True
             elif data.get("other_change"):
                 form2 = UserCreationForm2(
-                    data={'user_desc':data['user_desc'], 'email':data['email'], 
-                        'birth_year':data['birth_year'], 'birth_month':data['birth_month'], 
-                        'birth_day':data['birth_day']}
+                    data={'user_desc': data['user_desc'], 'email': data['email'],
+                          'birth_year': data['birth_year'], 'birth_month': data['birth_month'],
+                          'birth_day': data['birth_day']}
                 )
                 if form2.is_valid():
                     cleaned_data = form2.cleaned_data
                     user.user_desc = cleaned_data['user_desc']
                     user.email = cleaned_data['email']
                     dateString = cleaned_data['birth_year'] + "-" + \
-                        cleaned_data['birth_month'] + "-" + cleaned_data['birth_day']
+                                 cleaned_data['birth_month'] + "-" + cleaned_data['birth_day']
                     birth_date = datetime.datetime.strptime(dateString, "%Y-%m-%d")
                     user.save()
                     success = True
 
-        return render(request, 'user/user_edit.html', {'form1':form1, 'form2':form2, 'success':success})
+        return render(request, 'user/user_edit.html', {'form1': form1, 'form2': form2, 'success': success})
     else:
         return HttpResponseForbidden()
+
 
 def specView(request):
     if request.user.is_authenticated:
@@ -142,10 +147,11 @@ def specView(request):
         university = user.university_set.all()
         company = user.company_set.all()
         return render(request, 'user/spec.html', {
-            'university':university, 'company':company
+            'university': university, 'company': company
         })
     else:
         return HttpResponseForbidden()
+
 
 def exchangeView(request):
     if request.user.is_authenticated:
@@ -164,6 +170,7 @@ def exchangeView(request):
                 user.account += point_amount
                 user.save()
                 success = point_amount
+
 
         return render(request, 'user/exchange.html', {'form':form, 'success':success})
     else:

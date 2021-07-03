@@ -1,3 +1,15 @@
+
+
+
+.contain-all{
+    background: linear-gradient(#fafbfc 90% ,#347F80);
+}
+
+header{
+    background: linear-gradient(#B5B0E2 45% ,#fafbfc);
+}
+
+
 .nav-custom{
     padding-top: 1em;
 }
@@ -5,6 +17,10 @@
 .nav-custom-brand{
     position: relative;
     display: flex;
+}
+
+section h1 {
+    color: white;
 }
 
 
@@ -57,31 +73,6 @@ body {
 }
 
 
-.custom-cardview{
-    border-style: solid;
-    border-width: 3px;
-    border-color: #e9ebee;
-    border-radius: 5px 10px;
-    padding-left: 5px;
-    padding-top: 2px;
-    background-color: white;
-    transition: 0.3s;
-    color: black;
-    text-decoration: none;
-}
-
-
-.custom-contentview{
-    border-style: solid;
-    border-width: 2px;
-    border-color: #e9ebee;
-    border-radius: 5px 10px;
-    padding-left: 5px;
-    padding-top: 2px;
-    background-color: white;
-    text-decoration: none;
-    color: black;
-}
 
 
 
@@ -93,10 +84,6 @@ body {
 .custom-contentview-button{
     border: white;
     background-color: white;
-}
-.custom-cardview:hover {
-    text-decoration: none;
-    box-shadow: 0 0 16px 0 rgba(0,0,0,0.2);
 }
 
 .custom-cardview:visited{
@@ -183,6 +170,11 @@ body {
     color: black;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 a:hover{
     text-decoration: none;
     color: black;
@@ -211,10 +203,7 @@ textarea:focus{
     outline: none;
 }
 
-.focus-hr{
-    size: 3px;
-    color: #0c89aa;
-}
+
 
 .answer-size{
     padding-top: 20px;
@@ -241,4 +230,63 @@ textarea:focus{
 .check-button:hover{
     text-decoration: none;
     color: #0c89aa;
+}
+
+.btn
+{
+    background-color: teal;
+    border-radius: 8px;
+    border: none;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 5px;
+    font-size: 18px;
+    color:wheat;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.card{
+    min-width: 150px;
+    background-color: white;
+    color: black;
+    border-color: teal;
+    border-radius: 5px 10px;
+}
+
+.custom-cardview{
+    border-style: solid;
+    border-width: 3px;
+    border-color: teal;
+    border-radius: 5px 10px;
+    padding-left: 5px;
+    padding-top: 2px;
+    background-color: white;
+    transition: 0.3s;
+    color: black;
+    text-decoration: none;
+}
+
+hr{
+    border: 0;
+    height: 5px;
+    color: teal;
+}
+
+
+.custom-contentview{
+    border-style: solid;
+    border-width: 2px;
+    border-color: teal;
+    border-radius: 5px 10px;
+    padding-left: 5px;
+    padding-top: 2px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+.media{
 }

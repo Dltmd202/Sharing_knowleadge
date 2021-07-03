@@ -12,78 +12,84 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
-
-
+    <link rel="stylesheet" href="{% static 'home/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/home.css'%}">
 </head>
 <body>
+<div class="contain-all">
 {% include 'home/navbar.html' %}
-
-<div class="container" id="main-container" style="padding-left: 50px; padding-right: 70px;">
-        <div class="row">
-            <div class ="col-md-8 col-lg-9" id="main-area">
-                {% block main_area %}
-                {% endblock %}
-            </div>
-            <div class="col-md-4 col-lg-3">
-                <div class="custom-contentview">
-                    <div class="row">
-                        {% if user.is_authenticated %}
-                            <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
-                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            </div>
-                            <div class="col-7" style="padding-left: 15px;">
-                                    <p style="font-weight: bold; margin-top: 20px">{{ user }}</p>
-                                <a href="#" class="my-page" style="margin-top: 10px">마이페이지></a>
-                            </div>
-                            <div class="px-5">
-                                <hr>
-                            </div>
-                            <div class="px-1">
-                                <ul class="ul-user-status">
-                                    <li>
-                                        <p class="user-status">질문 포인트 |    {{ user.ques_point }} Point</p>
-                                    </li>
-                                    <li>
-                                        <p class="user-status">답변 포인트 |    {{ user.answer_point }} Point</p>
-                                    </li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
-                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                            </div>
-                            <div class="col-7" style="padding-left: 15px; padding-top: 15px">
-                                <div class="row">
-                                    <!----- 로그인 연결할 것 ----->
-                                    <a href="#" style="font-weight: bold">로그인</a>
-                                </div>
-                                <a href="#" class="my-page">마이페이지></a>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="custom-contentview my-4" id="categories-card">
-                    <h5 style="margin: 10px;">카테고리</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <ul class="list-unstyled mb-0">
-                                {% for c in category %}
+<div class="container " id="main-container" style=" margin-top: 80px; ">
+    <div class="row">
+        <div class ="col-md-8 col-lg-9" id="main-area">
+            {% block main_area %}
+            {% endblock %}
+        </div>
+        <div class="col-md-4 col-lg-3">
+            <div class="custom-contentview" style="margin-top: 100px;">
+                <div class="row">
+                    {% if user.is_authenticated %}
+                        <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
+                        {% if user.user_pic %}
+                            <img class="d-flex mr-3 rounded-circle" src="{{ user.user_pic.url }}"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            {% else %}
+                            <img class="d-flex mr-3 rounded-circle" src="https://dummyimage.com/50x50/dee2e6/6c757d.jpg"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            {% endif %}
+                        </div>
+                        <div class="col-7" style="padding-left: 15px;">
+                                <p style="font-weight: bold; margin-top: 20px; color: black">{{ user }}</p>
+                            <a href="{% url 'mypage' %}" class="" style="line-height: 0%">마이페이지></a>
+                        </div>
+                        <div class="px-5">
+                            <hr>
+                        </div>
+                        <div class="px-1">
+                            <ul class="ul-user-status">
                                 <li>
-                                    <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} ({{ c.question_set.count }})</a>
+                                    <p class="user-status">질문 포인트 |    {{ user.ques_point }} Point</p>
                                 </li>
-                                {% endfor %}
                                 <li>
-                                    <a href="/category/no_category" class="category-list">미분류 ({{ no_category_question_count }})</a>
+                                    <p class="user-status">답변 포인트 |    {{ user.answer_point }} Point</p>
                                 </li>
                             </ul>
                         </div>
+                    {% else %}
+                        <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
+                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        </div>
+                        <div class="col-7" style="padding-left: 15px; padding-top: 15px">
+                            <div class="row">
+                                <!----- 로그인 연결할 것 ----->
+                                <a href="{% url 'login' %}" style="font-weight: bold">로그인</a>
+                            </div>
+                            <a href="#" class="my-page">마이페이지></a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="custom-contentview my-4" id="categories-card">
+                <h5 style="margin: 10px; color: black">카테고리</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <ul class="list-unstyled mb-0">
+                            {% for c in categories %}
+                            <li>
+                                <a href="{{ c.get_absolute_path }}" class="category-list">{{ c }} | {{ c.question_set.count }}</a>
+                            </li>
+                            {% endfor %}
+                            <li>
+                                <a href="/category/no_category" class="category-list">미분류 | {{ no_category_question_count }}</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-{% include 'home/footer.html'%}
-    <script src="{% static 'question/js/scripts.js' %}"></script>
+</div>
+</div>
 </body>
+{% include 'home/footer.html'%}
+<script src="{% static 'home/js/scripts.js' %}"></script>
 </html>

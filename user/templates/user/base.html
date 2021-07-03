@@ -11,13 +11,17 @@
     <script src="{% static 'user/js/script.js' %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'user/css/user.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/footer.css' %}">
 </head>
 <body>
 {% include 'home/navbar.html' %}
-
+<section class="contain-all">
 {% block main_area %}
 {% endblock %}
-
+</section>
 {% include 'home/footer.html' %}
+<script src="{% static 'home/js/scripts.js' %}"></script>
 </body>
 </html>

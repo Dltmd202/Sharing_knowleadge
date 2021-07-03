@@ -1,13 +1,18 @@
-from django.shortcuts import render, redirect
 from university.models import University
 from django.views.generic import CreateView
+from .forms import UniversityForm
 
 
 class UnivCreate(CreateView):
     model = University
-    fields = ['uni_name', 'uni_degree', 'uni_major', 'enter_date', 'grad_date', 'is_attending']
+    form_class = UniversityForm
+    success_url= '/' # 성공시 연결할 페이지, 
+    # fields = ['uni_name', 'uni_degree', 'uni_major', 'is_attending', ]
     template_name = "university/new.html"
-    
+
+# def home(request):
+#     form = UniversityForm()
+#     return = render(request, 'new.html', {'form':form})
 
 # def new(request):
 #     return render(request, 'new.html')

@@ -31,8 +31,10 @@
         </div>
         <hr style=" margin-right: 30px;">
         {% if question.head_img %}
-        <hr style="margin-right: 30px">
-            <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
+            <div align="center" class="question_img">
+                <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
+            </div>
+            <hr style=" margin-right: 30px;">
         {% endif %}
         <!-- Post Content -->
         <p>{{ question.ques_desc | safe }}</p>
@@ -118,7 +120,7 @@
                                         {% if not answer.is_vote %}
                                         <i class="far fa-heart"></i> 추천</a>
                                         {% else %}
-                                        <i class="fas fa-heart" style="color: #ff0000"> 추천됨</i></a>
+                                        <i class="fas fa-heart" style="color: #ef7c91"> 추천됨</i></a>
                                         {% endif %}
                                         {% if not answer.is_chosen %}
                                     <a class="check-button" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
@@ -129,6 +131,11 @@
                                        role="button" style="padding: 5px">
                                         <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
                                         {% endif %}
+                                </div>
+                                <div align="right" style="padding-right: 11px; margin-top: 3px;">
+                                    <a class="report-button"
+                                       href="" onclick="report()"
+                                       role="button" style="padding: 6px"><i class="far fa-bell"></i> 신고하기</a>
                                 </div>
                             </div>
                             <small class="text-muted">{{ answer.answer_date }}</small>

@@ -27,12 +27,16 @@ Q & A
                     {% for q in object_list %}
                         <div class="col" style="padding: 10px">
                             <div class="card card px-3">
-                                <h5 class="fw-bolder" style="margin-top: 10px; font-size: medium">{{ q.title_brief }}</h5>
+                                <div style="min-height: 50px;">
+                                    <h5 class="fw-bolder" style="margin-top: 10px; font-size: medium">{{ q.title_brief }}</h5>
+                                </div>
                                 <hr>
                                 {% if q.head_img %}
-                                    <img class="card-img-top" src="{{ q.head_img.url }}" alt="..." width="30" height="120"/>
+                                    <img class="card-img-top" src="{{ q.head_img.url }}" alt="{{ q.title_brief }}"
+                                         width="30px" height="110px"/>
                                 {% else %}
-                                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                                         width="30px" height="110px" alt="..." />
                                 {% endif %}
                                 <div class="card-body">
                                     <div class="text-right">
@@ -67,23 +71,25 @@ Q & A
             {% endif %}
         </section>
     {% if is_paginated %}
-        <ul class="pagination justify-content-center mb-4">
+        <ul class="pagination justify-content-center" style="margin-bottom: 100px">
             {% if page_obj.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">&larr; Older</a>
+                    <a class="page-link able-link" href="?page={{ page_obj.next_page_number }}"
+                    style="background-color: teal; color: wheat">&larr; Older</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">&larr; Older</a>
+                    <a class="page-link page-button disabled-link" href="#">&larr; Older</a>
                 </li>
             {% endif %}
             {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Newer &rarr;</a>
+                    <a class="page-link page-button able-link" href="?page={{ page_obj.previous_page_number }}"
+                    style="background-color: teal; color: wheat">Newer &rarr;</a>
                 </li>
             {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">Newer &rarr;</a>
+                    <a class="page-link page-button disabled-link" href="#">Newer &rarr;</a>
                 </li>
             {% endif %}
         </ul>

@@ -20,9 +20,9 @@ class Question(models.Model):
         return str(self.pk) + ': ' + self.ques_title
 
     def title_brief(self):
-        if len(self.ques_desc) < 10:
-            return self.ques_desc
-        return self.ques_desc[:10] + '...'
+        if len(self.ques_title) < 15:
+            return self.ques_title
+        return self.ques_title[:15] + '...'
 
     def brief(self):
         if len(self.ques_desc) < 20:

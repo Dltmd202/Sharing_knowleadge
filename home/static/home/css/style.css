@@ -233,6 +233,16 @@ textarea:focus{
 
 .recommand-button:hover{
     text-decoration: none;
+    color: #ef7c91;
+}
+
+.report-button{
+    text-decoration: none;
+    color: black;
+}
+
+.report-button:hover{
+    text-decoration: none;
     color: red;
 }
 
@@ -307,4 +317,9 @@ hr{
     margin-left: 3px;
     padding-left: 10px;
     padding-top: 3px;
+}
+
+.question_img{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

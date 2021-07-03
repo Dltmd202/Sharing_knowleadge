@@ -6,7 +6,7 @@ from .models import CustomUser
 import datetime
 
 classValue = "form-control px-3"
-styleValue = "background-color: #d8eeff; height: 3rem;"
+styleValue = "background-color: wheat; height: 3rem;"
 
 
 class UserCreationForm1(forms.ModelForm):  # 회원가입 첫번째 페이지 폼(아이디, 비번)

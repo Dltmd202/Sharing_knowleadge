@@ -1,93 +1,46 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block head_title %}Upadte Company{% endblock %}
 
-<head>
-    <title>경력 추가</title>
-    <style>
-        .wrapper {
-            display: grid;
-            place-items: center;
-            min-height: 100vh;
-            min-width: 300px;
-        }
-
-        .container {
-            border: 1px solid #0c89aa;
-            border-radius: 25px;
-            padding: 25px;
-            margin: 10px 15px;
-            min-width: 500px;
-        }
-
-        .row{
-            margin: 30px;
-        }
-
-        input{
-            height: 30px;
-            width: 100%;
-            outline: none;
-            border: 1px solid #0c89aa;
-        }
-
-        .submit-button{
-            background-color: #ffffff;
-            font-size: medium;
-            border: 1px solid #0c89aa;
-            border-radius: 3px;
-            padding: 10px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="wrapper">
+{% block main_area %}
+<div class="lastwrapper" style="padding-left: 10px; padding-top: 50px; padding-bottom: 50px;" >
+    <div class="wrapper" style="max-width: 1200px; padding-right: 100px; padding-left: 430px;">
         <form method="post" enctype="multipart/form-data">
             <div class="container py-3">
                 <h3>경력 추가</h3>
                 {% csrf_token %}
-                <div class="row">
-                    <div class="col-1">
-                        <label for="회사 구분">회사 구분</label>
-                    </div>
+                <hr style=" width: 60%;">
+
                     <div class="col-7">
-                        {{ form.comp_title }}
+                        <label>회사 이름:&nbsp</label>{{ form.comp_name }}
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-1">
-                        <label for="회사 이름">회사 이름</label>
-                    </div>
+                    <br>
                     <div class="col-7">
-                        {{ form.comp_name }}
+                       <label>직&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp함:&nbsp</label>{{ form.comp_title }}
+                       
                     </div>
-                </div>
-                <div class="row my-3">
-                    <div class="col-2">
-                        <label for="입사 구분">입사 구분</label>
-                    </div>
+                    <br>
                     <div class="col-9">
-                        {{ form.employ_type }}
+                        <label>고용 형태:&nbsp</label>{{ form.employ_type }}
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <label for="입사 날짜">입사 날짜</label>
-                    </div>
+                    <br>
                     <div class="col-9">
-                        {{ form.join_date }}
+                        <label>입사 날짜:&nbsp</label>{{ form.join_date }}                             
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <label for="퇴사 날짜">퇴사 날짜</label>
-                    </div>
+                    <br>
                     <div class="col-9">
-                        {{ form.join_date }}
+                        <label>퇴사 날짜:&nbsp</label>{{ form.leave_date }} 
                     </div>
-                </div>
-                <div align="right" style="margin-right: 30px;">
-                    <button class="submit-button" type="submit">추가하기</button>
+                    <br>
+                    <div class="col-9">
+                        <label>재직중 &nbsp</label> {{ form.is_working }}
+                    </div>
+                    <br>
+                <div align="right" style="margin-right: 80px;">
+                    <button class="submit-button" type="submit" style="border-radius: 5px;">추가하기</button>
                 </div>
             </div>
         </form>
     </div>
-</body>
+</div>
+{% endblock %}

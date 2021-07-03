@@ -13,6 +13,8 @@ class Question(models.Model):
     ques_desc = models.TextField()
     ques_point = models.IntegerField(null=True, blank=True)
     head_img = models.FileField(upload_to='question/images/%Y/%m/%d/', blank=True)
+    who_chosen = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name='who_chosen')
+    vote_count = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.pk) + ': ' + self.ques_title

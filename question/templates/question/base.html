@@ -29,7 +29,13 @@
                 <div class="row">
                     {% if user.is_authenticated %}
                         <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
-                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        {% if user.user_pic %}
+                            <img class="d-flex mr-3 rounded-circle" src="{{ user.user_pic.url }}"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            {% else %}
+                            <img class="d-flex mr-3 rounded-circle" src="https://dummyimage.com/50x50/dee2e6/6c757d.jpg"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            {% endif %}
                         </div>
                         <div class="col-7" style="padding-left: 15px;">
                                 <p style="font-weight: bold; margin-top: 20px; color: black">{{ user }}</p>

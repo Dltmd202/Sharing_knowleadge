@@ -31,8 +31,10 @@
         </div>
         <hr style=" margin-right: 30px;">
         {% if question.head_img %}
-        <hr style="margin-right: 30px">
-            <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
+            <div align="center" class="question_img">
+                <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
+            </div>
+            <hr style=" margin-right: 30px;">
         {% endif %}
         <!-- Post Content -->
         <p>{{ question.ques_desc | safe }}</p>

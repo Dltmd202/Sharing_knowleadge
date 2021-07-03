@@ -30,9 +30,11 @@ Q & A
                                 <h5 class="fw-bolder" style="margin-top: 10px; font-size: medium">{{ q.title_brief }}</h5>
                                 <hr>
                                 {% if q.head_img %}
-                                    <img class="card-img-top" src="{{ q.head_img.url }}" alt="..." width="30" height="120"/>
+                                    <img class="card-img-top" src="{{ q.head_img.url }}" alt="{{ q.title_brief }}"
+                                         width="30px" height="110px"/>
                                 {% else %}
-                                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
+                                         width="30px" height="110px" alt="..." />
                                 {% endif %}
                                 <div class="card-body">
                                     <div class="text-right">

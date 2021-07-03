@@ -77,8 +77,8 @@
                 </div>
             </form>
             {% else %}
-                <a role="button" class="btn btn-outline-dark btn-block btn-sm" href="{% url 'login' %}"
-                   data-toggle="modal" data-target="#loginModal">Log in 하기</a>
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm"
+                   href="{% url 'login' %}">Log in</a>
             {% endif %}
         </div>
     </div>
@@ -118,21 +118,26 @@
                                     <a class="recommand-button"
                                        href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}"
                                        role="button" style="padding: 5px">
+                                        {% if not answer.is_vote %}
                                         <i class="far fa-heart"></i> 추천</a>
-                                    <a class="check-button" href=""
+                                        {% else %}
+                                        <i class="fas fa-heart" style="color: #ff0000"> 추천됨</i></a>
+                                        {% endif %}
+                                        {% if not answer.is_chosen %}
+                                    <a class="check-button" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
                                        role="button" style="padding: 5px">
                                         <i class="far fa-square"></i> 채택하기</a>
+                                        {% else %}
+                                            <a class="check-button" href=""
+                                       role="button" style="padding: 5px">
+                                        <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
+                                        {% endif %}
                                 </div>
                             </div>
                             <small class="text-muted">{{ answer.answer_date }}</small>
                         </div>
                         <hr>
                         <p>{{ answer.answer_desc | linebreaks }}</p>
-                        {% if answer.is_chosen %}
-                            채택
-                        {% else %}
-                            채택 x
-                        {% endif %}
                     </div>
                 </div>
             </section>

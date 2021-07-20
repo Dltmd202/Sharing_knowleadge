@@ -24,6 +24,9 @@
 * `pip install django`
 * `pip install pillow`
 * `pip install django-formtools`
+* `pip install djangorestframework`
+* `pip install markdown`
+* `pip install django-filter` 
 
   
 ## 개발

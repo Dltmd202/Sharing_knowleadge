@@ -1,5 +1,14 @@
 from django.urls import path, include
+from rest_framework import routers
 from . import views
+
+
+question_list = views.QuestionViewSet.as_view({
+    'post': 'create',
+    'get': 'list'
+})
+
+
 
 urlpatterns = [
     path('', views.QuestionList.as_view(), name="question_main"),
@@ -9,4 +18,6 @@ urlpatterns = [
     path('question/search/', views.QuestionUpdate.as_view(), name="question_search_base"),
     path('question/search/<str:q>/', views.QuestionSearch.as_view(), name="question_search"),
     path('question/search/<str:q>/<str:pk>', views.QuestionDetail.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
+    path('question-api/', question_list, name="question_list_api")
 ]

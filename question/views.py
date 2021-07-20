@@ -1,19 +1,27 @@
 from abc import ABC
 
-from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import ModelForm, TextInput, EmailInput, NumberInput
-from django.forms import formset_factory
-from .models import Question
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
+from django.shortcuts import render, redirect
+from django.forms import formset_factory
 from django.db.models import Q
+from django.db import models
+from django import forms
+
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework import renderers
+
 from category.models import Category
 from user.models import CustomUser
 from answer.forms import AnswerForm
-from django import forms
 from .forms import QuestionForm
-from django.db import models
+from .models import Question
+
+from .serializer import QuestionSerializer
 
 
 # 작동 문제 없음
@@ -28,6 +36,12 @@ class QuestionList(ListView):
         context['categories'] = Category.objects.all()
         context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
         return context
+
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+
 
 
 # 작동 문제 없음

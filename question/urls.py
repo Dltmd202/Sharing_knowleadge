@@ -1,12 +1,13 @@
-from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from rest_framework import routers
+
+from django.urls import path, include
 from . import views
 
 
-question_list = views.QuestionViewSet.as_view({
-    'post': 'create',
-    'get': 'list'
-})
+
+router = DefaultRouter()
+router.register(r'questions',views.QuestionViewSet())
 
 
 
@@ -19,5 +20,4 @@ urlpatterns = [
     path('question/search/<str:q>/', views.QuestionSearch.as_view(), name="question_search"),
     path('question/search/<str:q>/<str:pk>', views.QuestionDetail.as_view()),
     path('api-auth/', include('rest_framework.urls')),
-    path('question-api/', question_list, name="question_list_api")
 ]

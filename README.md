@@ -27,6 +27,8 @@
 * `pip install djangorestframework`
 * `pip install markdown`
 * `pip install django-filter` 
+* `pip install pip --upgrade`
+* `pip install -r requirements.txt`
 
   
 ## 개발
@@ -47,4 +49,5 @@
 ## 서버 운용
 * `python mange.py makemigrations`
 * `python mange.py migrate`
+* `python mange.py collectstatic`
 * `python manage.py runserver`

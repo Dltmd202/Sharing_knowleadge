@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+section
+{
+    padding: 100px;
+}
+.KnowSharing
+{
+    position: relative;
+    min-height: 100vh;
+    background-image: url(../img/night_sky.png) ;
+    background-size: cover;
+    background-position: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.KnowSharing h2
+{
+    font-size: 3em;
+    color: wheat;
+    font-weight: 500;
+    line-height: 1.5em;
+}
+
+.content-h2{
+    font-size: 3em;
+    color: wheat;
+    font-weight: 500;
+    line-height: 1.5em;
+}
+.KnowSharing h2 span
+{
+    font-size: 1.5em;
+    font-weight: 700;
+}
+.KnowSharing h3
+{
+    font-size: 1.5em;
+    color: wheat;
+    font-weight: 500;
+}
+.form-control
+{  
+    padding: 8px 5px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: none;
+    border-radius: 8px;
+}
+.btn
+{
+    background-color: teal;
+    border-radius: 8px;
+    border: none;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 5px;
+    font-size: 18px;
+    color:wheat;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+/*궁금한 내용 질문하기 */
+.질문자{
+    background: linear-gradient( #030F1D 60%, #B5B0E2)
+}
+.ask
+{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    color: wheat;
+}
+.ask h2
+{
+    font-weight: 600;
+    font-size: 30px;
+    color: wheat;
+}
+.content
+{
+    display: flex;
+    justify-content: space-between;
+    color: wheat;
+}
+.contentBx
+{
+    padding-right: 30px;
+}
+.contentBx h3
+{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+/*질문자 도와주기*/
+.답변자{
+    background: linear-gradient(#B5B0E2 60%,#347F80);
+}
+.answer
+{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    color: wheat;
+}
+.answer h2
+{
+    font-weight: 600;
+    font-size: 30px;
+    color: wheat;
+}
+.contentBx1
+{
+    padding-left: 30px;
+}
+.contentBx1 h3
+{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+/*사진*/
+.w50
+{
+    width:fit-content;
+    max-width: 100%;
+}
+.img
+{
+    background-image: url(../img/moon2.jfif);
+    background-size: cover;
+    background-position: right;
+    border-radius: 50%;
+    width: 340px;
+    height: 340px;
+    max-width: 100%;
+}
+
+/*답변자 사진*/
+.w51
+{
+    width: fit-content;
+}
+.img1
+{
+    background-image: url(../img/scope2.png);
+    background-size: cover;
+    background-position: right;
+    width: 500px;
+    height: 340px;
+    z-index: 1;
+    max-width: 100%;
+}
+
+/*잔디*/
+.grass{
+    background-image: url(../img/grass2.png) ;
+    background-size:contain;
+    background-color: #347F80;
+    background-position: right;
+}
+/*하단바*/
+

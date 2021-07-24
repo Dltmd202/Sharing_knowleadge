@@ -92,9 +92,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
 
 
-
-
-
 # 작동 문제 없음
 class QuestionList(ListView):
     model = Question

@@ -12,21 +12,24 @@ section
 {
     padding: 100px;
 }
+.main__banner{
+    min-height: 100vh;
+    display: block;
+}
 .KnowSharing
 {
-    position: relative;
-    min-height: 100vh;
-    background-image: url(../img/night_sky.png) ;
+    position: absolute;
     background-size: cover;
     background-position: right;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    bottom: 30%;
 }
 .KnowSharing h2
 {
     font-size: 3em;
-    color: wheat;
+    color: black;
     font-weight: 500;
     line-height: 1.5em;
 }
@@ -45,7 +48,7 @@ section
 .KnowSharing h3
 {
     font-size: 1.5em;
-    color: wheat;
+    color: black;
     font-weight: 500;
 }
 .form-control

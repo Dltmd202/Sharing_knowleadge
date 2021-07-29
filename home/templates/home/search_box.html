@@ -1,5 +1,5 @@
 <div class="home__input">
-    <div class="search__box">
+    <div class="search__box" id="input-box">
         <div class="search__class" id="search__box__category" onclick=searchBox('search__category__detail')>
             <span><b>카테고리</b><br/>카테고리를 선택하세요</span>
         </div>
@@ -8,6 +8,7 @@
         </svg>
         <div class="search__class" id="search__box__tag" onclick=searchBox('search__tag__detail')>
             <span><b>태그</b><br/>태그를를 선택하세요</span>
+
         </div>
         <svg width="1px" height="90%">
             <line x1="0" y1="10" x2="0" y2="90" />
@@ -30,12 +31,26 @@
     <div class="search__boxes">
         <div class="search__detail deactivate" id="search__category__detail">
             <h2>카테고리</h2>
+            <div class="category__box">
+                {% for category in categories %}
+                    <a href="{{ category.get_absolute_path }}">
+                        <div class="category__item">
+                            <span>{{ category }}</span>
+                            <span>{{ category.question_set.count }}</span>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
         </div>
         <div class="search__detail deactivate" id="search__tag__detail">
             <h2>태그</h2>
         </div>
         <div class="search__detail deactivate" id="search__keyword__detail">
             <h2>검색어</h2>
+            <div class="form-control">
+                <input class="form-control" id="box-search-input" type="search" placeholder="Search" aria-label="Search">
+                <button class="button search-button me-3" onclick="searchQuestion()">검색</button>
+            </div>
         </div>
     </div>
 </div>

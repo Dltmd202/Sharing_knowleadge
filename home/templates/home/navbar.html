@@ -1,27 +1,27 @@
-
-
 <header>
     <a href="{% url 'home' %}" class="logo">og-lab</a>
     <div class="toggle" onclick="toggleMenu();"></div>
     <!--상단바 메뉴-->
     <ul class="menu pt-4">
         <div class="d-flex">
-            <li><a href="{% url 'login' %}" onclick="toggleMenu()">홈</a></li>
-            <li><a href="{% url 'login' %}" onclick="toggleMenu()">질문</a></li>
-            <li><a href="{% url 'register' %}" onclick="toggleMenu()">답변</a></li>
+            <li><a href="{% url 'home' %}" onclick="toggleMenu()">홈</a></li>
+            <li><a href="{% url 'question_main' %}" onclick="toggleMenu()">질문</a></li>
+            <li><a href="{% url 'question_main' %}" onclick="toggleMenu()">답변</a></li>
         </div>
     </ul>
     <ul class="menu pt-4 account">
-        <li style="height: 30px; margin-right: 5px;">
-            <input class="form-control" id="search-input" type="search" placeholder="Search" aria-label="Search">
-        </li>
-        <li><button class="button search-button me-3" onclick="searchQuestion()">검색</button></li>
+        <div class="input-box">
+            <li style="height: 30px; margin-right: 5px;">
+                <input class="form-control" id="search-input"
+                       type="search" placeholder="Search" aria-label="Search"/>
+            </li>
+            <li><button class="button search-button me-3" onclick="searchQuestion()">검색</button></li>
+        </div>
         <div class="d-flex my-auto">
             {% if user.is_authenticated %}
             <li><a href="" onclick="notYet()">결제</a></li>
             <li><a href="{% url 'mypage' %}" onclick="toggleMenu()">{{ user.username }}</a></li>
             <li><a href="{% url 'logout' %}" onclick="toggleMenu()">로그아웃</a></li>
-
             {% else %}
             <li><a href="{% url 'login' %}" onclick="toggleMenu()">로그인</a></li>
             <li><a href="{% url 'register' %}" onclick="toggleMenu()">회원가입</a></li>
@@ -39,11 +39,11 @@
         }
 
         document.getElementById('search-input').addEventListener('keyup',
-        function (event){
-        if(event.key === 'Enter'){
-            searchQuestion()
-        }
-        });
+            function (event){
+            if(event.key === 'Enter'){
+                searchQuestion()
+            }
+            });
 
         function notYet(){
             alert("서비스 준비중입니다.")

@@ -7,6 +7,7 @@
 {% block body_title %}스펙 목록{% endblock %}
 
 {% block container_main_area %}
+    {% include 'university/new_university.html' %}
     <div class="my-3 py-4 profilebox">
         <div class="h3 font-midnight">학력</div>
         <ul>
@@ -31,8 +32,9 @@
         {% endfor %}
         </ul>
         <div class="d-flex justify-content-end">
-            <a href="{% url 'new_univ' %}" class="btn btn-lg px-4">추가하기</a>
+            <div class="btn btn-lg px-4" onclick=univModel()>추가하기</div>
         </div>
+
     </div>
     <div class="my-3 profilebox">
         <div class="h3 font-midnight">경력</div>
@@ -62,4 +64,5 @@
             <a href="{% url 'new_company' %}" class="btn btn-lg px-4">추가하기</a>
         </div>
     </div>
+    <script src="{% static 'university/js/university.js' %}"></script>
 {% endblock %}

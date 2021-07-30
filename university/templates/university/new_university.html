@@ -1,0 +1,47 @@
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'university/css/university.css' %}">
+<div class="my-3 mx-5 university__form__box" id="univ-box">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-6">
+            <div class="row my-3">
+                <label>학교 이름</label>
+                {{ form.uni_name }}
+            </div>
+
+            <div class="row my-3">
+                <label>학위</label>
+                {{ form.uni_degree }}
+
+            </div>
+
+            <div class="row my-3">
+                <label>전공</label>
+                {{ form.uni_major }}
+            </div>
+
+            <div class="row my-3">
+                <label>입학 날짜</label>
+                {{ form.enter_date }}
+            </div>
+
+            <div class="row my-3">
+                <label>졸업 날짜</label>
+                {{ form.grad_date }}
+            </div>
+
+            <div class="my-4 form-check">
+                {{ form.is_attending }}
+                <label class="form-check-label" for="isAttendingCheckBox">재학중</label>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-lg px-4" type="submit">추가하기</button>
+        </div>
+    </form>
+</div>
+
+<div class="shade-box" id="shade_box" onClick=univModelExit()></div>

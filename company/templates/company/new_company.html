@@ -1,0 +1,41 @@
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'company/css/company.css' %}">
+<div class="my-3 mx-5 company__form__box" id="company-box">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="col-6">
+            <div class="row my-3">
+                <label>회사 이름</label>
+                {{ form.comp_name }}
+            </div>
+
+            <div class="row my-3">
+                <label>직함</label>
+                {{ form.comp_title }}
+            </div>
+            <div class="row my-3">
+                <label>고용 형태:</label>
+                {{ form.employ_type }}
+            </div>
+            <div class="row my-3">
+                <label>입사 날짜:</label>
+                {{ form.join_date }}
+            </div>
+            <div class="row my-3">
+                <label>퇴사 날짜:</label>
+                {{ form.leave_date }}
+            </div>
+            <div class="my-4 form-check">
+                {{ form.is_working }}
+                <label class="form-check-label" for="isWorkingCheckBox">재직중</label>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-lg px-4" type="submit">추가하기</button>
+        </div>
+    </form>
+</div>
+<div class="shade-box" id="company_shade_box" onClick=companyModelExit()></div>

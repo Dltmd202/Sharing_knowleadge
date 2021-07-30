@@ -8,6 +8,7 @@
 
 {% block container_main_area %}
     {% include 'university/new_university.html' %}
+    {% include 'company/new_company.html' %}
     <div class="my-3 py-4 profilebox">
         <div class="h3 font-midnight">학력</div>
         <ul>
@@ -61,8 +62,9 @@
             </form>
         </ul>
         <div class="d-flex justify-content-end">
-            <a href="{% url 'new_company' %}" class="btn btn-lg px-4">추가하기</a>
+            <div class="btn btn-lg px-4" onclick=compModel()>추가하기</div>
         </div>
     </div>
     <script src="{% static 'university/js/university.js' %}"></script>
+    <script src="{% static 'company/js/company.js' %}"></script>
 {% endblock %}

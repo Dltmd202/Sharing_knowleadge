@@ -12,13 +12,17 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/navbar.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/search_box.css' %}">
 </head>
 <body>
     {% include 'home/navbar.html' %}
-    <section class="KnowSharing" id="home">
-        <div class="textBx">
-            <h2>likelion<br><span>OG-LAB</span></h2>
-            <h3>지식 나눔 사이트</h3>
+    <section class="main__banner">
+        {% include 'home/search_box.html' %}
+        <div class="KnowSharing" id="home">
+            <div class="textBx">
+                <h2><span>OG-LAB</span></h2>
+                <h3>지식을 공유하세요</h3>
+            </div>
         </div>
     </section>
 <!--질문-->

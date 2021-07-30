@@ -6,7 +6,6 @@ var input_box_height;
 window.onload = function () {
     input_box = document.getElementById('input-box');
     header = document.querySelector('header');
-    input_box_height = input_box.scrollHeight + header.scrollHeight
 }
 
 window.addEventListener('scroll', function(){
@@ -14,12 +13,12 @@ window.addEventListener('scroll', function(){
     let scrollLocation = document.documentElement.scrollTop;
 
     header.classList.toggle('sticky', window.scrollY > 0);
-	let windowHeight = window.innerHeight;
-	let fullHeight = document.body.scrollHeight;
-    console.log(input_box.scrollHeight, header.scrollHeight, scrollLocation)
-	if(scrollLocation >= input_box.scrollHeight + header.scrollHeight){
-		console.log('끝')
-	}
+	// let windowHeight = window.innerHeight;
+	// let fullHeight = document.body.scrollHeight;
+    // console.log(input_box.scrollHeight, header.scrollHeight, scrollLocation)
+	// if(scrollLocation >= input_box.scrollHeight + header.scrollHeight){
+	// 	console.log('끝')
+	// }
 });
 
 function toggleMenu(){

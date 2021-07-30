@@ -99,3 +99,7 @@ header .account{
     width: 250px;
     font-size: 16px;
 }
+
+.menu .input-box{
+    display: flex;
+}

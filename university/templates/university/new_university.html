@@ -5,35 +5,36 @@
 <div class="my-3 mx-5 university__form__box" id="univ-box">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="hidden" value="new_university" name="form-type">
         <div class="col-6">
             <div class="row my-3">
                 <label>학교 이름</label>
-                {{ form.uni_name }}
+                {{ new_university.uni_name }}
             </div>
 
             <div class="row my-3">
                 <label>학위</label>
-                {{ form.uni_degree }}
+                {{ new_university.uni_degree }}
 
             </div>
 
             <div class="row my-3">
                 <label>전공</label>
-                {{ form.uni_major }}
+                {{ new_university.uni_major }}
             </div>
 
             <div class="row my-3">
                 <label>입학 날짜</label>
-                {{ form.enter_date }}
+                {{ new_university.enter_date }}
             </div>
 
             <div class="row my-3">
                 <label>졸업 날짜</label>
-                {{ form.grad_date }}
+                {{ new_university.grad_date }}
             </div>
 
             <div class="my-4 form-check">
-                {{ form.is_attending }}
+                {{ new_university.is_attending }}
                 <label class="form-check-label" for="isAttendingCheckBox">재학중</label>
             </div>
         </div>

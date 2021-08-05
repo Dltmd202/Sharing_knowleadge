@@ -27,6 +27,7 @@
     <link rel="icon" type="image/x-icon" href="{% static 'home/img/icon.png' %}" />
     <link rel="stylesheet" href="{% static 'question/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'home/css/home.css'%}">
 </head>
 <body>
@@ -69,16 +70,15 @@
                             </ul>
                         </div>
                     {% else %}
-                        <div class="col-3 mx-2" style="padding-top: 25px; padding-left: 30px">
-                            <img class="d-flex mr-3 rounded-circle"
-                                 src="http://placehold.it/50x50" alt="">
-                        </div>
-                        <div class="col-7" style="padding-left: 15px; padding-top: 15px; padding-bottom: 30px;">
-                            <div class="row">
-                                <!----- 로그인 연결할 것 ----->
+                        <div class="profile">
+                            <img class="rounded-circle"
+                                 src="https://dummyimage.com/50x50/dee2e6/6c757d.jpg"
+                                 alt="{{ user.user_desc }}" width="50px">
+                            <div class="col-7 desc">
                                 <a href="{% url 'login' %}">로그인</a>
+                                <br/>
+                                <a href="{% url 'login' %}" class="">마이페이지></a>
                             </div>
-                            <a href="#" class="my-page">마이페이지></a>
                         </div>
                     {% endif %}
                 </div>

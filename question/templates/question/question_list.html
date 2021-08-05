@@ -23,46 +23,13 @@ Q & A
                 </div>
                 <hr>
                 {% if not object_list.count == 0 %}
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    {% for q in object_list %}
-                        <div class="col" style="padding: 10px">
-                            <div class="card card px-3">
-                                <div style="min-height: 50px;">
-                                    <h5 class="fw-bolder" style="margin-top: 10px; font-size: medium">{{ q.title_brief }}</h5>
-                                </div>
-                                <hr>
-                                {% if q.head_img %}
-                                    <img class="card-img-top" src="{{ q.head_img.url }}" alt="{{ q.title_brief }}"
-                                         width="30px" height="110px"/>
-                                {% else %}
-                                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                         width="30px" height="110px" alt="..." />
-                                {% endif %}
-                                <div class="card-body">
-                                    <div class="text-right">
-                                        <!-- Product name-->
-                                        <!-- Product price-->
-                                        <div style="height: 50px;">
-                                            <p class="card-text">{{ q.brief }}</p>
-                                        </div>
-                                        <br>
-                                        {% if not q.who_chosen %}
-                                            <p class="card-text" style="float: right">
-                                                {{ q.ques_point }} Point <i class="far fa-square"></i></p>
-                                        {% else %}
-                                        <p class="card-text" style="float: right">
-                                            {{ q.ques_point }} Point
-                                            <i class="fas fa-check-square" style="color: teal;"></i>
-                                        </p>
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                <!-- Product actions-->
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" align="right">
-                                    <div class="text-center"><a class="btn" href="{% url 'res' pk=q.pk %}">답변하기</a></div>
-                                </div>
+                <div class="question_list">
+                    {% for question in object_list %}
+                        <a href="{% url 'res' pk=question.pk %}" class="item">
+                            <div class="question_title">
+                                <p class="question__type">Q</p> <p>{{ question.ques_title }}</p>
                             </div>
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>

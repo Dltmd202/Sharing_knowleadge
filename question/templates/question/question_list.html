@@ -8,26 +8,32 @@ Q & A
 
 {% block main_area %}
         {% if search_info %}{% endif %}
-        <section class="content-box my-2">
+        <div class="content-box">
             <div class="px-3 px-lg-3">
-                <div class="row">
-                    <div class="col-9">
-                        <h1 style="color: black">Q & A</h1>
+                <div class="question__list__title">
+                    <div class="qna">
+                        <h1>Q & A</h1>
                     </div>
                     {% if user.is_authenticated %}
-                        <div class="col-3">
-                            <a class="btn" href="/question/create_question/"><i class="fas fa-pen mx-2"> 질문하기</i>
+                        <div class="create">
+                            <a class="btn create__question" href="/question/create_question/"><i class="fas fa-pen mx-2"> 질문하기</i>
                             </a>
                         </div>
                     {% endif %}
                 </div>
-                <hr>
                 {% if not object_list.count == 0 %}
                 <div class="question_list">
                     {% for question in object_list %}
                         <a href="{% url 'res' pk=question.pk %}" class="item">
                             <div class="question_title">
-                                <p class="question__type">Q</p> <p>{{ question.ques_title }}</p>
+                                <p class="question__type">Q</p>
+                                <div class="question__title__info">
+                                    <p>{{ question.ques_title }}</p>
+                                    <div class="question__title__info__detail">
+                                        <p>조회수 10</p>
+                                        <p>답변 10</p>
+                                    </div>
+                                </div>
                             </div>
                         </a>
                     {% endfor %}
@@ -36,7 +42,7 @@ Q & A
             {% else %}
                 <h1 style="color: black; margin-top: 30px; text-align: center">검색 결과가 없습니다</h1>
             {% endif %}
-        </section>
+        </div>
     {% if is_paginated %}
         <ul class="pagination justify-content-center" style="margin-bottom: 100px">
             {% if page_obj.has_next %}

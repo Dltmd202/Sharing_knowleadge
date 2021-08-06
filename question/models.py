@@ -3,6 +3,7 @@ from user.models import CustomUser
 from category.models import Category
 
 
+
 # User 모델 완성 후 수정할 것
 class Question(models.Model):
     ques_title = models.CharField(max_length=30)

@@ -22,8 +22,3 @@ class Category(models.Model):
     # 복수 명칭 변경
     class Meta:
         verbose_name_plural = 'Categories'
-
-
-class Tag(models.Model):
-    slug = models
-    question = models.ManyToManyField

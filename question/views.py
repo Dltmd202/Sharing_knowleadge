@@ -23,9 +23,10 @@ from user.models import CustomUser
 from answer.forms import AnswerForm
 from .forms import QuestionForm
 from .models import Question
-
+from .models import Tag
 from .serializer import QuestionSerializer
-
+import re
+from django.utils.text import slugify
 
 # Question - REST framework
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -126,6 +127,21 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     template_name = 'question/question_form.html'
 
     def form_valid(self, form):
+        response = super(create_question, self).form_valid(form)
+        tags = self.request.POST.get('tags')
+        if tags:
+            tags = tags.strip()
+            tags = tags.replace(" ", "#")
+            tags = tags.split("#")
+            for t in tags :
+                t = t.strip()
+                tag, is_tag = Tag.objects.get_or_create(name = t)
+                # 없으면 생성, 있으면 생성값에 
+                if is_tag :
+                    tag.slug = slugify(t, allow_unicode = True)
+                    tag.save()
+                self.object.tags.add(tag)
+
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.user_id = current_user

@@ -25,10 +25,7 @@
     padding: 3% 0;
 }
 
-.question_list .item{
-    width: 50%;
-    height: 5em;
-}
+
 
 .question_list .item:hover{
     background: #e3e3e3;
@@ -74,9 +71,6 @@
     margin-right: 3%;
 }
 
-.question_list .item:nth-child(odd){
-    border-right: 1px solid;
-}
 
 .question__list__title{
     display: flex;
@@ -372,11 +366,20 @@ background-color: red;
     margin-bottom: 20px;
 }
 
-@media screen and (max-width: 1440px){
 
+
+@media (min-width: 1023px){
+    .question_list .item{
+        width: 50% !important;
+        height: 5em;
+    }
+
+    .question_list .item:nth-child(odd){
+    border-right: 1px solid;
+    }
 }
 
-@media screen and (max-width: 768px){
+@media (min-width: 768px){
     .create__question{
         content: "작성";
         font-size: small;
@@ -386,8 +389,8 @@ background-color: red;
         width: 100%;
     }
 
-    .content-box{
-        width: 80%;
-    }
+}
 
+
+@media (min-width: 425px){
 }

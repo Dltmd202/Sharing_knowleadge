@@ -87,11 +87,11 @@
                 <div class="category-item">
                     <div class="category__bar">
                         <h5>카테고리</h5>
-                        <a href="#" id="category__toggle__button"><i class="fas fa-bars"></i>
+                        <a id="category__toggle__button"><i class="fas fa-bars"></i>
                         </a>
                     </div>
                     <div class="category-item">
-                        <ul class="list-unstyled mb-0">
+                        <ul class="list-unstyled mb-0" id="category__list">
                             {% for c in categories %}
                             <li>
                                 <a href="{{ c.get_absolute_path }}" class="category-list">

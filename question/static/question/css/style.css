@@ -366,9 +366,163 @@ background-color: red;
     margin-bottom: 20px;
 }
 
+.content-box__rank{
+    padding: 0 5%;
+}
+
+.rank_list{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-right: calc(var(--bs-gutter-x) * -.5);
+    margin-left: calc(var(--bs-gutter-x) * -.5);
+    border-radius: 0.5em;
+    min-height: 2em;
+    background-color: teal;
+    padding: 1% 0 0 0;
+}
+
+.rank_list .rank__attribute{
+    display: flex;
+    color: white;
+    height: 2em;
+}
+
+.rank_list .rank__items{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #707070;
+}
+
+.rank__items .rank__item{
+    height: 2em;
+}
+
+.rank__attribute h5:nth-child(1){
+    width: 10%;
+    text-align: center;
+}
+
+.rank__attribute h5:nth-child(2){
+    width: 60%;
+    text-align: center;
+}
+
+.rank__attribute h5:nth-child(3){
+    width: 10%;
+    text-align: center;
+}
+
+.rank__attribute h5:nth-child(4){
+    width: 10%;
+    text-align: center;
+}
+
+.rank__attribute h5:nth-child(5){
+    width: 10%;
+    text-align: center;
+}
+
+.rank_list .rank__items .rank__item{
+    display: flex;
+    background-color: white;
+    border: 1px solid #707070;
+    align-items: center;
+}
 
 
-@media (min-width: 1023px){
+.rank__item div{
+    text-align: center;
+}
+
+.rank__item div:nth-child(1){
+    width: 10%;
+}
+
+
+.rank__item div:nth-child(2){
+    width: 60%;
+    text-align: start !important;
+    padding-left: 10%;
+}
+
+
+.rank__item div:nth-child(3){
+    width: 10%;
+}
+
+
+.rank__item div:nth-child(4){
+    width: 10%;
+}
+
+
+.rank__item div:nth-child(5){
+    width: 10%;
+}
+
+
+@media screen and (max-width: 1024px){
+    .rank__attribute h5:nth-child(5){
+        width: 0%;
+        visibility: hidden;
+    }
+
+    .rank__item div:nth-child(5){
+        width: 0%;
+        visibility: hidden;
+    }
+
+    .rank__attribute h5:nth-child(4){
+        width: 15%;
+    }
+
+    .rank__item div:nth-child(4){
+        width: 15%;
+    }
+
+    .rank__attribute h5:nth-child(3){
+        width: 15%;
+    }
+
+    .rank__item div:nth-child(3){
+        width: 15%;
+    }
+}
+
+@media screen and (max-width: 768px){
+
+    .rank__attribute h5:nth-child(2){
+        width: 50%;
+    }
+
+    .rank__item div:nth-child(2){
+        width: 50%;
+    }
+
+    .rank__attribute h5:nth-child(3){
+        width: 20%;
+    }
+
+    .rank__item div:nth-child(3){
+        width: 20%;
+    }
+
+    .rank__attribute h5:nth-child(3){
+        width: 20%;
+    }
+
+    .rank__item div:nth-child(3){
+        width: 20%;
+    }
+
+}
+
+
+@media screen and (min-width: 1023px){
     .question_list .item{
         width: 50% !important;
         height: 5em;
@@ -377,9 +531,10 @@ background-color: red;
     .question_list .item:nth-child(odd){
     border-right: 1px solid;
     }
+
 }
 
-@media (min-width: 768px){
+@media screen and (min-width: 768px){
     .create__question{
         content: "작성";
         font-size: small;
@@ -392,5 +547,5 @@ background-color: red;
 }
 
 
-@media (min-width: 425px){
+@media screen and (min-width: 425px){
 }

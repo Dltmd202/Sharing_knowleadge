@@ -7,42 +7,44 @@ Q & A
 
 
 {% block main_area %}
-        {% if search_info %}{% endif %}
-        <div class="content-box">
-            <div class="px-3 px-lg-3">
-                <div class="question__list__title">
-                    <div class="qna">
-                        <h1>Q & A</h1>
-                    </div>
-                    {% if user.is_authenticated %}
-                        <div class="create">
-                            <a class="btn create__question" href="/question/create_question/"><i class="fas fa-pen mx-2"> 질문하기</i>
-                            </a>
-                        </div>
-                    {% endif %}
+    {% if search_info %}{% endif %}
+    <div class="content-box">
+        <div class="px-3 px-lg-3">
+            <div class="question__list__title">
+                <div class="qna">
+                    <h1>Q & A</h1>
                 </div>
-                {% if not object_list.count == 0 %}
-                <div class="question_list">
-                    {% for question in object_list %}
-                        <a href="{% url 'res' pk=question.pk %}" class="item">
-                            <div class="question_title">
-                                <p class="question__type">Q</p>
-                                <div class="question__title__info">
-                                    <p>{{ question.ques_title }}</p>
-                                    <div class="question__title__info__detail">
-                                        <p>조회수 10</p>
-                                        <p>답변 10</p>
-                                    </div>
+                {% if user.is_authenticated %}
+                    <div class="create">
+                        <a class="btn create__question"
+                           href="/question/create_question/">
+                            <i class="fas fa-pen mx-2"> 질문하기</i>
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            {% if not object_list.count == 0 %}
+            <div class="question_list">
+                {% for question in object_list %}
+                    <a href="{% url 'res' pk=question.pk %}" class="item">
+                        <div class="question_title">
+                            <p class="question__type">Q</p>
+                            <div class="question__title__info">
+                                <p>{{ question.ques_title }}</p>
+                                <div class="question__title__info__detail">
+                                    <p>조회수 10</p>
+                                    <p>답변 10</p>
                                 </div>
                             </div>
-                        </a>
-                    {% endfor %}
-                </div>
+                        </div>
+                    </a>
+                {% endfor %}
             </div>
-            {% else %}
-                <h1 style="color: black; margin-top: 30px; text-align: center">검색 결과가 없습니다</h1>
-            {% endif %}
         </div>
+        {% else %}
+            <h1 style="color: black; margin-top: 30px; text-align: center">검색 결과가 없습니다</h1>
+        {% endif %}
+    </div>
     {% if is_paginated %}
         <ul class="pagination justify-content-center" style="margin-bottom: 100px">
             {% if page_obj.has_next %}
@@ -57,7 +59,8 @@ Q & A
             {% endif %}
             {% if page_obj.has_previous %}
                 <li class="page-item">
-                    <a class="page-link page-button able-link" href="?page={{ page_obj.previous_page_number }}"
+                    <a class="page-link page-button able-link"
+                       href="?page={{ page_obj.previous_page_number }}"
                     style="background-color: teal; color: wheat">Newer &rarr;</a>
                 </li>
             {% else %}
@@ -67,4 +70,42 @@ Q & A
             {% endif %}
         </ul>
     {% endif %}
+    <div class="content-box__rank">
+        <div class="px-3 px-lg-3">
+            <div class="question__rank__title">
+                <div class="qna">
+                    <h1>랭킹</h1>
+                </div>
+            </div>
+            <div class="rank_list">
+                <div class="rank__attribute">
+                    <h5>#</h5>
+                    <h5>핸들</h5>
+                    <h5>포인트</h5>
+                    <h5>채택 수</h5>
+                    <h5>채택률</h5>
+                </div>
+                <div class="rank__items">
+                    <div class="rank__item">
+                        <div class="order">
+                            <span>1</span>
+                        </div>
+                        <div class="user">
+                            <span>이승환</span>
+                        </div>
+                        <div class="point">
+                            <span>1200</span>
+                        </div>
+                        <div class="choosen">
+                            <span>32</span>
+                        </div>
+                        <div class="채택률">
+                            <span>58.4%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

@@ -1,17 +1,20 @@
 <header>
-    <a href="{% url 'home' %}" class="logo">og-lab</a>
+    <div class="nav__top">
+        <a href="{% url 'home' %}" class="logo">og-lab</a>
+        <a class="nav__toggle"><i class="fas fa-bars"></i></a>
+    </div>
     <div class="toggle" onclick="toggleMenu();"></div>
     <!--상단바 메뉴-->
-    <ul class="menu pt-4">
+    <ul class="menu pt-4 nav-utils">
         <div class="d-flex">
             <li><a href="{% url 'home' %}" onclick="toggleMenu()">홈</a></li>
             <li><a href="{% url 'question_main' %}" onclick="toggleMenu()">질문</a></li>
             <li><a href="{% url 'question_main' %}" onclick="toggleMenu()">답변</a></li>
         </div>
     </ul>
-    <ul class="menu pt-4 account">
+    <ul class="menu account">
         <div class="input-box">
-            <li>
+            <li style="height: 30px; margin-right: 5px;">
                 <input class="form-control" id="search-input"
                        type="search" placeholder="Search" aria-label="Search"/>
             </li>

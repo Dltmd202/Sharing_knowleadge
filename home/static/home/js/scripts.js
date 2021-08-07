@@ -1,5 +1,4 @@
 
-var header;
 var input_box;
 var input_box_height;
 
@@ -11,8 +10,11 @@ window.onload = function () {
 window.addEventListener('scroll', function(){
     var header = document.querySelector('header');
     let scrollLocation = document.documentElement.scrollTop;
-
-    header.classList.toggle('sticky', window.scrollY > 0);
+    var toggledNav = document.querySelector("header .active");
+    console.log(toggledNav);
+    if (toggledNav === null){
+        header.classList.toggle('sticky', window.scrollY > 0);
+    }
 	// let windowHeight = window.innerHeight;
 	// let fullHeight = document.body.scrollHeight;
     // console.log(input_box.scrollHeight, header.scrollHeight, scrollLocation)
@@ -63,3 +65,21 @@ function searchBox(id){
         }
     }
 }
+
+const toggleBtn = document.querySelector(".nav__toggle");
+const nav_utils = document.querySelector(".nav-utils");
+const account = document.querySelector(".account");
+var header = document.querySelector('header');
+
+toggleBtn.addEventListener("click", ()=> {
+    var toggledNav = document.getElementsByClassName("sticky");
+    console.log(toggledNav[0]);
+    console.log(nav_utils);
+    nav_utils.classList.toggle('active');
+    account.classList.toggle('active');
+    if (toggledNav[0] === undefined){
+        header.classList.toggle('sticky');
+    } else{
+        header.classList.toggle('sticky', window.scrollY > 0);
+    }
+});

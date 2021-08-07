@@ -1,0 +1,70 @@
+#container {
+    max-width: 1920px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(5, 280px);
+    grid-template-rows: repeat(3, 400px);
+    gap: 20px;
+    margin: 0 auto;
+  }
+.item{
+    background-color: wheat; 
+    display: grid;
+    grid-template-columns: auto 56px;
+    grid-template-areas: "header header" "title sidebar" "main sidebar" "footer footer";
+    gap: 10px;
+}
+.inner{position:relative;}
+
+.page{
+    background-color:wheat;
+    width: 940px;
+    display: inline; }
+
+#line{
+    background-color: teal; 
+    height:15px; 
+  }
+
+#sb1{
+    grid-area: header; 
+  }
+
+#sb2{
+    left:20px;
+    grid-area: header;
+    top: 80px;
+    height: 100px;
+    position: relative; 
+}
+#sb3{
+    top: 100px;
+    left: 20px;
+    color:white;
+    grid-area: main;
+    z-index: 1;
+}
+
+#sb4{
+    grid-area: footer;
+    background-color: teal; 
+    height: 45px; 
+    position:relative;  }
+
+#sb5{
+    bottom: -60px;
+    left: 25px;
+    grid-area: footer; 
+}
+
+#img{
+    color:white;
+    grid-area: main;
+    top: 70px;
+    left:20px;
+    z-index: 1;
+    }
+div{ position:relative; }
+h1{color:teal; margin: 10px;}
+p{left:160px; position:relative;}
+*{color:teal; font-size: 16px; font-weight: bold; font-family: Arial, Helvetica, sans-serif;}

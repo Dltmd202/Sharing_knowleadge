@@ -1,4 +1,5 @@
 from abc import ABC
+import re
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.forms import ModelForm, TextInput, EmailInput, NumberInput
@@ -6,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.forms import formset_factory
+from django.utils.text import slugify
 from django.db.models import Q
 from django.db import models
 from django import forms
@@ -18,13 +20,12 @@ from rest_framework.views import APIView
 from rest_framework import renderers
 from rest_framework import status
 
+from .serializer import QuestionSerializer
 from category.models import Category
 from user.models import CustomUser
 from answer.forms import AnswerForm
 from .forms import QuestionForm
-from .models import Question
-
-from .serializer import QuestionSerializer
+from .models import Question, Tag
 
 
 # Question - REST framework
@@ -91,7 +92,6 @@ class QuestionViewSet(viewsets.ModelViewSet):
         return Response(question.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 # 작동 문제 없음
 class QuestionList(ListView):
     model = Question
@@ -126,18 +126,35 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     template_name = 'question/question_form.html'
 
     def form_valid(self, form):
+        response = super(QuestionCreate, self).form_valid(form)
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.user_id = current_user
+            tags = self.request.POST.get('tags')
+            # print(tags)
+            if tags:
+                tags = tags.strip()
+                tags = re.sub(r'[\s]', " ", tags)
+                tags = tags.replace("#", " ")
+                tags = tags.split()
+                for t in tags:
+                    t = t.strip()
+                    # print(t)
+                    tag, is_tag = Tag.objects.get_or_create(name=t)
+                    # print(tag, is_tag)
+                    # 없으면 생성, 있으면 생성값에
+                    if is_tag:
+                        tag.slug = slugify(t, allow_unicode=True)
+                        tag.save()
+                    self.object.tags.add(tag)
             ques_point_str = self.request.POST.get('ques_point')
             ques_point_str = form.fields['ques_point']
             new_ques = CustomUser()
             if ques_point_str:
                 user = CustomUser.objects.get(username=current_user)
-
                 user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
                 user.save()
-            return super(QuestionCreate, self).form_valid(form)
+            return response
         else:
             return redirect('/question')
 

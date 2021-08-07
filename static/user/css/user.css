@@ -1,0 +1,115 @@
+.profilebox {
+    border: 2px solid teal;
+    border-radius: 25px;
+    padding: 25px;
+    margin: 10px 15px;
+    min-height: 220px;
+}
+
+.bignumber {
+    font-size: 80px;
+    font-weight: bold;
+    color: teal;
+    margin-top: 10px;
+}
+
+.blank-userpic, .blank-userpic-small, .blank-userpic-smallest, .blank-userpic-smallest-fill {
+    width: 200px;
+    height: 200px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+    background: #F1F9FF;
+}
+
+.blank-userpic-small {
+    width: 100px;
+    height: 100px;
+}
+
+.blank-userpic-smallest, .blank-userpic-smallest-fill {
+    width: 30px;
+    height: 30px;
+    background: lightblue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blank-userpic-smallest-fill {
+    background: teal;
+    color: white;
+    border: none;
+}
+
+.input-inside {
+    position: relative;
+}
+
+.input-space, .input-btn-space {
+    position: absolute;
+    z-index: 10;
+    margin-top: 0 !important;
+}
+
+.input-space {
+    background-color: transparent !important;
+    color: black !important;
+    right: 10px;
+    top: 2px;
+}
+
+.mypage-title {
+    font-size: 50pt; 
+    color: midnightblue;
+}
+
+.font-teal {
+    color: teal !important;
+}
+
+.font-midnight {
+    color: midnightblue !important;
+}
+
+.font-wheat {
+    color: wheat !important;
+}
+
+.border-teal {
+    border-color: teal !important;
+}
+
+.border-midnight {
+    border-color: midnightblue !important;
+}
+
+/* 배경 */
+.contain-all{
+    background: linear-gradient(#fafbfc 90% ,#347F80);
+}
+
+header{
+    background: linear-gradient(#B5B0E2 45% ,#fafbfc);
+}
+
+section
+{
+    padding: 100px;
+}
+
+/* i 태그 */
+
+.btn-custom{
+    padding: 10px 15px 10px 15px;
+    border-radius: 3px;
+}
+
+
+
+.eye-button{
+    border: none;
+    background-color: #f1fafe;
+    border-radius: 5px;
+}

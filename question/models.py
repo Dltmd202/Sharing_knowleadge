@@ -3,6 +3,13 @@ from user.models import CustomUser
 from category.models import Category
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=150, allow_unicode=True, unique=True)
+
+    def __str__(self):
+        return self.name
+
 
 # User 모델 완성 후 수정할 것
 class Question(models.Model):
@@ -16,6 +23,7 @@ class Question(models.Model):
     head_img = models.FileField(upload_to='question/images/%Y/%m/%d/', blank=True)
     who_chosen = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name='who_chosen')
     vote_count = models.IntegerField(default=0)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
 
     def __str__(self):
         return str(self.pk) + ': ' + self.ques_title
@@ -32,3 +40,4 @@ class Question(models.Model):
 
     def get_absolute_url(self):
         return f'/question/{self.pk}/'
+

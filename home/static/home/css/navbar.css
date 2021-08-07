@@ -8,9 +8,14 @@ header
     padding: 4% 10%;
     z-index: 1000;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     transition: 0.5s;
 }
+
+.nav__toggle{
+    visibility: hidden;
+}
+
 header.sticky
 {
     background: #fff;
@@ -102,4 +107,74 @@ header .account{
 
 .menu .input-box{
     display: flex;
+}
+
+header .account{
+    padding-top: 1.5rem;
+}
+
+@media screen and (max-width: 1024px){
+    .input-box{
+        visibility: hidden;
+        height: 0;
+    }
+}
+
+@media screen and (max-width: 650px){
+    header{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    header ul{
+        display: none;
+        flex-direction: column;
+        position: static;
+        padding-left: 0 !important;
+        text-align: center;
+        padding-top: 0 !important;
+    }
+
+    header ul li{
+        position: static;
+    }
+
+    header ul div{
+        flex-direction: column;
+    }
+
+    header ul div li a{
+        width: 100% !important;
+    }
+
+    header ul div li a:hover{
+        background-color: #4f5b69;
+    }
+
+    .nav-utils{
+        margin-bottom: 0 !important;
+    }
+
+    header .account{
+        position: static;
+        padding-top: 0 !important;
+    }
+
+    .nav__toggle{
+        visibility: visible;
+        color: black;
+    }
+
+    .nav__top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    header .active{
+        display: flex;
+    }
+
+    header ul div li a{
+        margin-top: 0.5em;
+    }
 }

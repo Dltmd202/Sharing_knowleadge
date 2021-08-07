@@ -4,7 +4,7 @@ from .models import Question
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['ques_title', 'category_id', 'ques_point', 'ques_desc', 'head_img', 'tags']
+        fields = ['ques_title', 'category_id', 'ques_point', 'ques_desc', 'head_img']
         widgets = {
             'ques_title': forms.TextInput(
                 attrs={

@@ -120,7 +120,7 @@ header .account{
     }
 }
 
-@media screen and (max-width: 650px){
+@media screen and (max-width: 780px){
     header{
         flex-direction: column;
         align-items: stretch;

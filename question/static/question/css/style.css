@@ -308,8 +308,26 @@ a:hover{
     padding: 0 5%;
 }
 
+.category-item ul li{
+    width: 100%;
+}
+
+.category-item ul{
+    display: none;
+}
+
+.category-item .active{
+    display: block;
+}
+
 .custom-contentview .category-item .category-list{
-    font-size: small;
+    font-size: medium;
+    display: block;
+}
+
+
+.custom-contentview .category-item .category-list:hover{
+    background-color: #e4e4e4;
 }
 
 .custom-contentview .category-item .category__bar{

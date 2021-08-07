@@ -11,7 +11,6 @@ window.addEventListener('scroll', function(){
     var header = document.querySelector('header');
     let scrollLocation = document.documentElement.scrollTop;
     var toggledNav = document.querySelector("header .active");
-    console.log(toggledNav);
     if (toggledNav === null){
         header.classList.toggle('sticky', window.scrollY > 0);
     }
@@ -83,3 +82,11 @@ toggleBtn.addEventListener("click", ()=> {
         header.classList.toggle('sticky', window.scrollY > 0);
     }
 });
+
+var categoryBtn = document.querySelector("#category__toggle__button");
+console.log(categoryBtn);
+categoryBtn.addEventListener("click", ()=>{
+    var categoryList = document.querySelector("#category__list");
+    console.log(categoryList);
+    categoryList.classList.toggle('active');
+})

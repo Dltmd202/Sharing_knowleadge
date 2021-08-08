@@ -1,0 +1,31 @@
+{% extends 'user/base_form.html' %}
+{% load i18n %}
+
+{% block head_title %}소셜 회원가입 페이지{% endblock %}
+
+{% block body_title %}추가정보 작성{% endblock %}
+
+{% block container_main_area %}
+    <form action="{% url 'socialaccount_signup' %}" method="post" class="m-5">
+        {% csrf_token %}
+        {% if form.errors %}
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        <label class="h5">아이디</label>
+        <div class="mb-5">{{ form.username }}</div>
+        <label class="h5">이메일</label>
+        <div class="mb-5">{{ form.email }}</div>
+        <label class="h5">닉네임</label>
+        <div class="mb-5">{{ form.nickname }}</div>
+        <label class="h5">생년월일</label>
+        <div class="mb-3">{{ form.birth_year }}</div>
+        <div class="mb-3">{{ form.birth_month }}</div>
+        <div class="mb-3">{{ form.birth_day }}</div>
+        <button class="col-md-8 btn btn-lg mt-5" type="submit" value="submit">회원가입</button>
+    </form>
+{% endblock %}

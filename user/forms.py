@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.forms.widgets import TextInput, PasswordInput
 from .models import CustomUser
+from allauth.socialaccount.forms import SignupForm
 import datetime
 
 classValue = "form-control px-3"
@@ -91,6 +92,89 @@ class UserCreationForm2(forms.ModelForm):  # 회원가입 두번째 페이지 �
             raise forms.ValidationError("연도 범위를 초과했습니다.")
 
         return cleaned_data
+
+
+class SocialAccountSignupForm(SignupForm):
+    MONTH_CHOICE = ((i, '{}월'.format(i)) for i in range(1, 13))
+    DAY_CHOICE = ((i, '{}일'.format(i)) for i in range(1, 32))
+
+    birth_year = forms.CharField(
+        widget=forms.TextInput(attrs={
+            "placeholder": "생년", "class": classValue, "style": styleValue
+        })
+    )
+    birth_month = forms.CharField(
+        widget=forms.Select(choices=MONTH_CHOICE, attrs={
+            "placeholder": "생월", "class": classValue + " form-select", "style": styleValue
+        })
+    )
+    birth_day = forms.CharField(
+        widget=forms.Select(choices=DAY_CHOICE, attrs={
+            "placeholder": "생일", "class": classValue + " form-select", "style": styleValue
+        })
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            "placeholder": "이메일", "class": classValue, "style": styleValue
+        })
+    )
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={
+            "placeholder": "아이디", "class": classValue, "style": styleValue
+        })
+    )
+    nickname = forms.CharField(
+        widget=forms.TextInput(attrs={
+            "placeholder": "닉네임", "class": classValue, "style": styleValue
+        })
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(SocialAccountSignupForm, self).__init__(*args, **kwargs)
+        if hasattr(self, 'sociallogin'):
+            extra_data = self.sociallogin.account.extra_data
+            provider = self.sociallogin.account.provider
+            if provider == 'google':
+                if 'email' in extra_data:
+                    self.initial['username'] = extra_data['email'].split('@')[0]
+                if 'name' in extra_data:
+                    self.initial['nickname'] = extra_data['name']
+            if provider == 'kakao':
+                if 'kakao_account' in extra_data:
+                    if 'email' in extra_data['kakao_account']:
+                        self.initial['email'] = extra_data['kakao_account']['email']
+                        self.initial['username'] = extra_data['kakao_account']['email'].split('@')[0]
+                    if 'birthday' in extra_data['kakao_account']:
+                        birthday = extra_data['kakao_account']['birthday']
+                        month, day = int(birthday[:2]), int(birthday[2:])
+                        self.initial['birth_month'] = month
+                        self.initial['birth_day'] = day
+                if 'properties' in extra_data and 'nickname' in extra_data['properties']:
+                    self.initial['nickname'] = extra_data['properties']['nickname']
+            if self.sociallogin.account.provider == 'naver':
+                if 'email' in extra_data:
+                    self.initial['username'] = extra_data['email'].split('@')[0]
+                if 'nickname' in extra_data:
+                    self.initial['nickname'] = extra_data['nickname']
+                if 'birthyear' in extra_data:
+                    self.initial['birth_year'] = extra_data['birthyear']
+                if 'birthday' in extra_data:
+                    month, day = extra_data['birthday'].split('-')
+                    month, day = int(month), int(day)
+                    self.initial['birth_month'] = month
+                    self.initial['birth_day'] = day
+
+    def save(self, request):
+        user = super(SocialAccountSignupForm, self).save(request)
+        nickname = self.cleaned_data['nickname']
+        birth_year = self.cleaned_data['birth_year']
+        birth_month = self.cleaned_data['birth_month']
+        birth_day = self.cleaned_data['birth_day']
+        birth_date = birth_year + '-' + birth_month + '-' + birth_day
+        user.birth_date = birth_date
+        user.user_desc = nickname
+        user.save()
+        return user
 
 
 class UserPasswordEditForm(UserCreationForm1):

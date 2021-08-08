@@ -58,6 +58,7 @@ def loginView(request):
                 return redirect('/')
     else:
         form = CustomLoginForm()
+
     return render(request, 'user/login.html', {'form': form})
 
 
@@ -75,10 +76,12 @@ def mypageView(request):
         uni_len = len(university)
         comp_len = len(company)
         total_len = 6
-        return render(request, 'user/mypage.html', {'chosen': chosen,
-                                                    'university': university[:total_len],
-                                                    'company': company[:(total_len - uni_len)]}
-                      )
+        return render(request, 'user/mypage.html', 
+            {
+                'chosen': chosen,
+                'university': university[:total_len],
+                'company': company[:(total_len - uni_len)]
+            })
     else:
         return HttpResponseForbidden()
 
@@ -170,7 +173,6 @@ def exchangeView(request):
                 user.account += point_amount
                 user.save()
                 success = point_amount
-
 
         return render(request, 'user/exchange.html', {'form':form, 'success':success})
     else:

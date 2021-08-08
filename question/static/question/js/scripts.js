@@ -13,7 +13,7 @@ document.getElementById('search-input').addEventListener('keyup',
     if(event.key === 'Enter'){
         searchQuestion()
     }
-    });
+});
 
 function navSearchQuestion() {
     let serachValue = document.getElementById('nav-search-input').value.trim()

@@ -1,0 +1,140 @@
+.question__article{
+    display: none;
+}
+.main-banner{
+    margin-top: 10em;
+}
+
+.question__form{
+    padding-left: 3em;
+}
+
+.question__form .main-division{
+    color: black;
+    border: 0;
+    height: 2px;
+}
+
+.question__form hr{
+    color: #777777;
+}
+
+
+.custom-contentview{
+    border-style: solid;
+    border-width: 1px;
+    border-color: teal;
+    border-radius: 5px 10px;
+    padding: 5% 3%;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+}
+
+.question__input{
+    border: 2px solid #e2e2e2;
+    min-height: 2.5em;
+}
+
+.question__input:focus{
+    outline: none;
+    border: 2px solid teal;
+}
+
+.question__form .input__row{
+    display: flex;
+    padding: 1em 0;
+    align-items: center;
+}
+
+.question__form .input__row .input__label{
+    width: 15%;
+}
+
+.question__form .input__row .input__input{
+    width: 85%;
+}
+
+
+.question_form{
+    width: 100%;
+    margin-left: 3px;
+    padding-left: 10px;
+    padding-top: 3px;
+}
+
+.input__footer__bar {
+    width: 100%;
+    height: 4rem;
+    background: rgb(250, 250, 253);
+    box-shadow: rgb(234 233 241) 0 -1px 0 0;
+    left: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.input__footer__bar__button {
+    display: flex;
+    height: 100%;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 75%;
+    margin: auto;
+}
+
+.input__footer__bar__scrolled {
+    width: 100%;
+    height: 4rem;
+    background: rgb(250, 250, 253);
+    box-shadow: rgb(234 233 241) 0px -1px 0px 0px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+
+.input__footer__bar__scrolled__button {
+    height: 3.5rem;
+    width: 10rem;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 2px;
+    background: rgb(255, 80, 88);
+    position: relative;
+}
+
+#question__input__content{
+    resize: none;
+}
+
+.input__btn{
+    background-color: teal;
+    border: none;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 1.3em 2em;
+    font-size: 18px;
+    color: wheat;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 1024px){
+    .question__form .input__row .input__label{
+    width: 20%;
+    }
+
+    .question__form .input__row .input__input{
+    width: 80%;
+    }
+}
+
+@media screen and (max-width: 780px){
+    .input__footer__bar__button{
+        width: 85%;
+    }
+}

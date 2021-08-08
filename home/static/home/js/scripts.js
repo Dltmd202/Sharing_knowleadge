@@ -5,6 +5,13 @@ var input_box_height;
 window.onload = function () {
     input_box = document.getElementById('input-box');
     header = document.querySelector('header');
+    var questionForm = document.querySelector(".question__form");
+    var questionArticle = document.getElementsByClassName("question__article");
+    if (questionForm) {
+        console.log("questionForm " + questionForm);
+        console.log("questionArticle " + questionArticle[0]);
+        questionArticle[0].classList.remove('active');
+    }
 }
 
 window.addEventListener('scroll', function(){
@@ -90,3 +97,5 @@ categoryBtn.addEventListener("click", ()=>{
     console.log(categoryList);
     categoryList.classList.toggle('active');
 })
+
+

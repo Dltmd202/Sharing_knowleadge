@@ -19,6 +19,9 @@
             {% if user.user_pic %}
                 <img class="border rounded-circle" src="{{ user.user_pic.url }}"
                     alt="유저 사진" width="200" height="200">
+            {% elif user.user_pic_url %}
+                <img class="border rounded-circle" src="{{ user.user_pic_url }}"
+                    alt="유저 사진" width="200" height="200">
             {% else %}
                 <div class="blank-userpic mx-auto"></div>
             {% endif %}

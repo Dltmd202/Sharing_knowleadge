@@ -11,13 +11,14 @@ router.register(r'question', QuestionViewSet)
 urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
     path('answer/', include('answer.urls')),
     path('category/', include('category.urls')),
     path('company/', include('company.urls')),
     path('university/', include('university.urls')),
     path('user/', include('user.urls')),
     path('question/', include('question.urls')),
-    path('viewset/', include(router.urls))
+    path('viewset/', include(router.urls)),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -53,13 +53,18 @@
             </div>
             <hr>
             <div class="row">
+                <div class="col-2">
+                    <label for="질문포인트">태그</label>
+                </div>
+                <div class="col-9">
+                    <input name="tags" id="tags" class="custom-contentview question_form">
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
                 {{ form.ques_desc }}
             </div>
             <hr>
-            <div class="row">
-                <input name="tags" id="tags">
-
-            </div>
       </form>
     </section>
 {% endblock %}

@@ -23,7 +23,6 @@ function navSearchQuestion() {
         alert("검색어가 짧습니다");
     }
 }
-
 document.getElementById('nav-search-input').addEventListener('keyup',
     function (event){
     if(event.key === 'Enter'){

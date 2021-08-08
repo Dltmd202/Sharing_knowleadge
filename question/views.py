@@ -132,10 +132,10 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     template_name = 'question/question_form.html'
 
     def form_valid(self, form):
-        response = super(QuestionCreate, self).form_valid(form)
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.user_id = current_user
+            response = super(QuestionCreate, self).form_valid(form)
             tags = self.request.POST.get('tags')
             # print(tags)
             if tags:

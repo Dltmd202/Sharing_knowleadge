@@ -46,9 +46,12 @@
                 <div class="row item">
                     {% if user.is_authenticated %}
                         <div class="profile">
-                        {% if user.user_pic %}
+                            {% if user.user_pic %}
                             <img class="rounded-circle" src="{{ user.user_pic.url }}"
                                  alt="{{ user.user_desc }}">
+                            {% elif user.user_pic_url %}
+                                <img class="border rounded-circle" src="{{ user.user_pic_url }}"
+                                    alt="{{ user.user_desc }}">
                             {% else %}
                             <img class="rounded-circle"
                                  src="https://dummyimage.com/50x50/dee2e6/6c757d.jpg"

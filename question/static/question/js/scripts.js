@@ -1,32 +1,23 @@
+let quesPoint;
+let inputPoint;
+let innerPoint
 
-function searchQuestion() {
-    let serachValue = document.getElementById('search-input').value.trim()
-    if (serachValue.length > 1) {
-        location.href = "question/search/" + serachValue +"/"
-    } else {
-        alert("검색어가 짧습니다");
-    }
+window.onload = function () {
+    quesPoint = document.querySelector("#ques_point");
+    inputPoint = document.querySelector("#question__input__point");
+    innerPoint = document.querySelector("#ques_point").innerText;
+    console.log(document.querySelector("#question__input__point"));
+    console.log(inputPoint.innerText);
+    document.querySelector("#question__input__point").addEventListener('keyup',
+        function(event){
+            console.log(event);
+            console.log(inputPoint.value);
+            console.log(innerPoint);
+            console.log(inputPoint.value + innerPoint);
+            if (parseInt(inputPoint.value) > parseInt(innerPoint)){
+                alert("질문 포인트가 부족합니다.");
+                inputPoint.value = parseInt(innerPoint);
+            }
+        }
+        )
 }
-
-document.getElementById('search-input').addEventListener('keyup',
-    function (event){
-    if(event.key === 'Enter'){
-        searchQuestion()
-    }
-});
-
-function navSearchQuestion() {
-    let serachValue = document.getElementById('nav-search-input').value.trim()
-    if (serachValue.length > 1) {
-        location.href = "question/search/" + serachValue +"/"
-    } else {
-        alert("검색어가 짧습니다");
-    }
-}
-document.getElementById('nav-search-input').addEventListener('keyup',
-    function (event){
-    if(event.key === 'Enter'){
-        searchQuestion()
-    }
-    });
-

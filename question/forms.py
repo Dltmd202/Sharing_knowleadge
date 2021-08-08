@@ -19,6 +19,8 @@ class QuestionForm(forms.ModelForm):
             ),
             'ques_point': forms.TextInput(
                 attrs={
+                    'type': "number",
+                    'id': 'question__input__point',
                     'class': 'question__input question_form',
                 }
             ),

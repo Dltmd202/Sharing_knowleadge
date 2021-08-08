@@ -58,7 +58,9 @@ class QuestionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(pk=search_pk)
         if search_keyword:
             queryset = queryset.filter(
-                Q(ques_title__contains=search_keyword) | Q(ques_desc__contains=search_keyword) | Q(category_id__slug__contains=search_keyword)
+                Q(ques_title__contains=search_keyword)
+                | Q(ques_desc__contains=search_keyword)
+                | Q(category_id__slug__contains=search_keyword)
             ).distinct()
         return queryset
 
@@ -151,13 +153,14 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
                         tag.slug = slugify(t, allow_unicode=True)
                         tag.save()
                     self.object.tags.add(tag)
-            ques_point_str = self.request.POST.get('ques_point')
             ques_point_str = form.fields['ques_point']
-            new_ques = CustomUser()
             if ques_point_str:
                 user = CustomUser.objects.get(username=current_user)
-                user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
-                user.save()
+                if int(user.left_ques()) > int(self.request.POST.get('ques_point')):
+                    user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
+                    user.save()
+                else:
+                    return redirect('/question')
             return response
         else:
             return redirect('/question')
@@ -189,7 +192,9 @@ class QuestionSearch(QuestionList):
     def get_queryset(self):
         q = self.kwargs['q']
         question_list = Question.objects.filter(
-            Q(ques_title__contains=q) | Q(ques_desc__contains=q) | Q(category_id__slug__contains=q)
+            Q(ques_title__contains=q)
+            | Q(ques_desc__contains=q)
+            | Q(category_id__slug__contains=q)
         ).distinct()
         return question_list
 

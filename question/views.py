@@ -132,10 +132,10 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     template_name = 'question/question_form.html'
 
     def form_valid(self, form):
-        response = super(QuestionCreate, self).form_valid(form)
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.user_id = current_user
+            response = super(QuestionCreate, self).form_valid(form)
             tags = self.request.POST.get('tags')
             # print(tags)
             if tags:
@@ -175,7 +175,7 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
 # 작동 문제 없음
 class QuestionUpdate(LoginRequiredMixin, UpdateView):
     model = Question
-    fields = ['ques_title', 'category_id', 'ques_desc', 'head_img']
+    form_class = QuestionForm
     template_name = 'question/question_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -183,6 +183,50 @@ class QuestionUpdate(LoginRequiredMixin, UpdateView):
             return super(QuestionUpdate, self).dispatch(request, *args, **kwargs)
         else:
             raise PermissionDenied
+
+    def get_context_data(self, **kwargs):
+        context = super(QuestionUpdate, self).get_context_data()
+        if self.object.tags.exists():
+            tags_str = ""
+            for t in self.object.tags.all():
+                tags_str += ("#" + t.name + " ")
+            print(tags_str)
+            context['tags_str'] = tags_str
+        return context
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.user_id = current_user
+            response = super(QuestionUpdate, self).form_valid(form)
+            tags = self.request.POST.get('tags')
+            # print(tags)
+            if tags:
+                tags = tags.strip()
+                tags = re.sub(r'[\s]', " ", tags)
+                tags = tags.replace("#", " ")
+                tags = tags.split()
+                for t in tags:
+                    t = t.strip()
+                    # print(t)
+                    tag, is_tag = Tag.objects.get_or_create(name=t)
+                    # print(tag, is_tag)
+                    # 없으면 생성, 있으면 생성값에
+                    if is_tag:
+                        tag.slug = slugify(t, allow_unicode=True)
+                        tag.save()
+                    self.object.tags.add(tag)
+            ques_point_str = form.fields['ques_point']
+            if ques_point_str:
+                user = CustomUser.objects.get(username=current_user)
+                if int(user.left_ques()) > int(self.request.POST.get('ques_point')):
+                    user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
+                    user.save()
+                else:
+                    return redirect('/question')
+            return response
+        else:
+            return redirect('/question')
 
 
 # 작동 문제 없음

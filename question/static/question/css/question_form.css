@@ -19,6 +19,10 @@
     color: #777777;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
 
 .custom-contentview{
     border-style: solid;
@@ -63,7 +67,7 @@
     padding-top: 3px;
 }
 
-.input__footer__bar {
+.input__footer__bar{
     width: 100%;
     height: 4rem;
     background: rgb(250, 250, 253);

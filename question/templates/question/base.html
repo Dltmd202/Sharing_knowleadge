@@ -63,10 +63,10 @@
                         <div class="px-1 point-box">
                             <ul class="ul-user-status">
                                 <li>
-                                    <p class="user-status">질문 포인트 |    {{ user.ques_point }} Point</p>
+                                    <p class="user-status">질문 포인트 | <span id="ques_point">{{ user.ques_point }}</span></span> Point</p>
                                 </li>
                                 <li>
-                                    <p class="user-status">답변 포인트 |    {{ user.answer_point }} Point</p>
+                                    <p class="user-status">답변 포인트 | <span id="answer_point">{{ user.answer_point }}</span> Point</p>
                                 </li>
                             </ul>
                         </div>
@@ -114,4 +114,5 @@
 </body>
 {% include 'home/footer.html'%}
 <script src="{% static 'home/js/scripts.js' %}"></script>
+<script src="{% static 'question/js/scripts.js' %}"></script>
 </html>

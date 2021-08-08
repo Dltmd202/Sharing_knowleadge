@@ -1,70 +1,81 @@
 {% extends 'question/base.html' %}
-
+{% load static %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'question/css/question_form.css' %}">
+{% endblock %}
 {% block head_title %}Create Question{% endblock %}
 
 {% block main_area %}
-
-    <section class="my-2 px-3 px-lg-3">
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
-            <div class="row">
-                <div class="col-10">
-                    <h1 style="color: black">Q & A</h1>
-                </div>
-                <div class="col-2 px-3 py-3">
-                    <button type="submit" class="btn">
-                        <i class="fas fa-bookmark mx-2"> 제출하기</i></button>
+    <div class="question__form content-box">
+        <form method="post" enctype="multipart/form-data" autocomplete="off">{% csrf_token %}
+            <div class="question__list__title">
+                <div class="qna">
+                    <h1>Q & A</h1>
                 </div>
             </div>
-            <hr class="focus-hr">
-            <div class="row">
-                <div class="col-2">
+            <hr class="main-division">
+            <div class="input__row">
+                <div class="input__label">
                     <label for="제목">제 목</label>
                 </div>
-                <div class="col-9">
+                <div class="input__input">
                     {{ form.ques_title }}
                 </div>
             </div>
             <hr>
-          <div class="row my-3">
-              <div class="col-2">
+          <div class="input__row">
+              <div class="input__label">
                   <label for="카테고리">카테고리</label>
               </div>
-              <div class="col-9">
+              <div class="input__input">
                   {{ form.category_id }}
               </div>
           </div>
             <hr>
-            <div class="row">
-                <div class="col-2">
+            <div class="input__row">
+                <div class="input__label">
                     <label for="질문포인트">질문포인트</label>
                 </div>
-                <div class="col-9">
+                <div class="input__input">
                     {{ form.ques_point }}
                 </div>
             </div>
             <hr>
-            <div class="row">
-                <div class="col-2">
-                    <label for="질문포인트">이미지</label>
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="이미지">이미지</label>
                 </div>
-                <div class="col-9">
+                <div class="input__input">
                     {{ form.head_img }}
                 </div>
             </div>
             <hr>
-            <div class="row">
-                <div class="col-2">
-                    <label for="질문포인트">태그</label>
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="태그">태그</label>
                 </div>
-                <div class="col-9">
-                    <input name="tags" id="tags" class="custom-contentview question_form">
+                <div class="input__input">
+                    <input name="tags" id="tags"
+                           class="question__input question_form" placeholder="#태그">
                 </div>
             </div>
             <hr/>
-            <div class="row">
-                {{ form.ques_desc }}
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="설명">설명</label>
+                </div>
+                <div class="input__input">
+                    {{ form.ques_desc }}
+                </div>
             </div>
-            <hr>
+            <div class="input__footer__bar">
+                <div class="input__footer__bar__button">
+                    <div class="create">
+                        <button type="submit"
+                                class="input__btn create__question">제출하기</button>
+                    </div>
+                </div>
+            </div>
       </form>
-    </section>
+    </div>
 {% endblock %}

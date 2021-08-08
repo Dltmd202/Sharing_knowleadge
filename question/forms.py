@@ -1,6 +1,7 @@
 from django import forms
 from .models import Question
 
+
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
@@ -8,25 +9,23 @@ class QuestionForm(forms.ModelForm):
         widgets = {
             'ques_title': forms.TextInput(
                 attrs={
-                    'class': 'custom-contentview question_form',
+                    'class': 'question__input question_form',
                 }
             ),
             'category_id': forms.Select(
                 attrs={
-                    'class': 'custom-contentview question_form',
+                    'class': 'question__input question_form',
                 }
             ),
             'ques_point': forms.TextInput(
                 attrs={
-                    'class': 'custom-contentview question_form',
+                    'class': 'question__input question_form',
                 }
             ),
             'ques_desc': forms.Textarea(
                 attrs={
-                    'class': 'custom-contentview question_form',
-                    'style': '''
-                                width: 1000px; 
-                            '''
+                    'id': 'question__input__content',
+                    'class': 'question__input question_form',
                 }
             )
         }

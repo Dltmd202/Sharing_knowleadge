@@ -102,7 +102,7 @@
 }
 
 .content-box{
-    padding: 10% 5%;
+    padding: 10% 5% 3% 5%;
 }
 
 
@@ -481,6 +481,37 @@ a:hover{
 
 .rank__item div:nth-child(5){
     width: 10%;
+}
+
+.page{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 29em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-bottom: 1em;
+}
+
+.page div{
+    width: 1.2em;
+    text-align: center;
+}
+
+.page__disabled{
+    color: teal;
+    border-bottom: solid;
+}
+
+.page__active{
+    text-align: center;
+}
+
+.page__active:hover{
+    color: black;
+    border-bottom: solid;
 }
 
 @media screen and (max-width: 1200px){

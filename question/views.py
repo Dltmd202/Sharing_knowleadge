@@ -103,6 +103,10 @@ class QuestionList(ListView):
         context = super(QuestionList, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
+        page_size = 5
+        start_index = int((context['page_obj'].number - 1) / page_size) * page_size
+        end_index = min(start_index + page_size, len(context['paginator'].page_range))
+        context['page_range'] = context['paginator'].page_range[start_index: end_index]
         return context
 
 

@@ -1,11 +1,8 @@
 {% extends 'question/base.html' %}
-{% load static %}
 {% block head_title %}
 {{ question.title_brief }}
 {% endblock %}
-{% block stylesheet %}
-    <link rel="stylesheet" href="{% static 'question/css/question_detail.css' %}">
-{% endblock %}
+
 
 
 {% block main_area %}
@@ -150,6 +147,35 @@
                         </div>
                         <hr>
                         <p>{{ answer.answer_desc | linebreaks }}</p>
+                    {% if user.is_authenticated %}
+                        <form id="comment-form" method="POST" action="/comment/{{ question.pk }}/{{ answer.pk }}/new_comment">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-2 text-center">
+                                        <label for="제목">답글</label>
+                                    </div>
+                                    <div class="col-9 search-box" style="width: 600px">
+                                        {{ comment_form.comment_desc }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="" style="margin-right: 50px;" align="right">
+                                <div id="" class="col-3 px-3 py-3" align="center">
+                                    <button type="submit" class="btn" style="border: white;">
+                                        <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                    {% if answer.comment_set.exists %}
+                    {% for comment in answer.comment_set.iterator %}
+                        <div>
+                        {{ comment.user_id }}
+                        {{ comment }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
                     </div>
                 </div>
             </section>

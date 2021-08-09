@@ -8,9 +8,7 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'comment_desc': forms.Textarea(
                 attrs={
-                    'class': 'comment_desc nav-search-input',
-                    'style': '''width: 400px; height: 40px; border:none; border-right:0px; border-top:0px; boder-left:0px;
-                                boder-bottom:0px; margin-left: 3px;'''
+                    'class': 'question__input question_form',
                 }
             )
         }

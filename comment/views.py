@@ -7,7 +7,8 @@ from django.shortcuts import get_object_or_404, redirect
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status, viewsets, serializers
-from comment.forms import  CommentForm
+from comment.forms import CommentForm
+from question.models import Question
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -53,20 +54,22 @@ class CommentDetail(DetailView):
         return context
 
 
-def new_comment(request, pk):
+def new_comment(request, question_pk, answer_pk):
     if request.user.is_authenticated:
-        answer = get_object_or_404(Answer, pk=pk)
+        question = get_object_or_404(Question, pk=question_pk)
+        answer = get_object_or_404(Answer, pk=answer_pk)
         if request.method == 'POST':
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid():
                 comment = comment_form.save(commit=False)
                 comment.answer_id = answer
-                comment.comment_desc = comment
-                comment.user_id = request.user
+                comment.user_id_id = request.user.id
+                print(comment.user_id_id)
+                print(comment.id)
                 comment.save()
-                return comment
+                return redirect(question.get_absolute_url())
         else:
-            return redirect(Comment.get_absolute_url(Comment))
+            return redirect(question.get_absolute_url())
     else:
         raise PermissionDenied
 

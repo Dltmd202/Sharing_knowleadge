@@ -24,6 +24,7 @@ from .serializer import QuestionSerializer
 from category.models import Category
 from user.models import CustomUser
 from answer.forms import AnswerForm
+from comment.forms import CommentForm
 from .forms import QuestionForm
 from .models import Question, Tag
 
@@ -122,6 +123,7 @@ class QuestionDetail(DetailView):
         context['categories'] = Category.objects.all()
         context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
         context['answer_form'] = AnswerForm
+        context['comment_form'] = CommentForm
         return context
 
 

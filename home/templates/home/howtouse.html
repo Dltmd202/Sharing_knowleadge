@@ -1,0 +1,39 @@
+<button id="open"><i class="far fa-check-circle" > 이용방법 알아보기</i></button>
+    <div class="modal hidden">
+        <div class="modal_overlay"></div>
+            <div class="modal_content">
+                <button style="text-align: center;"> ❌창나가기❌ </button> <br><br>
+                <h2>질문자</h2>
+                <hr>
+                <h3>Q. 어떻게 질문하나요?</h3>
+                <p>A. 먼저 회원가입을 하고 질문자로 등록을 합니다.<br></p>
+                <h3>Q. 질문자이지만 답변도 할 수 있나요?</h3>
+                <p>A. 당연하죠! 회원가입에서 답변자의 자격으로 등록 혹은, 아래의 "답변자" 부분을 참고하세요! </p>
+                <hr>
+
+                <br>
+                <h2>답변자</h2>
+                <hr>
+                <h3>Q. 어떻게 돕나요?</h3>
+                <p>A. 먼저 회원가입을 하고 답변자로 등록을 합니다. 등록시에는 별도의 인증절차가 있습니다.</p>
+                <h3>Q. 도우면 좋은점이 있나요?</h3>
+                <p>A. 물론입니다! 질문에 성실히 답변을 하면 KnowSharing에서 코인을 지급하는데, 일정수준의 코인이 모이면 돈으로 환전 가능합니다 </p>
+                <hr>
+
+            </div>
+        </div>
+<script>
+    const openButton = document.getElementById("open");
+    const modal = document.querySelector(".modal");
+    const overlay = modal.querySelector(".modal_overlay");
+    const closeBtn = modal.querySelector("button");
+    const openModal = () => {
+        modal.classList.remove("hidden");
+    }
+    const closeModal = () => {
+        modal.classList.add("hidden");
+    }
+    overlay.addEventListener("click", closeModal);
+    closeBtn.addEventListener("click", closeModal);
+    openButton.addEventListener("click", openModal);
+</script>

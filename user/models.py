@@ -17,3 +17,32 @@ class CustomUser(AbstractUser):
     # question의 ques_point 문자열 호출용
     def left_ques(self):
         return self.ques_point
+
+class Report_Class(models.Model):
+    name = models.CharField(max_length=50, null=False, blank=False)
+
+    def __str__(self):
+        return self.name
+
+class Report(models.Model):
+    desc = models.CharField(max_length=2000, null=False, blank=False)
+    report_class = models.ForeignKey(Report_Class, null=False, on_delete=models.CASCADE)
+    report_user = models.ForeignKey(CustomUser, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.report_class.name + "(신고자: " + self.report_user.username + ")"
+
+class Report_Answer(Report):
+    report_answer = models.ForeignKey("answer.Answer", null=False, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.report_answer.answer_title + " - " + super(Report_Answer, self).__str__()
+
+class Report_Question(Report):
+    report_question = models.ForeignKey("question.Question", null=False, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.report_question.ques_title + " - " + super(Report_Question, self).__str__()

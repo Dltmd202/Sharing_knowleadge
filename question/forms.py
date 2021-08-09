@@ -1,5 +1,6 @@
 from django import forms
 from .models import Question
+from user.models import Report_Question
 
 
 class QuestionForm(forms.ModelForm):
@@ -29,3 +30,13 @@ class QuestionForm(forms.ModelForm):
                 }
             )
         }
+
+class ReportForm(forms.Form):
+    desc = forms.CharField(required=True, max_length=2000, widget=forms.TextInput(
+        attrs={'hidden': 'true', 'id': 'reportTextArea'}), label=False)
+    report_class = forms.CharField(required=True, max_length=50, widget=forms.TextInput(
+        attrs={'hidden': 'true', 'id': 'reportClassInput'}), label=False)
+    report_type = forms.CharField(required=True, max_length=50, widget=forms.TextInput(
+        attrs={'hidden': 'true', 'id': 'reportTypeInput'}), label=False)
+    report_pk = forms.CharField(required=True, max_length=50, widget=forms.TextInput(
+        attrs={'hidden': 'true', 'id': 'reportPKInput'}), label=False)

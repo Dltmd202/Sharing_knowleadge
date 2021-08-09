@@ -231,7 +231,7 @@ class QuestionUpdate(LoginRequiredMixin, UpdateView):
 
 # 작동 문제 없음
 class QuestionSearch(QuestionList):
-    paginate_by = None
+    paginate_by = 8
 
     def get_queryset(self):
         q = self.kwargs['q']

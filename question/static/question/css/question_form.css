@@ -113,6 +113,10 @@ input[type="number"]::-webkit-inner-spin-button {
     resize: none;
 }
 
+#answer__input{
+    resize: none;
+}
+
 .input__btn{
     background-color: teal;
     border: none;
@@ -125,6 +129,10 @@ input[type="number"]::-webkit-inner-spin-button {
     text-decoration: none;
     letter-spacing: 2px;
     font-weight: 500;
+}
+
+.input__input input{
+    resize: none;
 }
 
 @media screen and (max-width: 1024px){

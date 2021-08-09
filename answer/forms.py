@@ -9,16 +9,13 @@ class AnswerForm(forms.ModelForm):
         widgets = {
             'answer_title': forms.TextInput(
                 attrs={
-                    'class': 'answer-title nav-search-input',
-                    'style': '''width: 550px; border:none; border-right:0px; border-top:0px; boder-left:0px;
-                                boder-bottom:0px; margin-left: 3px;'''
+                    'class': 'question__input question_form',
                 }
             ),
             'answer_desc': forms.Textarea(
                 attrs={
-                    'class': 'answer_desc nav-search-input',
-                    'style': '''width: 550px; height: 300px; border:none; border-right:0px; border-top:0px; boder-left:0px;
-                                boder-bottom:0px; margin-left: 3px;'''
+                    'class': 'question__input question_form',
+                    'id': 'answer__input'
                 }
             )
         }

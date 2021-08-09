@@ -5,3 +5,105 @@
 .contain-all{
     margin-top: 10em;
 }
+
+.question__detail #post-area .title{
+    display: flex;
+    align-items: flex-start;
+}
+
+.question__detail #post-area .title .q{
+    color: teal;
+    margin-right: 2%;
+    font-size: 3em;
+}
+
+.question__detail #post-area .title div h1{
+    font-size: 1.5em;
+    margin-bottom: 0 !important;
+}
+
+.question__detail .content-box{
+    padding: 2% 5%;
+    margin-bottom: 3.75em;
+}
+
+.question__detail hr{
+    margin: 0 !important;
+}
+
+#post-area div .mid__row{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 1% 0;
+}
+
+#post-area div .mid__row .update a{
+    margin: 0 !important;
+}
+
+#post-area div .mid__row div p{
+    margin: 0 !important;
+}
+
+#post-area div .mid__row .update .btn{
+    background-color: teal;
+    border-radius: 3px;
+    border: none;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 5px;
+    font-size: 18px;
+    color: wheat;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+#post-area .content__row{
+    padding: 1% 0;
+    display: flex;
+}
+
+#post-area div .division__row{
+    font-size: 0.8rem;
+}
+
+#post-area div .division__row a{
+    color: #3767e8 !important;
+}
+
+#post-area div .division__row a i{
+    margin-right: 2px;
+}
+
+
+#post-area div .division__row a:hover{
+    text-decoration: solid underline #3767e8;
+}
+
+#post-area div .division__row{
+    display: flex;
+    align-items: baseline;
+}
+
+#post-area div .division__row .tags{
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+}
+
+#post-area div .division__row .tags .tag{
+    margin-right: 10px;
+    margin-bottom: 8px;
+    background: #e2ebf4;
+    border-radius: 2px;
+    color: black;
+    padding: 0.5em 0.5em;
+}
+
+#post-area div .division__row .part__division{
+    border-left: 2px solid rgba(0, 0, 0, 0.4);
+    margin: 0 1.5%;
+}

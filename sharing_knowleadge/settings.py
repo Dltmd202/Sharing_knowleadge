@@ -43,6 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.naver',
     'rest_framework',
     'formtools',
     'corsheaders',
@@ -53,6 +60,8 @@ INSTALLED_APPS = [
     'home',
     'university',
     'company',
+    'markdown_deux',
+    'comment',
 ]
 
 
@@ -72,8 +81,10 @@ ROOT_URLCONF = 'sharing_knowleadge.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'), 
+            os.path.join(BASE_DIR, 'allauth', 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -161,3 +172,31 @@ CORS_ORIGIN_WHITELIST = (
        'http://localhost:3000',
        'http://localhost:8000',
 )
+
+# 소셜 로그인 설정
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+            'openid',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+    }
+}
+SITE_ID = 3
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+SOCIALACCOUNT_ADAPTER = 'user.adapter.GoogleAccountAdapter'
+SOCIALACCOUNT_AUTO_SIGNUP = False
+SOCIALACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
+SOCIALACCOUNT_FORMS = {
+    'signup': 'user.forms.SocialAccountSignupForm'
+}

@@ -106,12 +106,17 @@ line{
     color: black;
     flex: 0 0 33%;
     text-decoration: none;
-    height: 5%;
+    padding-right: 10%;
+}
+
+.category__box .category__item:hover{
+    background-color: #e4e4e4;
 }
 
 .category__box .category__item{
     width: 100%;
-    position: relative;
+    display: flex;
+    justify-content:space-between;
 }
 
 .category__box .category__item span{

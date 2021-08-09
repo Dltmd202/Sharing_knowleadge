@@ -74,17 +74,17 @@
             </div>
         </div>
     </div>
-
     <div class="comment-area" id="comment-area">
       <!-- Comments Form -->
-        <div class="custom-contentview">
+        <div class="content-box">
+            <div class="custom-contentview">
             <h5>답변 작성하기</h5>
             <hr class="main-division">
             <div class="card-body">
                 {% if user.is_authenticated %}
                 <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
                     {% csrf_token %}
-                    <div class="form-group question__form">
+                    <div class="form-group question__form" id="answer__form">
                         <div class="input__row">
                             <div class="input__label">
                                 <label for="제목">타이틀</label>
@@ -102,11 +102,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="" style="margin-right: 50px;" align="right">
-                        <div id="" class="col-3 px-3 py-3" align="center">
-                            <button type="submit" class="btn" style="border: white;">
-                                <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
-                        </div>
+                    <div class="answer__button__row">
+                        <button type="submit" class="btn" style="border: white;">
+                            제출하기</button>
                     </div>
                 </form>
                 {% else %}
@@ -115,11 +113,12 @@
                 {% endif %}
             </div>
         </div>
+        </div>
         {% if object.answer_set.exists %}
             {% for answer in object.answer_set.iterator %}
             <!-- Single Comment -->
-                <section class="media mb-4 custom-contentview answer-size px-5" id="answer-{{ answer.pk }}">
-                    <div class="media-body">
+                <div class="content-box" id="answer-{{ answer.pk }}">
+                    <div class="custom-contentview">
                         {% if user.is_authenticated and comment.author == user %}
                         <div class="float-right">
                             <a role="button" class="btn btn-sm btn-info float-right"
@@ -134,80 +133,97 @@
                             </a>
                         </div>
                         {% endif %}
-                        <div class="row" style="padding-top: 20px;">
-                            <div class="col-1">
-                                <img class="d-flex mr-5 rounded-circle"
-                                     src="http://placehold.it/50x50" alt="{{ answer }}">
-                            </div>
-                            <div class="col-8">
-                                <h5 class="">{{ answer.answer_title }}</h5>
-                                <p class="lead">
-                                by
-                                <a href="#" class="a-user-info">{{ answer.user_id | upper }}</a>
-                            </div>
-                            <div class="col-3" style="padding-top: 10px;">
-                                <div>
-                                    <div align="left">
-                                        <a class="recommand-button"
+                        <div>
+                            <div class="answer__top__row">
+                                <div class="col-9">
+                                    <div class="title top__row">
+                                        <img class="d-flex mr-5 rounded-circle"
+                                             src="http://placehold.it/50x50" alt="{{ answer }}">
+                                        <div>
+                                            <h1>{{ question.ques_title }}</h1>
+                                            <div class="author">
+                                                <p class="lead">
+                                                by
+                                                <a class="a-user-info">{{ question.user_id | upper }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 answer__utils">
+                                    <div class="answer__utils__top">
+                                        <a class=""
                                            href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}"
                                            role="button" style="padding: 5px">
                                             {% if not answer.is_vote %}
-                                            <i class="far fa-heart"></i> 추천</a>
+                                                <i class="far fa-heart"></i> 추천</a>
                                             {% else %}
-                                            <i class="fas fa-heart" style="color: #ef7c91"> 추천됨</i></a>
+                                                <i class="fas fa-heart" style="color: #ef7c91"> 추천됨</i></a>
                                             {% endif %}
                                             {% if not answer.is_chosen %}
-                                        <a class="check-button" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
+                                        <a class="" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
                                            role="button" style="padding: 5px">
                                             <i class="far fa-square"></i> 채택하기</a>
                                             {% else %}
-                                                <a class="check-button" href=""
-                                           role="button" style="padding: 5px">
+                                        <a class="" href=""
+                                            role="button" style="padding: 5px">
                                             <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
                                             {% endif %}
                                     </div>
-                                    <div align="right" style="padding-right: 11px; margin-top: 3px;">
+                                    <div class="answer__utils__down">
                                         <a class="report-button"
                                            href="" onclick="report()"
                                            role="button" style="padding: 6px"><i class="far fa-bell"></i> 신고하기</a>
                                     </div>
                                 </div>
-                                <small class="text-muted">{{ answer.answer_date }}</small>
                             </div>
                             <hr>
-                            <p>{{ answer.answer_desc | linebreaks }}</p>
-                        {% if user.is_authenticated %}
-                            <form id="comment-form" method="POST" action="/comment/{{ question.pk }}/{{ answer.pk }}/new_comment">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-2 text-center">
-                                            <label for="제목">답글</label>
-                                        </div>
-                                        <div class="col-9 search-box" style="width: 600px">
-                                            {{ comment_form.comment_desc }}
-                                        </div>
-                                    </div>
+                            <div class="mid__row">
+                                <div>
+                                    <p>{{ question.post_date }}</p>
                                 </div>
-                                <div class="" style="margin-right: 50px;" align="right">
-                                    <div id="" class="col-3 px-3 py-3" align="center">
-                                        <button type="submit" class="btn" style="border: white;">
-                                            <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        {% endif %}
-                        {% if answer.comment_set.exists %}
-                        {% for comment in answer.comment_set.iterator %}
-                            <div>
-                            {{ comment.user_id }}
-                            {{ comment }}
                             </div>
-                            {% endfor %}
-                        {% endif %}
+                            <hr>
+                            <div class="content__row">
+                                <span>{{ answer.answer_desc }}</span>
+                            </div>
+                            <div class="bottom__row">
+                                <hr class="comment__division">
+                                <div class="comment__button__row">
+                                    <a id="comment_button" onclick=commentButtonActive({{ answer.pk }})>댓글 <i class="far fa-comments"></i></a>
+                                </div>
+                                <div class="comment__area" id="comment_area_{{ answer.pk }}">
+                                    {% if user.is_authenticated %}
+                                    <form id="comment-form" method="POST" action="/comment/{{ question.pk }}/{{ answer.pk }}/new_comment">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div>
+                                                {{ comment_form.comment_desc }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                        <div class="comment__submit">
+                                            <button type="submit" class="btn">
+                                                <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                    {% endif %}
+                                    {% if answer.comment_set.exists %}
+                                    {% for comment in answer.comment_set.iterator %}
+                                    <div class="comment__contain">
+                                        <div class="comment__author">{{ comment.user_id }}</div>
+                                        <div class="comment__content">{{ comment }}</div>
+                                        <div class="comment__date">{{ comment.comment_date }}</div>
+                                        <hr>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </section>
+                </div>
             {% endfor %}
         {% endif %}
     </div>

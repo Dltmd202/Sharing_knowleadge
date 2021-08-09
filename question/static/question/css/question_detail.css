@@ -6,20 +6,24 @@
     margin-top: 10em;
 }
 
-.question__detail #post-area .title{
+.question__detail .title{
     display: flex;
     align-items: flex-start;
 }
 
-.question__detail #post-area .title .q{
+.question__detail .title .q{
     color: teal;
     margin-right: 2%;
     font-size: 3em;
 }
 
-.question__detail #post-area .title div h1{
+.question__detail .title div h1{
     font-size: 1.5em;
     margin-bottom: 0 !important;
+}
+
+.question__detail .title img{
+    margin-right: 1em;
 }
 
 .question__detail .content-box{
@@ -31,11 +35,15 @@
     margin: 0 !important;
 }
 
-#post-area div .mid__row{
+.mid__row{
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     padding: 1% 0;
+}
+
+.mid__row p{
+    margin-bottom: 0 !important;
 }
 
 #post-area div .mid__row .update a{
@@ -59,6 +67,10 @@
     text-decoration: none;
     letter-spacing: 2px;
     font-weight: 500;
+}
+
+#post-area div .mid__row .update .btn:hover{
+    color:#212529;
 }
 
 #post-area .content__row{
@@ -118,4 +130,173 @@
 
 #self-box{
     margin-top: 0 !important;
+}
+
+#answer__form{
+    padding: 0 !important;
+}
+
+.answer__button__row{
+    position: relative;
+    min-height: 2em;
+}
+
+.answer__button__row button{
+    position: absolute;
+    right: 0;
+    margin-top: 0 !important;
+}
+
+.btn{
+    background-color: teal;
+    border-radius: 3px;
+    border: none;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 5px;
+    font-size: 18px;
+    color: wheat;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.btn:hover{
+    color: #212529;
+}
+
+.answer__top__row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer__utils{
+    position: relative;
+}
+
+.answer__utils__top{
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.answer__utils__down{
+    position: absolute;
+    right: 0;
+    bottom: 30%;
+}
+
+.content__row{
+    min-height: 15em;
+    vertical-align: middle;
+}
+
+.content__row span{
+    vertical-align: middle;
+}
+
+.bottom__row{
+    position: relative;
+}
+
+.comment__button__row{
+    display: flex;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+#comment_button:hover{
+    color: #3767e8;
+}
+
+.comment__area{
+    display: none;
+}
+
+.active{
+    display: block;
+}
+
+.comment__area form{
+    margin-bottom: 1em;
+}
+
+.comment__area textarea{
+    resize: none;
+    height: 100px;
+}
+
+.comment__submit{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment__division{
+    margin-bottom: 5px;
+}
+
+.comment__contain{
+    padding: 1% 2%;
+}
+
+.comment__author{
+    margin-bottom: 0.8em;
+}
+
+.comment__content{
+    font-size: 0.8em;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.comment__date{
+    font-size: 0.5em;
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 1.2em;
+}
+
+#comment-area{
+    padding-bottom: 3%;
+}
+
+@media screen and (min-width: 779px){
+    .answer__top__row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.answer__utils{
+    position: relative;
+}
+
+.answer__utils__top{
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+.answer__utils__down{
+    position: absolute;
+    right: 0;
+    bottom: 30%;
+}
+}
+
+@media screen and (max-width: 1024px){
+    .answer__top__row{
+        align-items: flex-end;
+    }
+
+    .answer__utils__top{
+        flex-direction: column;
+    }
+
+    .answer__utils__top{
+    display: flex;
+    position: static;
+}
+
+    .answer__utils__down{
+        position: static;
+    }
 }

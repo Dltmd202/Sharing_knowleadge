@@ -2,11 +2,13 @@ let quesPoint;
 let inputPoint;
 let innerPoint;
 let questionDetail;
+let commentButton;
 
 window.onload = function () {
     quesPoint = document.querySelector("#ques_point");
     inputPoint = document.querySelector("#question__input__point");
     innerPoint = document.querySelector("#ques_point");
+    commentButton = document.getElementById("comment_button");
 
     questionDetail = document.getElementById("post-area");
     var questionArticle = document.getElementsByClassName("question__article");
@@ -34,4 +36,11 @@ window.onload = function () {
             }
         );
     }
+
+
+}
+function commentButtonActive(id){
+    console.log("comment_area_" + id);
+    console.log(document.getElementById("comment_area_" + id));
+    document.getElementById("comment_area_" + id ).classList.toggle('active');
 }

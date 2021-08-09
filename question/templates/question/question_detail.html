@@ -1,17 +1,28 @@
 {% extends 'question/base.html' %}
+{% load markdown_deux_tags %}
+
 {% block head_title %}
 {{ question.title_brief }}
 {% endblock %}
 
 
-
+{% load markdown_deux_tags %}
 {% block main_area %}
+<!--목록 버튼--> 
 
-<section style="padding-right: 50px;">
+<div class="" style="margin-right: 50px;" align="right">
+    <div id="" class="col-3 px-3 py-3" align="center">
+        <button type="submit" class="btn" style="border: white;">
+            <a id="submi-button-i"class="fas fa-bookmark mx-2" href="{% url 'question_main' %}">목록</a></button>
+    </div>
+</div>
+
+<!--질문-->
+<section style="padding-right: 50px; padding-top: 0px;">
     <div id="post-area" class="custom-contentview px-5">
-        {% if question.category_id %}
+        {% if question.tag_id %}
             <span class="custom-cardview badge-secondary float-right"
-                  style="float:right; margin: 30px; padding: 5px;">{{ question.category_id }}</span>
+                  style="float:right; margin: 30px; padding: 5px;">{{ question.tag_id }}</span>
         {% else %}
             <span class="custom-cardview badge-secondary float-right"
                   style="float:right; margin: 30px; padding: 5px;">미분류</span>
@@ -36,57 +47,17 @@
             </div>
             <hr style=" margin-right: 30px;">
         {% endif %}
-        <!-- Post Content -->
-        <p>{{ question.ques_desc | safe }}</p>
-        <br />
+        <p>{{ question.ques_desc |markdown |safe }}</p>
         <br />
     </div>
-<div class="comment-area" id="comment-area">
-  <!-- Comments Form -->
-    <div class="custom-contentview my-4 px-3">
-        <h5 style="margin: 20px;">답변 작성하기</h5>
-        <hr style="margin-right: 30px">
-        <div class="card-body">
-            {% if user.is_authenticated %}
-            <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
-                {% csrf_token %}
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-2 text-center">
-                            <label for="제목">타이틀</label>
-                        </div>
-                        <div class="col-9 search-box" style="width: 600px">
-                            {{ answer_form.answer_title }}
-                        </div>
-                    </div>
-                  <div class="row my-3">
-                    <div class="col-2 text-center">
-                        <label for="내용">내용</label>
-                    </div>
-                    <div class="col-9 search-box" style="height: 330px; width: 600px;">
-                        {{ answer_form.answer_desc }}
-                    </div>
-                    </div>
-                </div>
-                <div class="" style="margin-right: 50px;" align="right">
-                    <div id="" class="col-3 px-3 py-3" align="center">
-                        <button type="submit" class="btn" style="border: white;">
-                            <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
-                    </div>
-                </div>
-            </form>
-            {% else %}
-                <a role="button" class="btn btn-outline-dark btn-block btn-sm"
-                   href="{% url 'login' %}">Log in</a>
-            {% endif %}
-        </div>
-    </div>
+    <br/>
+
+<!--답변-->
     {% if object.answer_set.exists %}
         {% for answer in object.answer_set.iterator %}
-        <!-- Single Comment -->
-            <section class="media mb-4 custom-contentview answer-size px-5" id="answer-{{ answer.pk }}">
+            <section style="padding-right: 50px; padding-top: 0px;" id="answer-{{ answer.pk }}">
                 <div class="media-body">
-                    {% if user.is_authenticated and comment.author == user %}
+                    {% if user.is_authenticated and comment.user_id == author %}
                     <div class="float-right">
                         <a role="button" class="btn btn-sm btn-info float-right"
                             id="comment-{{ answer.pk }}-update-btn"
@@ -141,14 +112,106 @@
                             <small class="text-muted">{{ answer.answer_date }}</small>
                         </div>
                         <hr>
-                        <p>{{ answer.answer_desc | linebreaks }}</p>
+                        <p>{{ answer.answer_desc |markdown | safe | linebreaks }}</p>
                     </div>
                 </div>
-            </section>
+
+<!--코멘트 작성란-->
+            {% if user.is_authenticated %}
+            {% if answer_id == answer_id %}
+            <form id="answer-form" method="POST" action="/comment/{{ question.pk }}/new_comment" >
+                {% csrf_token %}
+                <div class="row my-3">
+                    <div class="col-2 text-center">
+                        <label for="내용">내용</label>
+                    </div>
+                    <div class="col-9 search-box" style="width: 450px; height: 50px;">
+                        {{ comment_form.comment_desc }}
+                    </div>
+                </div>
+                <div class="" style="margin-right: 50px;" align="right">
+                    <div id="" class="col-3 px-3 py-3" align="center">
+                        <button type="submit" class="btn" style="border: white;">
+                            <a id="submi-button-i"class="fas fa-bookmark mx-2" > -> </a></button>
+                    </div>
+                </div>
+            </form>
+            {% endif %}
+            {% else %}
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm"
+                   href="{% url 'login' %}">Log in</a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endfor %}
+{% endif %}
+
+<!--코멘트 나오는 부분-->
+{% if object.comment_set.exists %}
+        {% for comment in object.comment_set.iterator %}
+            <section style="padding-right: 50px; padding-top: 0px;" id="answer-{{ answer.pk }}">
+                <div class="media-body">
+                    <div class="row" style="padding-top: 20px;">
+                        <div class="col-8">
+                            <a href="#" class="a-user-info">{{comment.user_id | upper }}</a>
+                        </div>
+                        <div class="col-3" style="padding-top: 10px;">
+                            <small class="text-muted">{{ comment.comment_date }}</small>
+                        </div>
+                        <hr>
+                        <p>{{ comment.comment_desc |markdown | safe }}</p>
+                    </div>
+                </div>
         {% endfor %}
-    {% endif %}
+{% endif %}
+</section>
+
+<!--답변작성란-->
+<section style="padding-right: 50px; padding-top: 0px;" id="answer-{{ answer.pk }}">
+    <div class="comment-area" id="comment-area">
+        <div class="custom-contentview my-4 px-3">
+            <h5 style="margin: 20px;">답변 작성하기</h5>
+            <hr style="margin-right: 30px">
+        <div class="card-body">
+            {% if user.is_authenticated %}
+            <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
+                {% csrf_token %}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-2 text-center">
+                            <label for="제목">타이틀</label>
+                        </div>
+                        <div class="col-9 search-box" style="width: 600px">
+                            {{ answer_form.answer_title }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-2 text-center">
+                        <label for="내용">내용</label>
+                    </div>
+                    <div class="col-9 search-box" style="height: 330px; width: 600px;">
+                        {{ answer_form.answer_desc }}
+                    </div>
+                </div>
+                <div class="" style="margin-right: 50px;" align="right">
+                    <div id="" class="col-3 px-3 py-3" align="center">
+                        <button type="submit" class="btn" style="border: white;">
+                            <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                    </div>
+                </div>
+            </form>
+            {% else %}
+                <a role="button" class="btn btn-outline-dark btn-block btn-sm"
+                   href="{% url 'login' %}">Log in</a>
+            {% endif %}
+        </div>
+    </div>
+
 </div>
 </section>
+
 
 
 {% endblock %}

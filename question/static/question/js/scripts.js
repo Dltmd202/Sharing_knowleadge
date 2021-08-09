@@ -2,20 +2,23 @@ let quesPoint;
 let inputPoint;
 let innerPoint;
 let questionDetail;
-let questionArticle;
 
 window.onload = function () {
     quesPoint = document.querySelector("#ques_point");
     inputPoint = document.querySelector("#question__input__point");
     innerPoint = document.querySelector("#ques_point");
 
-    questionDetail = document.getElementsByClassName("question__form");
-    questionArticle = document.getElementsByClassName("question__article");
-    console.log(questionDetail[0]);
+    questionDetail = document.getElementById("post-area");
+    var questionArticle = document.getElementsByClassName("question__article");
+    console.log(questionDetail);
     console.log(questionArticle[0]);
 
-    
-    console.log(document.querySelector("#question__input__point"));
+    if(questionDetail){
+        console.log(questionArticle[0]);
+        questionArticle[0].classList.remove('active');
+    }
+
+
 
     if(inputPoint){
         inputPoint.addEventListener('keyup',

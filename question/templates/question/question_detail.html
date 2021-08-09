@@ -1,8 +1,11 @@
 {% extends 'question/base.html' %}
+{% load static %}
 {% block head_title %}
 {{ question.title_brief }}
 {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'question/css/question_detail.css' %}">
+{% endblock %}
 
 
 {% block main_area %}

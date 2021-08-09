@@ -1,13 +1,16 @@
 {% extends 'question/base.html' %}
+{% load static %}
 {% block head_title %}
 {{ question.title_brief }}
 {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'question/css/question_detail.css' %}">
+{% endblock %}
 
 
 {% block main_area %}
 
-<section style="padding-right: 50px;">
+<section>
     <div id="post-area" class="custom-contentview px-5">
         {% if question.category_id %}
             <span class="custom-cardview badge-secondary float-right"

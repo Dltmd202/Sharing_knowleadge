@@ -13,6 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('answer/', include('answer.urls')),
+    path('comment/', include('comment.urls')),
     path('category/', include('category.urls')),
     path('company/', include('company.urls')),
     path('university/', include('university.urls')),

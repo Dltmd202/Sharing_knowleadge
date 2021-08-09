@@ -7,6 +7,21 @@
 
 {% block main_area %}
 
+<!-- 에러 표기용 alert -->
+{% if messages %}
+    {% for msg in messages %}
+        <div class="position-relative">
+            <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5">
+                <div class="alert {% if msg.tags == 'error' %}alert-danger
+                    {% elif msg.tags == 'success' %}alert-success{% endif %} ps-5" role="alert">
+                    {{ msg }}
+                    <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
 <section style="padding-right: 50px;">
     <div id="post-area" class="custom-contentview px-5">
         {% if question.category_id %}
@@ -190,7 +205,7 @@
                     </div>
                 </div>
             {% endfor %}
-            <form action="{% url 'report' %}" method="post" id="reportForm" name="reportForm">
+            <form action="{% url 'report' question.pk %}" method="post" id="reportForm" name="reportForm">
                 {% csrf_token %}
                 {{ report_form }}
             </form>

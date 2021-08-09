@@ -5,6 +5,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.forms import ModelForm, TextInput, EmailInput, NumberInput
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 from django.core.exceptions import PermissionDenied, BadRequest
 from django.shortcuts import render, redirect
 from django.forms import formset_factory
@@ -206,7 +207,7 @@ class QuestionSearch(QuestionList):
 
 
 # 신고 접수 기능
-def reportView(request):
+def reportView(request, page_pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
             form = ReportForm(data=request.POST)
@@ -218,16 +219,19 @@ def reportView(request):
             if request.POST['report_type'] == 'answer':
                 report_pk = Answer.objects.get(pk=report_pk)
                 if Report_Answer.objects.filter(report_user=user, report_answer=report_pk).exists():
-                    raise BadRequest("이미 같은 게시글에 대한 신고를 하셨습니다.") # 임시용
+                    messages.error(request, "이미 같은 게시글에 대한 신고를 하셨습니다.")
+                    return redirect('res', pk=page_pk)
                 report = Report_Answer(desc=desc, report_class=report_class, report_user=user,
                     report_answer=report_pk)
                 report.save()
             elif request.POST['report_type'] == 'question':
                 report_pk = Question.objects.get(pk=report_pk)
                 if Report_Question.objects.filter(report_user=user, report_question=report_pk).exists():
-                    raise BadRequest("이미 같은 게시글에 대한 신고를 하셨습니다.") # 임시용
+                    messages.error(request, "이미 같은 게시글에 대한 신고를 하셨습니다.")
+                    return redirect('res', pk=page_pk)
                 report = Report_Question(desc=desc, report_class=report_class, report_user=user,
                     report_question=report_pk)
                 report.save()
                 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+    messages.success(request, "신고가 접수 되었습니다.")
+    return redirect('res', pk=page_pk)

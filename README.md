@@ -29,6 +29,7 @@
 * `pip install django-filter` 
 * `pip install pip --upgrade`
 * `pip install -r requirements.txt`
+* `pip3 install django-markdown-deux`
 
   
 ## 개발

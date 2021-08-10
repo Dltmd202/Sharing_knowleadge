@@ -1,13 +1,82 @@
 {% extends 'question/base.html' %}
-
-{% block head_title %}Update Question{% endblock %}
+{% load static %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'question/css/question_form.css' %}">
+{% endblock %}
+{% block head_title %} Create Question{% endblock %}
 
 {% block main_area %}
-    <h1>Edit Question</h1>
-    <hr />
-    <form method="post" enctype="multipart/form-data">{% csrf_token %}
-      {{ form  }}
-        <br />
-        <button type="submit" class="btn btn-primary float-right">Submit</button>
-    </form>
+    <div class="question__form content-box">
+        <form method="post" enctype="multipart/form-data" autocomplete="off">{% csrf_token %}
+            <div class="question__list__title">
+                <div class="qna">
+                    <h1>Q & A 수정</h1>
+                </div>
+            </div>
+            <hr class="main-division">
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="제목">제 목</label>
+                </div>
+                <div class="input__input">
+                    {{ form.ques_title }}
+                </div>
+            </div>
+            <hr>
+          <div class="input__row">
+              <div class="input__label">
+                  <label for="카테고리">카테고리</label>
+              </div>
+              <div class="input__input">
+                  {{ form.category_id }}
+              </div>
+          </div>
+            <hr>
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="질문포인트">질문포인트</label>
+                </div>
+                <div class="input__input">
+                    {{ form.ques_point }}
+                </div>
+            </div>
+            <hr>
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="이미지">이미지</label>
+                </div>
+                <div class="input__input">
+                    {{ form.head_img }}
+                </div>
+            </div>
+            <hr>
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="태그">태그</label>
+                </div>
+                <div class="input__input">
+                    <input name="tags" id="tags"
+                           class="question__input question_form"
+                           value="{{ tags_str }}">
+                </div>
+            </div>
+            <hr/>
+            <div class="input__row">
+                <div class="input__label">
+                    <label for="설명">설명</label>
+                </div>
+                <div class="input__input">
+                    {{ form.ques_desc }}
+                </div>
+            </div>
+            <div class="input__footer__bar">
+                <div class="input__footer__bar__button">
+                    <div class="create">
+                        <button type="submit"
+                                class="input__btn create__question">제출하기</button>
+                    </div>
+                </div>
+            </div>
+      </form>
+    </div>
 {% endblock %}

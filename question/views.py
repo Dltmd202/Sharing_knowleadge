@@ -26,7 +26,9 @@ from .serializer import QuestionSerializer
 from category.models import Category
 from user.models import CustomUser, Report_Class, Report_Answer, Report_Question
 from answer.forms import AnswerForm
+
 from answer.models import Answer
+from comment.forms import CommentForm
 from .forms import QuestionForm, ReportForm
 from .models import Question, Tag
 
@@ -61,7 +63,9 @@ class QuestionViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(pk=search_pk)
         if search_keyword:
             queryset = queryset.filter(
-                Q(ques_title__contains=search_keyword) | Q(ques_desc__contains=search_keyword) | Q(category_id__slug__contains=search_keyword)
+                Q(ques_title__contains=search_keyword)
+                | Q(ques_desc__contains=search_keyword)
+                | Q(category_id__slug__contains=search_keyword)
             ).distinct()
         return queryset
 
@@ -123,9 +127,12 @@ class QuestionDetail(DetailView):
         context['categories'] = Category.objects.all()
         context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
         context['answer_form'] = AnswerForm
+
         # 신고 관련 데이터 같이 삽입
         context['report_classes'] = Report_Class.objects.all().values_list('pk', 'name')
         context['report_form'] = ReportForm
+
+        context['comment_form'] = CommentForm
         return context
 
 
@@ -136,10 +143,10 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
     template_name = 'question/question_form.html'
 
     def form_valid(self, form):
-        response = super(QuestionCreate, self).form_valid(form)
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.user_id = current_user
+            response = super(QuestionCreate, self).form_valid(form)
             tags = self.request.POST.get('tags')
             # print(tags)
             if tags:
@@ -157,13 +164,14 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
                         tag.slug = slugify(t, allow_unicode=True)
                         tag.save()
                     self.object.tags.add(tag)
-            ques_point_str = self.request.POST.get('ques_point')
             ques_point_str = form.fields['ques_point']
-            new_ques = CustomUser()
             if ques_point_str:
                 user = CustomUser.objects.get(username=current_user)
-                user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
-                user.save()
+                if int(user.left_ques()) > int(self.request.POST.get('ques_point')):
+                    user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
+                    user.save()
+                else:
+                    return redirect('/question')
             return response
         else:
             return redirect('/question')
@@ -178,7 +186,7 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
 # 작동 문제 없음
 class QuestionUpdate(LoginRequiredMixin, UpdateView):
     model = Question
-    fields = ['ques_title', 'category_id', 'ques_desc', 'head_img']
+    form_class = QuestionForm
     template_name = 'question/question_update_form.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -187,15 +195,61 @@ class QuestionUpdate(LoginRequiredMixin, UpdateView):
         else:
             raise PermissionDenied
 
+    def get_context_data(self, **kwargs):
+        context = super(QuestionUpdate, self).get_context_data()
+        if self.object.tags.exists():
+            tags_str = ""
+            for t in self.object.tags.all():
+                tags_str += ("#" + t.name + " ")
+            print(tags_str)
+            context['tags_str'] = tags_str
+        return context
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.user_id = current_user
+            response = super(QuestionUpdate, self).form_valid(form)
+            tags = self.request.POST.get('tags')
+            # print(tags)
+            if tags:
+                tags = tags.strip()
+                tags = re.sub(r'[\s]', " ", tags)
+                tags = tags.replace("#", " ")
+                tags = tags.split()
+                for t in tags:
+                    t = t.strip()
+                    # print(t)
+                    tag, is_tag = Tag.objects.get_or_create(name=t)
+                    # print(tag, is_tag)
+                    # 없으면 생성, 있으면 생성값에
+                    if is_tag:
+                        tag.slug = slugify(t, allow_unicode=True)
+                        tag.save()
+                    self.object.tags.add(tag)
+            ques_point_str = form.fields['ques_point']
+            if ques_point_str:
+                user = CustomUser.objects.get(username=current_user)
+                if int(user.left_ques()) > int(self.request.POST.get('ques_point')):
+                    user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
+                    user.save()
+                else:
+                    return redirect('/question')
+            return response
+        else:
+            return redirect('/question')
+
 
 # 작동 문제 없음
 class QuestionSearch(QuestionList):
-    paginate_by = None
+    paginate_by = 8
 
     def get_queryset(self):
         q = self.kwargs['q']
         question_list = Question.objects.filter(
-            Q(ques_title__contains=q) | Q(ques_desc__contains=q) | Q(category_id__slug__contains=q)
+            Q(ques_title__contains=q)
+            | Q(ques_desc__contains=q)
+            | Q(category_id__slug__contains=q)
         ).distinct()
         return question_list
 

@@ -7,8 +7,8 @@ Q & A
 
 
 {% block main_area %}
-    {% if search_info %}{% endif %}
     <div class="content-box">
+    {% if search_info %}{% endif %}
         <div class="px-3 px-lg-3">
             <div class="question__list__title">
                 <div class="qna">
@@ -26,24 +26,24 @@ Q & A
             {% if not object_list.count == 0 %}
             <div class="question_list">
                 {% for question in object_list %}
-                    <a href="{% url 'res' pk=question.pk %}" class="item">
-                        <div class="question_title">
-                            <p class="question__type">Q</p>
-                            <div class="question__title__info">
-                                <p>{{ question.ques_title }}</p>
-                                <div class="question__title__info__detail">
-                                    <p>조회수 10</p>
-                                    <p>답변 10</p>
-                                </div>
+                <a href="{% url 'res' pk=question.pk %}" class="item">
+                    <div class="question_title">
+                        <p class="question__type">Q</p>
+                        <div class="question__title__info">
+                            <p>{{ question.ques_title }}</p>
+                            <div class="question__title__info__detail">
+                                <p>조회수 10</p>
+                                <p>답변 10</p>
                             </div>
                         </div>
-                    </a>
+                    </div>
+                </a>
                 {% endfor %}
             </div>
-        </div>
         {% else %}
             <h1 style="color: black; margin-top: 30px; text-align: center">검색 결과가 없습니다</h1>
         {% endif %}
+        </div>
     </div>
     {% if is_paginated %}
         <div class="page">

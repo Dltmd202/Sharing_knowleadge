@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'home',
     'university',
     'company',
+    'markdown_deux',
+    'comment',
 ]
 
 

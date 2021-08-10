@@ -43,13 +43,16 @@
             {% endblock %}
         </div>
         <div class="col-md-4 col-lg-3 side-bar">
-            <div class="custom-contentview">
+            <div class="custom-contentview" id="self-box">
                 <div class="row item">
                     {% if user.is_authenticated %}
                         <div class="profile">
-                        {% if user.user_pic %}
+                            {% if user.user_pic %}
                             <img class="rounded-circle" src="{{ user.user_pic.url }}"
                                  alt="{{ user.user_desc }}">
+                            {% elif user.user_pic_url %}
+                                <img class="border rounded-circle" src="{{ user.user_pic_url }}"
+                                    alt="{{ user.user_desc }}">
                             {% else %}
                             <img class="rounded-circle"
                                  src="https://dummyimage.com/50x50/dee2e6/6c757d.jpg"
@@ -64,10 +67,10 @@
                         <div class="px-1 point-box">
                             <ul class="ul-user-status">
                                 <li>
-                                    <p class="user-status">질문 포인트 |    {{ user.ques_point }} Point</p>
+                                    <p class="user-status">질문 포인트 | <span id="ques_point">{{ user.ques_point }}</span></span> Point</p>
                                 </li>
                                 <li>
-                                    <p class="user-status">답변 포인트 |    {{ user.answer_point }} Point</p>
+                                    <p class="user-status">답변 포인트 | <span id="answer_point">{{ user.answer_point }}</span> Point</p>
                                 </li>
                             </ul>
                         </div>
@@ -115,4 +118,5 @@
 </body>
 {% include 'home/footer.html'%}
 <script src="{% static 'home/js/scripts.js' %}"></script>
+<script src="{% static 'question/js/scripts.js' %}"></script>
 </html>

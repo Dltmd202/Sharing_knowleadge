@@ -3,7 +3,7 @@
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'question/css/question_form.css' %}">
 {% endblock %}
-{% block head_title %}Create Question{% endblock %}
+{% block head_title %} Create Question{% endblock %}
 
 {% block main_area %}
     <div class="question__form content-box">
@@ -23,14 +23,14 @@
                 </div>
             </div>
             <hr>
-          <div class="input__row">
+            <div class="input__row">
               <div class="input__label">
                   <label for="카테고리">카테고리</label>
               </div>
               <div class="input__input">
                   {{ form.category_id }}
               </div>
-          </div>
+            </div>
             <hr>
             <div class="input__row">
                 <div class="input__label">

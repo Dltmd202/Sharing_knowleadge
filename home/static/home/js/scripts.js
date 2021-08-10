@@ -1,10 +1,10 @@
-
 var input_box;
 var input_box_height;
 
 window.onload = function () {
     input_box = document.getElementById('input-box');
     header = document.querySelector('header');
+
     var questionForm = document.querySelector(".question__form");
     var questionArticle = document.getElementsByClassName("question__article");
     if (questionForm) {

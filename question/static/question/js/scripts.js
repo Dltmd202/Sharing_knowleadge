@@ -1,35 +1,41 @@
+let quesPoint;
+let inputPoint;
+let innerPoint;
+let questionDetail;
+let commentButton;
 
-function searchQuestion() {
-    let serachValue = document.getElementById('search-input').value.trim()
-    if (serachValue.length > 1) {
-        location.href = "question/search/" + serachValue +"/"
-    } else {
-        alert("검색어가 짧습니다");
-    }
-}
+window.onload = function () {
+    quesPoint = document.querySelector("#ques_point");
+    inputPoint = document.querySelector("#question__input__point");
+    innerPoint = document.querySelector("#ques_point");
+    commentButton = document.getElementById("comment_button");
 
-document.getElementById('search-input').addEventListener('keyup',
-    function (event){
-    if(event.key === 'Enter'){
-        searchQuestion()
-    }
-});
+    questionDetail = document.getElementById("post-area");
+    var questionArticle = document.getElementsByClassName("question__article");
+    console.log(questionDetail);
+    console.log(questionArticle[0]);
 
-function navSearchQuestion() {
-    let serachValue = document.getElementById('nav-search-input').value.trim()
-    if (serachValue.length > 1) {
-        location.href = "question/search/" + serachValue +"/"
-    } else {
-        alert("검색어가 짧습니다");
+    if(questionDetail){
+        console.log(questionArticle[0]);
+        questionArticle[0].classList.remove('active');
     }
-}
-document.getElementById('nav-search-input').addEventListener('keyup',
-    function (event){
-    if(event.key === 'Enter'){
-        searchQuestion()
-    }
-    });
 
+
+
+    if(inputPoint){
+        inputPoint.addEventListener('keyup',
+            function(event){
+                console.log(event);
+                console.log(inputPoint.value);
+                console.log(innerPoint.innerText);
+                console.log(inputPoint.value + innerPoint);
+                if (parseInt(inputPoint.value) > parseInt(innerPoint.innerText)){
+                    alert("질문 포인트가 부족합니다.");
+                    inputPoint.value = parseInt(innerPoint.innerText);
+                }
+            }
+        );
+    }
 
 // 신고 모달 내용 변경 기능
 function reportClassClicked(pk, back=false) {
@@ -53,4 +59,11 @@ function convertReportText(pk) {
 function checkReportType(type, pk) {
     document.getElementById("reportTypeInput").value = type;
     document.getElementById("reportPKInput").value = pk
+
+}
+  
+function commentButtonActive(id){
+    console.log("comment_area_" + id);
+    console.log(document.getElementById("comment_area_" + id));
+    document.getElementById("comment_area_" + id ).classList.toggle('active');
 }

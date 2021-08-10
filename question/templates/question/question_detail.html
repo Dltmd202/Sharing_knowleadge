@@ -1,8 +1,12 @@
 {% extends 'question/base.html' %}
+{% load static %}
 {% block head_title %}
 {{ question.title_brief }}
 {% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'question/css/question_form.css' %}">
+    <link rel="stylesheet" href="{% static 'question/css/question_detail.css' %}">
+{% endblock %}
 
 
 {% block main_area %}
@@ -22,153 +26,230 @@
     {% endfor %}
 {% endif %}
 
-<section style="padding-right: 50px;">
-    <div id="post-area" class="custom-contentview px-5">
-        {% if question.category_id %}
-            <span class="custom-cardview badge-secondary float-right"
-                  style="float:right; margin: 30px; padding: 5px;">{{ question.category_id }}</span>
-        {% else %}
-            <span class="custom-cardview badge-secondary float-right"
-                  style="float:right; margin: 30px; padding: 5px;">미분류</span>
-        {% endif %}
-        <h1 class="mt-2" style="color: black; margin-top: 30px;">{{ question.ques_title }}</h1>
-        <p class="lead">
-        by
-            <a href="#" class="a-user-info">{{ question.user_id | upper }}</a>
-            <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
-                role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
-                <i class="far fa-bell"></i> 신고하기
-            </a>
-        </p>
-        <hr style="margin-right: 30px">
-        <div class="row">
-            <div class="col-9">
-                <p>Posted on {{ question.post_date }}</p>
+<div class="question__detail">
+    <div id="post-area" class="content-box">
+        <div class="custom-contentview">
+            <div class="title top__row">
+                <h1 class="q">Q</h1>
+                <div>
+                    <h1>{{ question.ques_title }}</h1>
+                    <div class="author">
+                        <p class="lead">
+                        by
+                        <a class="a-user-info">{{ question.user_id | upper }}</a>
+                        </p>
+                    </div>
+                </div>
             </div>
-            {% if user.is_authenticated and user == question.user_id %}
-            {% endif %}
-        </div>
-        <hr style=" margin-right: 30px;">
-        {% if question.head_img %}
-            <div align="center" class="question_img">
+            <hr>
+            <div class="mid__row">
+                <div>
+                    <p>{{ question.post_date }}</p>
+                </div>
+                {% if user.is_authenticated and user == question.user_id %}
+                <div class="update">
+                    <a class="btn" href="{% url 'question_update' pk=question.pk %}">수정하기</a>
+                </div>
+                {% endif %}
+                <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
+                    role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
+                    <i class="far fa-bell"></i> 신고하기
+                </a>
+            </div>
+            <hr>
+            {% if question.head_img %}
+            <div class="question_img img__row">
                 <img class="img-fluid rounded" src="{{ question.head_img.url }}" alt="">
             </div>
-            <hr style=" margin-right: 30px;">
-        {% endif %}
-        <!-- Post Content -->
-        <p>{{ question.ques_desc | safe }}</p>
-        <br />
-        <br />
-    </div>
-<div class="comment-area" id="comment-area">
-  <!-- Comments Form -->
-    <div class="custom-contentview my-4 px-3">
-        <h5 style="margin: 20px;">답변 작성하기</h5>
-        <hr style="margin-right: 30px">
-        <div class="card-body">
-            {% if user.is_authenticated %}
-            <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
-                {% csrf_token %}
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-2 text-center">
-                            <label for="제목">타이틀</label>
-                        </div>
-                        <div class="col-9 search-box" style="width: 600px">
-                            {{ answer_form.answer_title }}
-                        </div>
-                    </div>
-                  <div class="row my-3">
-                    <div class="col-2 text-center">
-                        <label for="내용">내용</label>
-                    </div>
-                    <div class="col-9 search-box" style="height: 330px; width: 600px;">
-                        {{ answer_form.answer_desc }}
-                    </div>
-                    </div>
-                </div>
-                <div class="" style="margin-right: 50px;" align="right">
-                    <div id="" class="col-3 px-3 py-3" align="center">
-                        <button type="submit" class="btn" style="border: white;">
-                            <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
-                    </div>
-                </div>
-            </form>
-            {% else %}
-                <a role="button" class="btn btn-outline-dark btn-block btn-sm"
-                   href="{% url 'login' %}">Log in</a>
+            <hr>
             {% endif %}
+            <!-- Post Content -->
+            <div class="content__row">
+                <p>{{ question.ques_desc | safe }}</p>
+            </div>
+            <div class="division__row">
+                {% if question.category_id %}
+                    <div class="category__link">
+                        <a href="{{ question.category_id.get_absolute_path }}">
+                            <i class="fas fa-bars"></i>{{ question.category_id }}
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="category__link">
+                        <a href="/category/no_category">
+                            <i class="fas fa-bars"></i> 미분류
+                        </a>
+                    </div>
+                {% endif %}
+                <div class="part__division"></div>
+                <div class="tags">
+                {% if question.tags.exists %}
+                    {% for tag in question.tags.iterator %}
+                        <div class="tag">
+                            #{{ tag }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+            </div>
         </div>
     </div>
-    {% if object.answer_set.exists %}
-        {% for answer in object.answer_set.iterator %}
-        <!-- Single Comment -->
-            <section class="media mb-4 custom-contentview answer-size px-5" id="answer-{{ answer.pk }}">
-                <div class="media-body">
-                    {% if user.is_authenticated and comment.author == user %}
-                    <div class="float-right">
-                        <a role="button" class="btn btn-sm btn-info float-right"
-                            id="comment-{{ answer.pk }}-update-btn"
-                            href="/blog/update_comment/{{ answer.pk }}/">
-                            edit
-                        </a>
-                        <a role="button" href="#" id="comment-{{ answer.pk }}-delete-modal-btn"
-                            class="btn btn-sm btn-danger" data-toggle="modal"
-                           data-target="#deleteCommentModal-{{ answer.pk }}">
-                        delete
-                        </a>
+    <div class="comment-area" id="comment-area">
+      <!-- Comments Form -->
+        <div class="content-box">
+            <div class="custom-contentview">
+            <h5>답변 작성하기</h5>
+            <hr class="main-division">
+            <div class="card-body">
+                {% if user.is_authenticated %}
+                <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
+                    {% csrf_token %}
+                    <div class="form-group question__form" id="answer__form">
+                        <div class="input__row">
+                            <div class="input__label">
+                                <label for="제목">타이틀</label>
+                            </div>
+                            <div class="input__input">
+                                {{ answer_form.answer_title }}
+                            </div>
+                        </div>
+                        <div class="input__row">
+                            <div class="input__label">
+                                <label for="내용">내용</label>
+                            </div>
+                            <div class="input__input">
+                                {{ answer_form.answer_desc }}
+                            </div>
+                        </div>
                     </div>
-                    {% endif %}
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-1">
-                            <img class="d-flex mr-5 rounded-circle"
-                                 src="http://placehold.it/50x50" alt="{{ answer }}">
+                    <div class="answer__button__row">
+                        <button type="submit" class="btn" style="border: white;">
+                            제출하기</button>
+                    </div>
+                </form>
+                {% else %}
+                    <a role="button" class="btn btn-outline-dark btn-block btn-sm"
+                       href="{% url 'login' %}">Log in</a>
+                {% endif %}
+            </div>
+        </div>
+        </div>
+        {% if object.answer_set.exists %}
+            {% for answer in object.answer_set.iterator %}
+            <!-- Single Comment -->
+                <div class="content-box" id="answer-{{ answer.pk }}">
+                    <div class="custom-contentview">
+                        {% if user.is_authenticated and comment.author == user %}
+                        <div class="float-right">
+                            <a role="button" class="btn btn-sm btn-info float-right"
+                                id="comment-{{ answer.pk }}-update-btn"
+                                href="/blog/update_comment/{{ answer.pk }}/">
+                                edit
+                            </a>
+                            <a role="button" href="#" id="comment-{{ answer.pk }}-delete-modal-btn"
+                                class="btn btn-sm btn-danger" data-toggle="modal"
+                               data-target="#deleteCommentModal-{{ answer.pk }}">
+                            delete
+                            </a>
                         </div>
-                        <div class="col-8">
-                            <h5 class="">{{ answer.answer_title }}</h5>
-                            <p class="lead">
-                            by
-                            <a href="#" class="a-user-info">{{ answer.user_id | upper }}</a>
-                        </div>
-                        <div class="col-3" style="padding-top: 10px;">
-                            <div>
-                                <div align="left">
-                                    <a class="recommand-button"
-                                       href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}"
-                                       role="button" style="padding: 5px">
-                                        {% if not answer.is_vote %}
-                                        <i class="far fa-heart"></i> 추천</a>
-                                        {% else %}
-                                        <i class="fas fa-heart" style="color: #ef7c91"> 추천됨</i></a>
-                                        {% endif %}
-                                        {% if not answer.is_chosen %}
-                                    <a class="check-button" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
-                                       role="button" style="padding: 5px">
-                                        <i class="far fa-square"></i> 채택하기</a>
-                                        {% else %}
-                                            <a class="check-button" href=""
-                                       role="button" style="padding: 5px">
-                                        <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
-                                        {% endif %}
+                        {% endif %}
+                        <div>
+                            <div class="answer__top__row">
+                                <div class="col-9">
+                                    <div class="title top__row">
+                                        <img class="d-flex mr-5 rounded-circle"
+                                             src="http://placehold.it/50x50" alt="{{ answer }}">
+                                        <div>
+                                            <h1>{{ question.ques_title }}</h1>
+                                            <div class="author">
+                                                <p class="lead">
+                                                by
+                                                <a class="a-user-info">{{ question.user_id | upper }}</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div align="right" style="padding-right: 11px; margin-top: 3px;">
-                                    <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
-                                        role="button" style="padding: 6px" onclick="checkReportType('answer', '{{ answer.pk }}')">
-                                        <i class="far fa-bell"></i> 신고하기
+
+                                <div class="col-3 answer__utils">
+                                    <div class="answer__utils__top">
+                                        <a class=""
+                                           href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}"
+                                           role="button" style="padding: 5px">
+                                            {% if not answer.is_vote %}
+                                                <i class="far fa-heart"></i> 추천</a>
+                                            {% else %}
+                                                <i class="fas fa-heart" style="color: #ef7c91"> 추천됨</i></a>
+                                            {% endif %}
+                                            {% if not answer.is_chosen %}
+                                        <a class="" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
+                                           role="button" style="padding: 5px">
+                                            <i class="far fa-square"></i> 채택하기</a>
+                                            {% else %}
+                                        <a class="" href=""
+                                            role="button" style="padding: 5px">
+                                            <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
+                                            {% endif %}
+                                    </div>
+                                    <div class="answer__utils__down">
+                                        <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
+                                            role="button" style="padding: 6px" onclick="checkReportType('answer', '{{ answer.pk }}')">
+                                            <i class="far fa-bell"></i> 신고하기
                                     </a>
+                                    </div>
                                 </div>
                             </div>
-                            <small class="text-muted">{{ answer.answer_date }}</small>
+                            <hr>
+                            <div class="mid__row">
+                                <div>
+                                    <p>{{ question.post_date }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="content__row">
+                                <span>{{ answer.answer_desc }}</span>
+                            </div>
+                            <div class="bottom__row">
+                                <hr class="comment__division">
+                                <div class="comment__button__row">
+                                    <a id="comment_button" onclick=commentButtonActive({{ answer.pk }})>댓글 <i class="far fa-comments"></i></a>
+                                </div>
+                                <div class="comment__area" id="comment_area_{{ answer.pk }}">
+                                    {% if user.is_authenticated %}
+                                    <form id="comment-form" method="POST" action="/comment/{{ question.pk }}/{{ answer.pk }}/new_comment">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div>
+                                                {{ comment_form.comment_desc }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                        <div class="comment__submit">
+                                            <button type="submit" class="btn">
+                                                <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                                        </div>
+                                        </div>
+                                    </form>
+                                    {% endif %}
+                                    {% if answer.comment_set.exists %}
+                                    {% for comment in answer.comment_set.iterator %}
+                                    <div class="comment__contain">
+                                        <div class="comment__author">{{ comment.user_id }}</div>
+                                        <div class="comment__content">{{ comment }}</div>
+                                        <div class="comment__date">{{ comment.comment_date }}</div>
+                                        <hr>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
-                        <hr>
-                        <p>{{ answer.answer_desc | linebreaks }}</p>
                     </div>
                 </div>
-            </section>
-        {% endfor %}
-    {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
 </div>
-</section>
 
 <!-- Report Modal -->
 {% if user.is_authenticated %}

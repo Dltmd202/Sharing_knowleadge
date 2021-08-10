@@ -212,7 +212,13 @@
                             <div class="bottom__row">
                                 <hr class="comment__division">
                                 <div class="comment__button__row">
-                                    <a id="comment_button" onclick="commentButtonActive('{{ answer.pk }}')">댓글 <i class="far fa-comments"></i></a>
+                                    <a id="comment_button" onclick="commentButtonActive('{{ answer.pk }}')">
+                                        {% if answer.comment_set.exists %}
+                                        {{ answer.comment_set.count }}
+                                        {% else %}
+                                        0
+                                        {% endif %}
+                                        <i class="far fa-comments"></i></a>
                                 </div>
                                 <div class="comment__area" id="comment_area_{{ answer.pk }}">
                                     {% if user.is_authenticated %}

@@ -143,6 +143,23 @@ line{
     justify-content: space-between;
 }
 
+.search__detail .tags__box{
+    display: flex;
+    flex-wrap: wrap;
+    width: 75%;
+}
+
+.search__detail .tags__box .tag{
+    margin-right: 18px;
+    margin-bottom: 20px;
+    background: #e2ebf4;
+    border-radius: 2px;
+    color: black;
+    padding: 0.5em 0.5em;
+    text-decoration: none;
+}
+
+
 
 
 @media screen and (max-width: 1200px){

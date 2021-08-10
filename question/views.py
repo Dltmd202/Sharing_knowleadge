@@ -298,3 +298,18 @@ def reportView(request, page_pk):
                 
     messages.success(request, "신고가 접수 되었습니다.")
     return redirect('res', pk=page_pk)
+
+
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    question_list = Question.objects.filter(tags=tag)
+
+    return render(
+        request,
+        'question/question_list.html',
+        {
+            'object_list': question_list,
+            'categories': Category.objects.all(),
+            'no_category_question_count': Question.objects.filter(category_id=None).count(),
+        }
+    )

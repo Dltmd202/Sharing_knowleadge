@@ -85,9 +85,9 @@
                 <div class="tags">
                 {% if question.tags.exists %}
                     {% for tag in question.tags.iterator %}
-                        <div class="tag">
+                        <a href="{{ tag.get_absolute_path }}" class="tag">
                             #{{ tag }}
-                        </div>
+                        </a>
                     {% endfor %}
                 {% endif %}
                 </div>

@@ -6,16 +6,20 @@ from question.models import Tag, Question
 
 
 def landing(request):
+    context = dict()
     categories = Category.objects.all()
+    if categories:
+        context['categories'] = categories
     tags = Tag.objects.all().order_by('-hit')[:10]
-    pop_question = Question.objects.order_by("-hit_count_generic__hits")[0]
+    if tags:
+        context['tags'] = tags
+    if Question.objects.all():
+        pop_question = Question.objects.order_by("-hit_count_generic__hits")[0]
+        if pop_question:
+            context['pop_question'] = pop_question
+    context['cnt'] = 0
     return render(
         request,
         'home/index.html',
-        {
-            'categories': categories,
-            'tags': tags,
-            'pop_question': pop_question,
-            'cnt': 0
-        }
+        context
     )

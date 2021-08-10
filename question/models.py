@@ -11,6 +11,9 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_path(self):
+        return f'/question/{self.slug}'
+
 
 # User 모델 완성 후 수정할 것
 class Question(models.Model):

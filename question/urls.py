@@ -21,4 +21,5 @@ urlpatterns = [
     path('question/search/<str:q>/<str:pk>', views.QuestionDetail.as_view()),
     path('report/<str:page_pk>/', views.reportView, name="report"),
     path('api-auth/', include('rest_framework.urls')),
+    path('<str:slug>', views.tag_page),
 ]

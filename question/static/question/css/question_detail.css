@@ -81,7 +81,7 @@
     font-size: 0.8rem;
 }
 
-#post-area div .division__row a{
+#post-area div .division__row .category__link a{
     color: #3767e8 !important;
 }
 
@@ -90,7 +90,7 @@
 }
 
 
-#post-area div .division__row a:hover{
+#post-area div .division__row .category__link a:hover{
     text-decoration: solid underline #3767e8;
 }
 
@@ -256,6 +256,11 @@
 
 #comment-area{
     padding-bottom: 3%;
+}
+
+.tags a{
+    color: black;
+    text-decoration: none;
 }
 
 @media screen and (min-width: 779px){

@@ -10,6 +10,22 @@
 
 
 {% block main_area %}
+
+<!-- 에러 표기용 alert -->
+{% if messages %}
+    {% for msg in messages %}
+        <div class="position-relative">
+            <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5">
+                <div class="alert {% if msg.tags == 'error' %}alert-danger
+                    {% elif msg.tags == 'success' %}alert-success{% endif %} ps-5" role="alert">
+                    {{ msg }}
+                    <button type="button" class="btn-close ms-5" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
 <div class="question__detail">
     <div id="post-area" class="content-box">
         <div class="custom-contentview">
@@ -35,6 +51,10 @@
                     <a class="btn" href="{% url 'question_update' pk=question.pk %}">수정하기</a>
                 </div>
                 {% endif %}
+                <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
+                    role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
+                    <i class="far fa-bell"></i> 신고하기
+                </a>
             </div>
             <hr>
             {% if question.head_img %}
@@ -150,6 +170,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="col-3 answer__utils">
                                     <div class="answer__utils__top">
                                         <a class=""
@@ -171,9 +192,10 @@
                                             {% endif %}
                                     </div>
                                     <div class="answer__utils__down">
-                                        <a class="report-button"
-                                           href="" onclick="report()"
-                                           role="button" style="padding: 6px"><i class="far fa-bell"></i> 신고하기</a>
+                                        <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
+                                            role="button" style="padding: 6px" onclick="checkReportType('answer', '{{ answer.pk }}')">
+                                            <i class="far fa-bell"></i> 신고하기
+                                    </a>
                                     </div>
                                 </div>
                             </div>
@@ -229,5 +251,49 @@
     </div>
 </div>
 
+<!-- Report Modal -->
+{% if user.is_authenticated %}
+<div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="reportModalLabel">신고 사유 선택</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            {% for pk, class in report_classes %}
+                <a href="#" onclick="((e) => {e.preventDefault(); reportClassClicked('{{ pk }}');})(event)">
+                    <div class="my-4 px-3 reportClassLists" style="font-weight: 400;">
+                        <i class="far fa-circle"></i> {{ class }}
+                    </div>
+                </a>
+                <div class="reportClassLink" hidden>
+                    <a href="#" onclick="((e) => {e.preventDefault(); reportClassClicked('{{ pk }}', true);})(event)">
+                        <div class="bg-light p-3" style="font-weight: 400;">
+                            <i class="far fa-check-circle"></i> {{ class }}
+                        </div>
+                    </a>
+                    <div class="bg-light p-3 my-2">
+                        <label class="text-secondary" style="font-weight: 400;">신고 이유를 상세히 적어주세요.</label>
+                        <div class="border-top border-1 mt-1 mb-2"></div>
+                        <div id="reportText-{{ pk }}" class="p-3" contenteditable="true"
+                            style="font-weight: 400; min-height: 200px;"></div>
+                    </div>
+                    <div class="my-1">
+                        <button type="submit" class="btn mx-1 px-3" 
+                            onclick="return convertReportText('{{ pk }}')">제출</button>
+                        <button class="btn mx-1 px-3" data-dismiss="modal">취소</button>
+                    </div>
+                </div>
+            {% endfor %}
+            <form action="{% url 'report' question.pk %}" method="post" id="reportForm" name="reportForm">
+                {% csrf_token %}
+                {{ report_form }}
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
 
 {% endblock %}

@@ -1,10 +1,12 @@
 from abc import ABC
 import re
+from django.http.response import HttpResponse, HttpResponseRedirect
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.forms import ModelForm, TextInput, EmailInput, NumberInput
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
+from django.contrib import messages
+from django.core.exceptions import PermissionDenied, BadRequest
 from django.shortcuts import render, redirect
 from django.forms import formset_factory
 from django.utils.text import slugify
@@ -22,10 +24,12 @@ from rest_framework import status
 
 from .serializer import QuestionSerializer
 from category.models import Category
-from user.models import CustomUser
+from user.models import CustomUser, Report_Class, Report_Answer, Report_Question
 from answer.forms import AnswerForm
+
+from answer.models import Answer
 from comment.forms import CommentForm
-from .forms import QuestionForm
+from .forms import QuestionForm, ReportForm
 from .models import Question, Tag
 
 
@@ -123,6 +127,11 @@ class QuestionDetail(DetailView):
         context['categories'] = Category.objects.all()
         context['no_category_question_count'] = Question.objects.filter(category_id=None).count()
         context['answer_form'] = AnswerForm
+
+        # 신고 관련 데이터 같이 삽입
+        context['report_classes'] = Report_Class.objects.all().values_list('pk', 'name')
+        context['report_form'] = ReportForm
+
         context['comment_form'] = CommentForm
         return context
 
@@ -249,3 +258,34 @@ class QuestionSearch(QuestionList):
         q = self.kwargs['q']
         context['search_info'] = f'Search : {q} ({self.get_queryset().count()}'
         return context
+
+
+# 신고 접수 기능
+def reportView(request, page_pk):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = ReportForm(data=request.POST)
+            if form.is_valid():
+                desc = form.cleaned_data.get('desc')
+                user = request.user
+                report_class = Report_Class.objects.get(pk=request.POST['report_class'])
+                report_pk = request.POST['report_pk']
+            if request.POST['report_type'] == 'answer':
+                report_pk = Answer.objects.get(pk=report_pk)
+                if Report_Answer.objects.filter(report_user=user, report_answer=report_pk).exists():
+                    messages.error(request, "이미 같은 게시글에 대한 신고를 하셨습니다.")
+                    return redirect('res', pk=page_pk)
+                report = Report_Answer(desc=desc, report_class=report_class, report_user=user,
+                    report_answer=report_pk)
+                report.save()
+            elif request.POST['report_type'] == 'question':
+                report_pk = Question.objects.get(pk=report_pk)
+                if Report_Question.objects.filter(report_user=user, report_question=report_pk).exists():
+                    messages.error(request, "이미 같은 게시글에 대한 신고를 하셨습니다.")
+                    return redirect('res', pk=page_pk)
+                report = Report_Question(desc=desc, report_class=report_class, report_user=user,
+                    report_question=report_pk)
+                report.save()
+                
+    messages.success(request, "신고가 접수 되었습니다.")
+    return redirect('res', pk=page_pk)

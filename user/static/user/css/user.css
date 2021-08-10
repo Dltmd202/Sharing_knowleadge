@@ -85,15 +85,6 @@
     border-color: midnightblue !important;
 }
 
-/* 배경 */
-.contain-all{
-    background: linear-gradient(#fafbfc 90% ,#347F80);
-}
-
-header{
-    background: linear-gradient(#B5B0E2 45% ,#fafbfc);
-}
-
 section
 {
     padding: 100px;
@@ -105,8 +96,6 @@ section
     padding: 10px 15px 10px 15px;
     border-radius: 3px;
 }
-
-
 
 .eye-button{
     border: none;

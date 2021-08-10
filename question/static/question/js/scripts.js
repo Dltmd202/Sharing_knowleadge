@@ -36,9 +36,11 @@ window.onload = function () {
             }
         );
     }
+}
 
 // 신고 모달 내용 변경 기능
 function reportClassClicked(pk, back=false) {
+    console.log(pk)
     const reportClassList = document.getElementsByClassName("reportClassLists");
     for (var i = 0; i < reportClassList.length; ++i) {
         reportClassList[i].hidden = !back;
@@ -50,7 +52,7 @@ function reportClassClicked(pk, back=false) {
 function convertReportText(pk) {
     const reportText = document.getElementById("reportText-" + pk).innerHTML;
     document.getElementById("reportTextArea").value = reportText;
-    document.getElementById("reportClassInput").value = pk
+    document.getElementById("reportClassInput").value = pk;
     const form = document.getElementById("reportForm");
     form.submit();
 }
@@ -58,8 +60,7 @@ function convertReportText(pk) {
 // 질문 or 답변 신고인지 표시해주는 기능
 function checkReportType(type, pk) {
     document.getElementById("reportTypeInput").value = type;
-    document.getElementById("reportPKInput").value = pk
-
+    document.getElementById("reportPKInput").value = pk;
 }
   
 function commentButtonActive(id){

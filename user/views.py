@@ -10,6 +10,11 @@ from .forms import UserCreationForm1, UserCreationForm2, \
 from itertools import chain
 import datetime
 
+# Company
+from company.forms import CompanyForm
+# University
+from university.forms import UniversityForm
+
 
 # 한 페이지에서 여러 폼을 다루기 위해서 formtools를 설치해서 Session Wizard View를 특별히 사용합니다
 # pip install django-formtools
@@ -138,19 +143,37 @@ def specView(request):
         if request.method == 'POST':
             data = request.POST
             type = data['form-type']
-            pk = data['primary-key']
             if type == "university":
+                pk = data['primary-key']
                 delete_uni = get_object_or_404(user.university_set, pk=pk)
                 delete_uni.delete()
             elif type == "company":
+                pk = data['primary-key']
                 delete_comp = get_object_or_404(user.company_set, pk=pk)
                 delete_comp.delete()
+            # new_company
+            elif type == 'new_company':
+                company_create_form = CompanyForm(request.POST)
+                if request.user.is_authenticated:
+                    create_company = company_create_form.save(commit=False)
+                    create_company.user_id = request.user
+                    create_company.save()
+            # new_university
+            elif type == 'new_university':
+                univ_create_form = UniversityForm(request.POST)
+                if request.user.is_authenticated:
+                    create_university = univ_create_form.save(commit=False)
+                    create_university.user_id = request.user
+                    create_university.save()
             return redirect('spec')
-
+        new_company = CompanyForm()
+        new_university = UniversityForm()
         university = user.university_set.all()
         company = user.company_set.all()
         return render(request, 'user/spec.html', {
-            'university': university, 'company': company
+            'university': university, 'company': company,
+            'new_university': new_university,
+            'new_company': new_company,
         })
     else:
         return HttpResponseForbidden()

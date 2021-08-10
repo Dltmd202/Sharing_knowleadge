@@ -5,30 +5,31 @@
 <div class="my-3 mx-5 company__form__box" id="company-box">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="hidden" value="new_company" name="form-type">
         <div class="col-6">
             <div class="row my-3">
                 <label>회사 이름</label>
-                {{ form.comp_name }}
+                {{ new_company.comp_name }}
             </div>
 
             <div class="row my-3">
                 <label>직함</label>
-                {{ form.comp_title }}
+                {{ new_company.comp_title }}
             </div>
             <div class="row my-3">
                 <label>고용 형태:</label>
-                {{ form.employ_type }}
+                {{ new_company.employ_type }}
             </div>
             <div class="row my-3">
                 <label>입사 날짜:</label>
-                {{ form.join_date }}
+                {{ new_company.join_date }}
             </div>
             <div class="row my-3">
                 <label>퇴사 날짜:</label>
-                {{ form.leave_date }}
+                {{ new_company.leave_date }}
             </div>
             <div class="my-4 form-check">
-                {{ form.is_working }}
+                {{ new_company.is_working }}
                 <label class="form-check-label" for="isWorkingCheckBox">재직중</label>
             </div>
         </div>

@@ -160,11 +160,11 @@
                                         <img class="d-flex mr-5 rounded-circle"
                                              src="http://placehold.it/50x50" alt="{{ answer }}">
                                         <div>
-                                            <h1>{{ question.ques_title }}</h1>
+                                            <h1>{{ answer.answer_title }}</h1>
                                             <div class="author">
                                                 <p class="lead">
                                                 by
-                                                <a class="a-user-info">{{ question.user_id | upper }}</a>
+                                                <a class="a-user-info">{{ answer.user_id | upper }}</a>
                                                 </p>
                                             </div>
                                         </div>
@@ -202,7 +202,7 @@
                             <hr>
                             <div class="mid__row">
                                 <div>
-                                    <p>{{ question.post_date }}</p>
+                                    <p>{{ answer.answer_date }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -212,7 +212,13 @@
                             <div class="bottom__row">
                                 <hr class="comment__division">
                                 <div class="comment__button__row">
-                                    <a id="comment_button" onclick="commentButtonActive('{{ answer.pk }}')">댓글 <i class="far fa-comments"></i></a>
+                                    <a id="comment_button" onclick="commentButtonActive('{{ answer.pk }}')">
+                                        {% if answer.comment_set.exists %}
+                                        {{ answer.comment_set.count }}
+                                        {% else %}
+                                        0
+                                        {% endif %}
+                                        <i class="far fa-comments"></i></a>
                                 </div>
                                 <div class="comment__area" id="comment_area_{{ answer.pk }}">
                                     {% if user.is_authenticated %}

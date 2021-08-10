@@ -1,8 +1,4 @@
-let quesPoint;
-let inputPoint;
-let innerPoint;
-let questionDetail;
-let commentButton;
+
 
 window.onload = function () {
     quesPoint = document.querySelector("#ques_point");

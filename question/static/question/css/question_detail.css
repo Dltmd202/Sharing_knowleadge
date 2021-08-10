@@ -201,12 +201,33 @@
 
 .comment__button__row{
     display: flex;
+    flex-wrap: wrap;
     margin-bottom: 1em;
     margin-top: 1em;
 }
 
 #comment_button:hover{
     color: #3767e8;
+}
+
+.vote__active__button{
+    color: #000;
+    margin-left: 0.8em;
+}
+
+.vote__active__button:hover{
+    color: #ef7c91;
+    margin-right: 5px;
+}
+
+
+.vote__deactive__button{
+    color: #ef7c91;
+    margin-left: 0.8em;
+}
+
+.vote__deactive__button:hover{
+    color: #000;
 }
 
 .comment__area{

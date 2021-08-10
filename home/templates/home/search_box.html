@@ -58,6 +58,7 @@
                 <input class="form-control" id="search-input2" type="search" placeholder="Search" aria-label="Search">
                 <button class="button search-button me-3" onclick="searchQuestion(2)">검색</button>
             </div>
+            {% if pop_question %}
             <div class="pop_question">
                 <a href="{% url 'res' pk=pop_question.pk %}">
                     <div class="pop_question__title">
@@ -76,6 +77,7 @@
                     </div>
                 </a>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>

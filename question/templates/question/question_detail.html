@@ -170,18 +170,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-3 answer__utils">
                                     <div class="answer__utils__top">
-                                        <a class=""
-                                           href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}"
-                                           role="button" style="padding: 5px">
-                                            {% if not answer.is_vote %}
-                                                <i class="far fa-heart"></i> 추천</a>
-                                            {% else %}
-                                                <i class="fas fa-heart" style="color: #ef7c91"> 추천됨</i></a>
-                                            {% endif %}
-                                            {% if not answer.is_chosen %}
+                                        {% if not answer.is_chosen %}
                                         <a class="" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
                                            role="button" style="padding: 5px">
                                             <i class="far fa-square"></i> 채택하기</a>
@@ -219,6 +210,27 @@
                                         0
                                         {% endif %}
                                         <i class="far fa-comments"></i></a>
+                                    {% if user in answer.vote_user.iterator %}
+                                    <a class="vote__deactive__button"
+                                       href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}">
+                                            {% if answer.vote_user.exists %}
+                                                {{ answer.vote_user.count }}
+                                            {% else %}
+                                            0
+                                            {% endif %}
+                                        <i class="fas fa-heart"></i>
+                                    </a>
+                                    {% else %}
+                                    <a class="vote__active__button"
+                                       href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}">
+                                            {% if answer.vote_user.exists %}
+                                                {{ answer.vote_user.count }}
+                                            {% else %}
+                                            0
+                                            {% endif %}
+                                        <i class="far fa-heart"></i>
+                                    </a>
+                                    {% endif %}
                                 </div>
                                 <div class="comment__area" id="comment_area_{{ answer.pk }}">
                                     {% if user.is_authenticated %}

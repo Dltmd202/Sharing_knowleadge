@@ -43,7 +43,14 @@
             </div>
         </div>
         <div class="search__detail deactivate" id="search__tag__detail">
-            <h2>태그</h2>
+            <h2>인기 태그</h2>
+            <div class="tags__box">
+                {% for tag in tags %}
+                    <a class="tag" href="{{ tag.get_absolute_path }}">
+                        #{{ tag }}
+                    </a>
+                {% endfor %}
+            </div>
         </div>
         <div class="search__detail deactivate" id="search__keyword__detail">
             <h2>검색어</h2>

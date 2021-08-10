@@ -18,11 +18,21 @@ class CustomUser(AbstractUser):
     def left_ques(self):
         return self.ques_point
 
+
+''' 신고 사유 목록(임시)
+    - 욕설/비하
+    - 음란물/불건전한 만남 및 대화
+    - 상업적 광고 및 판매
+    - 유출/사칭/사기
+    - 낚시/놀람/도배
+'''
 class Report_Class(models.Model):
     name = models.CharField(max_length=50, null=False, blank=False)
 
     def __str__(self):
         return self.name
+
+
 
 class Report(models.Model):
     desc = models.CharField(max_length=2000, null=False, blank=False)

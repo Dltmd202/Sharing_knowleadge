@@ -14,7 +14,7 @@
 <!-- 에러 표기용 alert -->
 {% if messages %}
     {% for msg in messages %}
-        <div class="position-relative">
+        <div class="position-relative" style="z-index: 100 !important;">
             <div class="position-fixed bottom-0 start-50 translate-middle-x mb-5">
                 <div class="alert {% if msg.tags == 'error' %}alert-danger
                     {% elif msg.tags == 'success' %}alert-success{% endif %} ps-5" role="alert">
@@ -33,11 +33,15 @@
                 <h1 class="q">Q</h1>
                 <div>
                     <h1>{{ question.ques_title }}</h1>
-                    <div class="author">
-                        <p class="lead">
+                    <div class="author row">
+                        <p class="lead col-auto">
                         by
                         <a class="a-user-info">{{ question.user_id | upper }}</a>
                         </p>
+                        <a class="report-button col-auto" href="" data-toggle="modal" data-target="#reportModal"
+                            role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
+                            <i class="far fa-bell"></i> 신고하기
+                        </a>
                     </div>
                 </div>
             </div>
@@ -51,10 +55,6 @@
                     <a class="btn" href="{% url 'question_update' pk=question.pk %}">수정하기</a>
                 </div>
                 {% endif %}
-                <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
-                    role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
-                    <i class="far fa-bell"></i> 신고하기
-                </a>
             </div>
             <hr>
             {% if question.head_img %}
@@ -195,7 +195,7 @@
                                         <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
                                             role="button" style="padding: 6px" onclick="checkReportType('answer', '{{ answer.pk }}')">
                                             <i class="far fa-bell"></i> 신고하기
-                                    </a>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
                             <div class="bottom__row">
                                 <hr class="comment__division">
                                 <div class="comment__button__row">
-                                    <a id="comment_button" onclick=commentButtonActive({{ answer.pk }})>댓글 <i class="far fa-comments"></i></a>
+                                    <a id="comment_button" onclick="commentButtonActive('{{ answer.pk }}')">댓글 <i class="far fa-comments"></i></a>
                                 </div>
                                 <div class="comment__area" id="comment_area_{{ answer.pk }}">
                                     {% if user.is_authenticated %}

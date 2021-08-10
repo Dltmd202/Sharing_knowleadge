@@ -270,6 +270,9 @@ def reportView(request, page_pk):
                 user = request.user
                 report_class = Report_Class.objects.get(pk=request.POST['report_class'])
                 report_pk = request.POST['report_pk']
+            else:
+                messages.error(request, "신고 폼 형식이 맞지 않습니다.")
+                return redirect('res', pk=page_pk)
             if request.POST['report_type'] == 'answer':
                 report_pk = Answer.objects.get(pk=report_pk)
                 if Report_Answer.objects.filter(report_user=user, report_answer=report_pk).exists():

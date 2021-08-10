@@ -125,6 +125,7 @@ line{
 
 #search__keyword__detail .form-control{
     display: flex;
+    justify-content: space-between;
 }
 
 #search__keyword__detail .form-control input{
@@ -159,7 +160,39 @@ line{
     text-decoration: none;
 }
 
+.search__detail .pop__badge{
+    color: teal !important;
+    border-radius: 4px;
+    padding: 1px 2px;
+    margin-right: 3%;
+}
 
+.search__detail .pop_question a{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: 2px;
+    border: 1px solid #dddddd;
+    padding: 1% 2%;
+}
+
+.search__detail .pop_question a .pop_question__title{
+    display: flex;
+    color: black;
+}
+
+.pop_question .pop_question__info{
+    display: flex;
+    color: black;
+    margin-bottom: 0;
+    justify-content: space-between;
+    font-size: 0.8rem;
+}
+
+.pop_question .pop_question__info .pop__answer{
+    right: 0;
+    color: #3767e8;
+}
 
 
 @media screen and (max-width: 1200px){

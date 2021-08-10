@@ -58,6 +58,24 @@
                 <input class="form-control" id="search-input2" type="search" placeholder="Search" aria-label="Search">
                 <button class="button search-button me-3" onclick="searchQuestion(2)">검색</button>
             </div>
+            <div class="pop_question">
+                <a href="{% url 'res' pk=pop_question.pk %}">
+                    <div class="pop_question__title">
+                        <div class="pop__badge">인기</div>
+                        {{ pop_question.brief }}
+                    </div>
+                    <div class="pop_question__info">
+                        <div class="pop__hitcount">
+                            조회수
+                            {% load hitcount_tags %}
+                            {% get_hit_count for pop_question %}
+                        </div>
+                        <div class="pop__answer">
+                            <i class="far fa-comments"></i> {{ pop_question.answer_set.count }}
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

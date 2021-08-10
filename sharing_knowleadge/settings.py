@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'company',
     'markdown_deux',
     'comment',
+    'hitcount'
 ]
 
 

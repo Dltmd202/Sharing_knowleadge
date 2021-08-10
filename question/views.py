@@ -22,9 +22,10 @@ from rest_framework.views import APIView
 from rest_framework import renderers
 from rest_framework import status
 
+from user.models import CustomUser, Report_Class, Report_Answer, Report_Question
+from hitcount.views import HitCountDetailView
 from .serializer import QuestionSerializer
 from category.models import Category
-from user.models import CustomUser, Report_Class, Report_Answer, Report_Question
 from answer.forms import AnswerForm
 
 from answer.models import Answer
@@ -118,9 +119,11 @@ class QuestionList(ListView):
 
 
 # 작동 문제 없음
-class QuestionDetail(DetailView):
+class QuestionDetail(HitCountDetailView):
     model = Question
     template_name = 'question/question_detail.html'
+    count_hit = True
+    context_object_name = "question"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(QuestionDetail, self).get_context_data()

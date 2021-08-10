@@ -154,11 +154,15 @@ class QuestionCreate(LoginRequiredMixin, CreateView, ABC):
                     if is_tag:
                         tag.slug = slugify(t, allow_unicode=True)
                         tag.save()
+                    tag.hit += 1
+                    tag.save()
+                    print(tag.hit + 1)
+                    print(type(tag.hit))
                     self.object.tags.add(tag)
             ques_point_str = form.fields['ques_point']
             if ques_point_str:
                 user = CustomUser.objects.get(username=current_user)
-                if int(user.left_ques()) > int(self.request.POST.get('ques_point')):
+                if self.request.POST.get('ques_point') and int(user.left_ques()) > int(self.request.POST.get('ques_point')):
                     user.ques_point = str(int(user.left_ques()) - int(self.request.POST.get('ques_point')))
                     user.save()
                 else:
@@ -217,6 +221,8 @@ class QuestionUpdate(LoginRequiredMixin, UpdateView):
                     if is_tag:
                         tag.slug = slugify(t, allow_unicode=True)
                         tag.save()
+                    tag.hit += 1
+                    tag.save()
                     self.object.tags.add(tag)
             ques_point_str = form.fields['ques_point']
             if ques_point_str:

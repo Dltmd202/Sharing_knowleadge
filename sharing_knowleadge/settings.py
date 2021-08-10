@@ -201,3 +201,6 @@ SOCIALACCOUNT_EMAIL_VERIFICATION = "none"
 SOCIALACCOUNT_FORMS = {
     'signup': 'user.forms.SocialAccountSignupForm'
 }
+
+TIME_ZONE = 'Asia/Seoul'
+USE_TZ = False

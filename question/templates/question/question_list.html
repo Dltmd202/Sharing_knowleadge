@@ -32,8 +32,11 @@ Q & A
                         <div class="question__title__info">
                             <p>{{ question.ques_title }}</p>
                             <div class="question__title__info__detail">
-                                <p>조회수 10</p>
-                                <p>답변 10</p>
+                                <p>조회수
+                                    {% load hitcount_tags %}
+                                    {% get_hit_count for question %}
+                                </p>
+                                <p>답변 {{ question.answer_set.count }}</p>
                             </div>
                         </div>
                     </div>

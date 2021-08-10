@@ -1,6 +1,8 @@
 from django.db import models
 from user.models import CustomUser
 from category.models import Category
+from hitcount.models import HitCountMixin, HitCount
+from django.contrib.contenttypes.fields import GenericRelation
 
 
 class Tag(models.Model):
@@ -16,7 +18,7 @@ class Tag(models.Model):
 
 
 # User 모델 완성 후 수정할 것
-class Question(models.Model):
+class Question(models.Model, HitCountMixin):
     ques_title = models.CharField(max_length=30)
     user_id = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL)
     category_id = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
@@ -28,6 +30,10 @@ class Question(models.Model):
     who_chosen = models.ForeignKey(CustomUser, null=True, on_delete=models.SET_NULL, related_name='who_chosen')
     vote_count = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag, null=True, blank=False)
+    hit_count_generic = GenericRelation(
+        HitCount, object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation'
+    )
 
     def __str__(self):
         return str(self.pk) + ': ' + self.ques_title
@@ -41,6 +47,9 @@ class Question(models.Model):
         if len(self.ques_desc) < 20:
             return self.ques_desc
         return self.ques_desc[:20] + '...'
+
+    def answer_count(self):
+        return self.answer_count()
 
     def get_absolute_url(self):
         return f'/question/{self.pk}/'

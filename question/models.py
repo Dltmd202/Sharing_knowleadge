@@ -54,4 +54,6 @@ class Question(models.Model, HitCountMixin):
     def get_absolute_url(self):
         return f'/question/{self.pk}/'
 
+    def get_ques_point(self):
+        return self.ques_point
 

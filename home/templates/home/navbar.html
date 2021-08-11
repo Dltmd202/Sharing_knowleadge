@@ -22,7 +22,7 @@
         </div>
         <div class="d-flex my-auto">
             {% if user.is_authenticated %}
-            <li><a href="" onclick="notYet()">결제</a></li>
+            <li><a href="{% url 'credits' %}" onclick="notYet()">결제</a></li>
             <li><a href="{% url 'mypage' %}" onclick="toggleMenu()">{{ user.username }}</a></li>
             <li><a href="{% url 'logout' %}" onclick="toggleMenu()">로그아웃</a></li>
             {% else %}
@@ -49,7 +49,7 @@
             });
 
         function notYet(){
-            alert("서비스 준비중입니다.")
+            alert("서비스 준비중입니다. + 4000qp")
         }
     </script>
 </header>

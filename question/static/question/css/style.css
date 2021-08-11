@@ -339,7 +339,6 @@ a:hover{
 .question__article{
     display: flex;
     width: 100%;
-    height: 30%;
     justify-content: space-around;
 }
 
@@ -419,6 +418,11 @@ a:hover{
     flex-direction: column;
     background-color: white;
     border: 1px solid #707070;
+    border-bottom: none;
+}
+
+.rank_list .rank__items:nth-last-child(1){
+    border-bottom: 1px solid #707070;
 }
 
 .rank__items .rank__item{

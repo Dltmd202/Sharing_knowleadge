@@ -62,14 +62,14 @@
     </div>
     <div class="row my-5">
         <div class="col-lg-7 profilebox position-relative">
-            <div>최근에 채택된 답변</div>
-            {% if not chosen %}
+            <div>답변 목록</div>
+            {% if not answer_list %}
                 <div class="absolute-center">
                     <div class="bigtext text-center">Empty!</div>
                 </div>
             {% else %}
                 <div class="mx-4">
-                    {% for answer in chosen|dictsortreversed:"answer_date" %}
+                    {% for answer in answer_list|dictsortreversed:"answer_date" %}
                         <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
                             <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
                                 {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
@@ -130,27 +130,19 @@
     </div>
     <div class="row mt-5">
         <div class="col-lg profilebox position-relative">
-            <div>최근 답변 목록</div>
+            <div>질문 목록</div>
             <div class="mx-4">
-            {% if not user.answer_set.all %}
+            {% if not question_list %}
                 <div class="absolute-center">
                     <div class="bigtext text-center">Empty!</div>
                 </div>
             {% else %}
-                {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
+                {% for question in question_list|dictsortreversed:"modify_date" %}
                     <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
-                        <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
-                            {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
-                        </div>
                         <div class="col my-auto">
-                            {{ answer.question_id.ques_title }}
+                            {{ question.ques_title }}
                         </div>
-                        <div class="col my-auto d-flex justify-content-end">
-                            {% if answer.is_chosen %}
-                                <span class="badge rounded-pill bg-dark border p-2">채택!</span>
-                            {% endif %}
-                        </div>
-                        <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
+                        <a href="{% url 'res' question.pk %}" class="stretched-link"></a>
                     </div>
                 {% endfor %}
             {% endif %}

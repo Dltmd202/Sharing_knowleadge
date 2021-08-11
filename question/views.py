@@ -115,6 +115,8 @@ class QuestionList(ListView):
         start_index = int((context['page_obj'].number - 1) / page_size) * page_size
         end_index = min(start_index + page_size, len(context['paginator'].page_range))
         context['page_range'] = context['paginator'].page_range[start_index: end_index]
+
+        context['ranks'] = CustomUser.objects.all().order_by('-answer_point')[:10]
         return context
 
 

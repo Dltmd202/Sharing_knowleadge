@@ -1,5 +1,7 @@
 {% extends 'user/base_form.html' %}
+
 {% load i18n %}
+{% load socialaccount %}
 
 {% block head_title %}회원가입 페이지{% endblock %}
 
@@ -60,9 +62,15 @@
     {% if wizard.steps.step1 == 1 %}
         <div class="border-top border-2 mt-5"></div>
         <div class="d-grid mx-5 mt-4 pb-5">
-            <button class="btn-lg btn-warning my-2">카카오톡 아이디로 회원가입</button>
-            <button class="btn-lg btn-primary my-2">구글 아이디로 회원가입</button>
-            <button class="btn-lg btn-success my-2">네이버 아이디로 회원가입</button>
+            <a href="{% provider_login_url 'google' method='oauth2' %}">
+                <button class="btn-lg btn-warning my-2">카카오톡 아이디로 회원가입</button>
+            </a>
+            <a href="{% provider_login_url 'google' method='oauth2' %}">
+                <button class="btn-lg btn-primary my-2">구글 아이디로 회원가입</button>
+            </a>
+            <a href="{% provider_login_url 'naver' method='oauth2' %}">
+                <button class="btn-lg btn-success my-2">네이버 아이디로 회원가입</button>
+            </a>
         </div>
     {% endif %}
 {% endblock %}

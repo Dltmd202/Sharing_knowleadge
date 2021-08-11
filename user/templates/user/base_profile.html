@@ -6,20 +6,19 @@
 {% block head_title %}마이페이지{% endblock %}
 
 {% block main_area %}
-    <div class="container-lg my-5 p-5 mx-auto" style="max-width: 1200px;">
-        <div class="mx-3">
-            <div class="row mx-3 mt-5">
-                <div class="col-auto">
-                    <div class="mypage-title font-midnight">
-                        {% block body_title %}{% endblock %}
-                    </div>
-                </div>
-                <div class="col-auto mt-5 pt-2">
-                    {% block title_btn %}{% endblock %}
+    <div class="container-lg mt-5 py-5 justify-content-between" style="max-width: 1200px;">
+        <div class="row mt-5">
+            <div class="col-auto">
+                <div class="mypage-title font-midnight">
+                    {% block body_title %}{% endblock %}
                 </div>
             </div>
-            <div class="border-top border-3 border-midnight mt-2 mb-5"></div>
+            <div class="col-auto mt-5">
+                {% block title_btn %}{% endblock %}
+            </div>
         </div>
+        <div class="border-top border-3 border-midnight mt-2 mb-5"></div>
+
         {% block container_main_area %}
         {% endblock %}
     </div>

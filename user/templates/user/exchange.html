@@ -24,7 +24,7 @@
                     <div class="alert alert-success">{{ success }} 포인트 환전 성공!</div>
                 {% endif %}
             </div>
-            <div class="col-5">
+            <div class="col-lg-5">
                 <div class="my-3">{{ form.point_type }}</div>
                 <div class="my-3">{{ form.point_amount }}</div>
             </div>
@@ -34,20 +34,20 @@
                     <div class="border-top border-1 border-teal mt-1"></div>
                 </div>
                 
-                <div class="row my-3 mx-5">
-                    <div class="col-6 text-center h5">현금 포인트</div>
-                    <div class="col-6 text-center h5">{{ user.account|intcomma }} 원</div>
-                    <div class="border-top border-1 mt-1"></div>
+                <div class="row my-4 mx-3">
+                    <div class="col-md-6 text-center h5">현금 포인트</div>
+                    <div class="col-md-6 text-center h5">{{ user.account|intcomma }} 원</div>
+                    <div class="border-top border-1 mt-3"></div>
                 </div>
-                <div class="row my-3 mx-5">
-                    <div class="col-6 text-center h5">질문 포인트</div>
-                    <div class="col-6 text-center h5">{{ user.ques_point|intcomma }} 포인트</div>
-                    <div class="border-top border-1 mt-1"></div>
+                <div class="row my-4 mx-3">
+                    <div class="col-md-6 text-center h5">질문 포인트</div>
+                    <div class="col-md-6 text-center h5">{{ user.ques_point|intcomma }} 포인트</div>
+                    <div class="border-top border-1 mt-3"></div>
                 </div>
-                <div class="row my-3 mx-5">
-                    <div class="col-6 text-center h5">답변 포인트</div>
-                    <div class="col-6 text-center h5">{{ user.answer_point|intcomma }} 포인트</div>
-                    <div class="border-top border-1 mt-1"></div>
+                <div class="row my-4 mx-3">
+                    <div class="col-md-6 text-center h5">답변 포인트</div>
+                    <div class="col-md-6 text-center h5">{{ user.answer_point|intcomma }} 포인트</div>
+                    <div class="border-top border-1 mt-3"></div>
                 </div>
             </div>
             <div class="d-flex justify-content-end">

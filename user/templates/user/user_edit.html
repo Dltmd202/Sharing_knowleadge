@@ -6,7 +6,7 @@
 
 {% block container_main_area %}
     
-    <ul class="nav nav-tabs my-5 pt-3">
+    <ul class="nav nav-tabs mt-5 pt-3" style="display: inline-flex !important; border: none;">
         <li class="nav-item" id="password-tab">
             <a class="nav-link active" data-bs-toggle="tab" data-bs-target="#password" href="#password">
                 비밀번호 변경
@@ -17,7 +17,14 @@
                 세부정보 변경
             </a>
         </li>
+        <li class="nav-item" id="picture-tab">
+            <a class="nav-link" data-bs-toggle="tab" data-bs-target="#picture" href="#picture">
+                사진 변경
+            </a>
+        </li>
     </ul>
+
+    <div class="border-top border-1 mb-5"></div>
 
     <div>
         {% if form2.errors %}
@@ -43,7 +50,7 @@
         <div class="tab-pane container active" id="password">
             <form action="{% url 'edit' %}" method="post" class="m-5">
                 {% csrf_token %}
-                <div class="">
+                <div>
                     <label class="h5">비밀번호 변경</label>
                     <div class="my-3">{{ form1.username }}</div>
                     <div class="my-3 d-flex input-inside">
@@ -79,6 +86,17 @@
                 </div>
                 <button type="submit" name="other_change" value=1
                 class="col-sm-8 btn btn-lg mt-4 px-5">저장</button>
+            </form>
+        </div>
+        <div class="tab-pane container" id="picture">
+            <form enctype="multipart/form-data" action="{% url 'edit' %}" method="post" class="m-5">
+                {% csrf_token %}
+                <div>
+                    <label class="h5">사진 변경</label>
+                    <div class="my-5">{{ form3.user_pic }}</div>
+                </div>
+                <button type="submit" name="picture_change" value=1
+                    class="col-sm-8 btn btn-lg mt-5 px-5">저장</button>
             </form>
         </div>
     </div>

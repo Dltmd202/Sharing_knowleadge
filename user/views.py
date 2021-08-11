@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator
 from formtools.wizard.views import SessionWizardView
 from .models import CustomUser
-from .forms import UserCreationForm1, UserCreationForm2, \
+from .forms import UserCreationForm1, UserCreationForm2, UserPictureEditForm, \
     UserPasswordEditForm, CustomLoginForm, PointExchangeForm
 from itertools import chain
 import datetime
@@ -100,6 +100,7 @@ def userEditPageView(request):
 
         form1 = UserPasswordEditForm()
         form2 = UserCreationForm2()
+        form3 = UserPictureEditForm()
         form2.initial['user_desc'] = user.user_desc
         form2.initial['email'] = user.email
         birth_date = user.birth_date
@@ -133,8 +134,17 @@ def userEditPageView(request):
                     birth_date = datetime.datetime.strptime(dateString, "%Y-%m-%d")
                     user.save()
                     success = True
+            elif data.get("picture_change"):
+                form3 = UserPictureEditForm(request.POST, request.FILES)
+                if form3.is_valid():
+                    cleaned_data = form3.cleaned_data
+                    user.user_pic = cleaned_data['user_pic']
+                    user.save()
+                    success = True
 
-        return render(request, 'user/user_edit.html', {'form1': form1, 'form2': form2, 'success': success})
+        return render(request, 'user/user_edit.html', {
+            'form1': form1, 'form2': form2, 'form3': form3, 'success': success
+        })
     else:
         return HttpResponseForbidden()
 

@@ -75,7 +75,8 @@ def logoutView(request):
 def mypageView(request):
     if request.user.is_authenticated:
         user = request.user
-        chosen = user.answer_set.filter(is_chosen=True)
+        answer = user.answer_set.all()
+        question = user.question_set.all()
         university = user.university_set.all()
         company = user.company_set.all()
         uni_len = len(university)
@@ -83,7 +84,8 @@ def mypageView(request):
         total_len = 6
         return render(request, 'user/mypage.html', 
             {
-                'chosen': chosen,
+                'answer_list': answer,
+                'question_list': question,
                 'university': university[:total_len],
                 'company': company[:(total_len - uni_len)]
             })

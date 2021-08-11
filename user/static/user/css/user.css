@@ -2,15 +2,21 @@
     border: 2px solid teal;
     border-radius: 25px;
     padding: 25px;
-    margin: 10px 15px;
+    margin-top: 10px;
+    margin-right: 10px;
     min-height: 220px;
 }
 
-.bignumber {
-    font-size: 80px;
+.bignumber, .bigtext {
+    font-size: 70px;
     font-weight: bold;
     color: teal;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.bigtext {
+    margin-top: 0px;
+    color: #e0e0e0;
 }
 
 .blank-userpic, .blank-userpic-small, .blank-userpic-smallest, .blank-userpic-smallest-fill {
@@ -85,11 +91,6 @@
     border-color: midnightblue !important;
 }
 
-section
-{
-    padding: 100px;
-}
-
 /* i 태그 */
 
 .btn-custom{
@@ -101,4 +102,31 @@ section
     border: none;
     background-color: #f1fafe;
     border-radius: 5px;
+}
+
+
+/* Position and Spacing */
+
+.absolute-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%) !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+}
+
+.absolute-center-off {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 45%;
+    -webkit-transform: translateY(-50%) !important;
+    -ms-transform: translateY(-50%) !important;
+    transform: translateY(-50%) !important;
+}
+
+.mt-6 {
+    margin-top: 4.5rem !important;
 }

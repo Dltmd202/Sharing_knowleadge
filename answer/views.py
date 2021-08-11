@@ -60,13 +60,17 @@ def new_answer(request, pk):
 def vote_answer(request, pk, answer_pk):
     current_answer = Answer.objects.get(id=answer_pk)
     question = get_object_or_404(Question, pk=pk)
-    try:
-        vote_user = current_answer.vote_user.get(username=request.user)
-        current_answer.vote_user.remove(request.user)
-    except:
-        current_answer.vote_user.add(request.user)
-    current_answer.save()
-    return redirect(question.get_absolute_url())
+    if request.user.is_authenticated:
+        try:
+            vote_user = current_answer.vote_user.get(username=request.user)
+            current_answer.vote_user.remove(request.user)
+        except:
+            current_answer.vote_user.add(request.user)
+        current_answer.save()
+        return redirect(question.get_absolute_url())
+    else:
+        raise PermissionDenied
+
 
 
 def select_answer(request, pk, answer_pk):

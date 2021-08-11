@@ -5,6 +5,8 @@ from user.models import CustomUser
 
 
 class Answer(models.Model):
+    class Meta:
+        ordering = ['-answer_date']
     question_id = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
     answer_date = models.DateTimeField(auto_now_add=True)
     user_id = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.SET_NULL)

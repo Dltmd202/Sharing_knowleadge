@@ -60,8 +60,10 @@
             </div>
             <hr>
             <div class="mid__row">
-                <div>
+                <div class="mid__info">
                     <p>{{ question.post_date }}</p>
+                    <p>조회수 {% load hitcount_tags %}
+                        {% get_hit_count for question %}</p>
                 </div>
                 {% if user.is_authenticated and user == question.user_id %}
                 <div class="update">

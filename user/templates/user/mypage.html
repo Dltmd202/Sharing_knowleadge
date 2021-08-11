@@ -15,7 +15,7 @@
 
 {% block container_main_area %}
     <div class="row my-3">
-        <div class="col-3 text-center my-auto">
+        <div class="col-lg-3 text-center my-auto">
             {% if user.user_pic %}
                 <img class="border rounded-circle" src="{{ user.user_pic.url }}"
                     alt="유저 사진" width="200" height="200">
@@ -26,11 +26,11 @@
                 <div class="blank-userpic mx-auto"></div>
             {% endif %}
         </div>
-        <div class="col profilebox">
+        <div class="col-lg-4 profilebox">
             <div>채택된 답변 개수</div>
             <div class="h1 text-center bignumber">{{ chosen.count|intcomma }}</div>
         </div>
-        <div class="col profilebox">
+        <div class="col-lg profilebox">
             <div>누적 득표수</div>
             <div class="h1 text-center bignumber">
                 {% if user.score >= 0 %}+{% endif %}{{ user.score|intcomma }}
@@ -38,19 +38,19 @@
         </div>
     </div>
     <div class="row my-3">
-        <div class="col profilebox">
+        <div class="col-lg profilebox">
             <div>질문 포인트</div>
             <div class="h1 text-center bignumber">
                 {{ user.ques_point|intcomma }}p
             </div>
         </div>
-        <div class="col profilebox">
+        <div class="col-lg profilebox">
             <div>답변 포인트</div>
-            <div class="h1 text-center bignumber">
+            <div class="h1 text-center bignumber flex-shrink-1">
                 {{ user.answer_point|intcomma }}p
             </div>
         </div>
-        <div class="col profilebox">
+        <div class="col-lg profilebox">
             <div>현금 포인트</div>
             <div class="h1 text-center bignumber">
                 {{ user.account|intcomma }}￦
@@ -60,8 +60,8 @@
             </div>
         </div>
     </div>
-    <div class="row my-3">
-        <div class="col-7 profilebox">
+    <div class="row my-5">
+        <div class="col-lg-7 profilebox">
             <div>최근에 채택된 답변</div>
             <div class="mx-4">
                 {% for answer in chosen|dictsortreversed:"answer_date" %}
@@ -80,7 +80,7 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="col profilebox">
+        <div class="col-lg profilebox">
             <div>스펙</div>
             <div class="mt-3">
                 {% if university %}
@@ -113,8 +113,8 @@
             </div>
         </div>
     </div>
-    <div class="row my-3">
-        <div class="col profilebox">
+    <div class="row mt-5">
+        <div class="col-lg profilebox">
             <div>최근 답변 목록</div>
             <div class="mx-4">
             {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}

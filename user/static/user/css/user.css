@@ -2,15 +2,16 @@
     border: 2px solid teal;
     border-radius: 25px;
     padding: 25px;
-    margin: 10px 15px;
+    margin-top: 10px;
+    margin-right: 10px;
     min-height: 220px;
 }
 
 .bignumber {
-    font-size: 80px;
+    font-size: 70px;
     font-weight: bold;
     color: teal;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .blank-userpic, .blank-userpic-small, .blank-userpic-smallest, .blank-userpic-smallest-fill {
@@ -83,11 +84,6 @@
 
 .border-midnight {
     border-color: midnightblue !important;
-}
-
-section
-{
-    padding: 100px;
 }
 
 /* i 태그 */

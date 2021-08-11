@@ -35,11 +35,11 @@
     <link rel="stylesheet" href="{% static 'home/css/home.css'%}">
 </head>
 <body>
-<section class="">
+<div class="mt-5 pt-5 mx-4">
 {% include 'home/navbar.html' %}
 {% block main_area %}
 {% endblock %}
-</section>
+</div>
 {% include 'home/footer.html' %}
 <script src="{% static 'home/js/scripts.js' %}"></script>
 </body>

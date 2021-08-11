@@ -56,33 +56,44 @@
                 {{ user.account|intcomma }}￦
             </div>
             <div class="d-flex justify-content-end">
-                <a href="{% url 'exchange' %}">환전하러 가기</a>
+                <a href="{% url 'exchange' %}">환전 하러가기...</a>
             </div>
         </div>
     </div>
     <div class="row my-5">
-        <div class="col-lg-7 profilebox">
+        <div class="col-lg-7 profilebox position-relative">
             <div>최근에 채택된 답변</div>
-            <div class="mx-4">
-                {% for answer in chosen|dictsortreversed:"answer_date" %}
-                    <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
-                        <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
-                            {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
+            {% if not chosen %}
+                <div class="absolute-center">
+                    <div class="bigtext text-center">Empty!</div>
+                </div>
+            {% else %}
+                <div class="mx-4">
+                    {% for answer in chosen|dictsortreversed:"answer_date" %}
+                        <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
+                            <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
+                                {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
+                            </div>
+                            <div class="col my-auto">
+                                {{ answer.question_id.ques_title }}
+                            </div>
+                            <div class="col my-auto d-flex justify-content-end">
+                                <span class="badge rounded-pill bg-dark border p-2">채택!</span>
+                            </div>
+                            <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
                         </div>
-                        <div class="col my-auto">
-                            {{ answer.question_id.ques_title }}
-                        </div>
-                        <div class="col my-auto d-flex justify-content-end">
-                            <span class="badge rounded-pill bg-dark border p-2">채택!</span>
-                        </div>
-                        <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
-                    </div>
-                {% endfor %}
-            </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
-        <div class="col-lg profilebox">
+        <div class="col-lg profilebox position-relative">
             <div>스펙</div>
             <div class="mt-3">
+                {% if not university and not company %}
+                <div class="absolute-center-off">
+                    <div class="bigtext text-center">Empty!</div>
+                </div>
+                {% endif %}
                 {% if university %}
                 <div>
                     <div class="font-teal">학력</div>
@@ -105,34 +116,44 @@
                     </ul>
                 </div>
                 {% endif %}
-                <div>
-                    <a class="d-flex justify-content-center py-3" href="{% url 'spec' %}">
-                        자세히 보기...
-                    </a>
-                </div>
+                {% if not university and not company %}
+                    <div class="absolute-center text-center absolute-center-off mt-6">
+                        <a href="{% url 'spec' %}">추가 하러가기...</a>
+                    </div>
+                {% else %}
+                    <div class="d-flex justify-content-center">
+                        <a href="{% url 'spec' %}">자세히 보기...</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-lg profilebox">
+        <div class="col-lg profilebox position-relative">
             <div>최근 답변 목록</div>
             <div class="mx-4">
-            {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
-                <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
-                    <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
-                        {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
-                    </div>
-                    <div class="col my-auto">
-                        {{ answer.question_id.ques_title }}
-                    </div>
-                    <div class="col my-auto d-flex justify-content-end">
-                        {% if answer.is_chosen %}
-                            <span class="badge rounded-pill bg-dark border p-2">채택!</span>
-                        {% endif %}
-                    </div>
-                    <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
+            {% if not user.answer_set.all %}
+                <div class="absolute-center">
+                    <div class="bigtext text-center">Empty!</div>
                 </div>
-            {% endfor %}
+            {% else %}
+                {% for answer in user.answer_set.all|dictsortreversed:"answer_date" %}
+                    <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
+                        <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
+                            {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
+                        </div>
+                        <div class="col my-auto">
+                            {{ answer.question_id.ques_title }}
+                        </div>
+                        <div class="col my-auto d-flex justify-content-end">
+                            {% if answer.is_chosen %}
+                                <span class="badge rounded-pill bg-dark border p-2">채택!</span>
+                            {% endif %}
+                        </div>
+                        <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
+                    </div>
+                {% endfor %}
+            {% endif %}
             </div>
         </div>
     </div>

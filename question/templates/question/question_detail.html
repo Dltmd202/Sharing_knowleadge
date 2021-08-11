@@ -29,20 +29,27 @@
 <div class="question__detail">
     <div id="post-area" class="content-box">
         <div class="custom-contentview">
-            <div class="title top__row">
-                <h1 class="q">Q</h1>
-                <div>
-                    <h1>{{ question.ques_title }}</h1>
-                    <div class="author row">
-                        <p class="lead col-auto">
-                        by
-                        <a class="a-user-info">{{ question.user_id | upper }}</a>
-                        </p>
-                        <a class="report-button col-auto" href="" data-toggle="modal" data-target="#reportModal"
-                            role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
-                            <i class="far fa-bell"></i> 신고하기
-                        </a>
+            <div class="top__row">
+                <div class="title">
+                    <h1 class="q">Q</h1>
+                    <div>
+                        <h1>{{ question.ques_title }}</h1>
+                        <div class="author">
+                            <span class="lead">
+                            by
+                            </span>
+                            <span class="a-user-info">{{ question.user_id | upper }}</span>
+                        </div>
                     </div>
+                </div>
+                <div class="question__title__util">
+                    <span>
+                        {{ question.ques_point }}
+                    </span>
+                    <a class="report-button col-auto" href="" data-toggle="modal" data-target="#reportModal"
+                       role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
+                        <i class="far fa-bell"></i> 신고하기
+                    </a>
                 </div>
             </div>
             <hr>
@@ -98,41 +105,43 @@
       <!-- Comments Form -->
         <div class="content-box">
             <div class="custom-contentview">
-            <h5>답변 작성하기</h5>
-            <hr class="main-division">
-            <div class="card-body">
-                {% if user.is_authenticated %}
-                <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
-                    {% csrf_token %}
-                    <div class="form-group question__form" id="answer__form">
-                        <div class="input__row">
-                            <div class="input__label">
-                                <label for="제목">타이틀</label>
+                <h5>답변 작성하기</h5>
+                <hr class="main-division">
+                <div class="card-body">
+                    {% if user.is_authenticated %}
+                    <form id="answer-form" method="POST" action="/answer/{{ question.pk }}/new_answer">
+                        {% csrf_token %}
+                        <div class="form-group question__form" id="answer__form">
+                            <div class="input__row">
+                                <div class="input__label">
+                                    <label for="제목">제목</label>
+                                </div>
+                                <div class="input__input">
+                                    {{ answer_form.answer_title }}
+                                </div>
                             </div>
-                            <div class="input__input">
-                                {{ answer_form.answer_title }}
+                            <div class="input__row">
+                                <div class="input__label">
+                                    <label for="내용">답변</label>
+                                </div>
+                                <div class="input__input">
+                                    {{ answer_form.answer_desc }}
+                                </div>
                             </div>
                         </div>
-                        <div class="input__row">
-                            <div class="input__label">
-                                <label for="내용">내용</label>
-                            </div>
-                            <div class="input__input">
-                                {{ answer_form.answer_desc }}
-                            </div>
+                        <div class="answer__button__row">
+                            <button type="submit" class="btn" style="border: white;">
+                                제출하기</button>
                         </div>
-                    </div>
-                    <div class="answer__button__row">
-                        <button type="submit" class="btn" style="border: white;">
-                            제출하기</button>
-                    </div>
-                </form>
-                {% else %}
-                    <a role="button" class="btn btn-outline-dark btn-block btn-sm"
-                       href="{% url 'login' %}">Log in</a>
-                {% endif %}
+                    </form>
+                    {% else %}
+                        <div class="answer__button__row">
+                        <a role="button" class="btn"
+                           href="{% url 'login' %}">Log in</a>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
-        </div>
         </div>
         {% if object.answer_set.exists %}
             {% for answer in object.answer_set.iterator %}
@@ -170,17 +179,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% if user == question.user_id %}
                                 <div class="col-3 answer__utils">
                                     <div class="answer__utils__top">
                                         {% if not answer.is_chosen %}
                                         <a class="" href="{% url 'select_answer' pk=question.pk answer_pk=answer.pk%}"
                                            role="button" style="padding: 5px">
                                             <i class="far fa-square"></i> 채택하기</a>
-                                            {% else %}
+                                        {% else %}
                                         <a class="" href=""
                                             role="button" style="padding: 5px">
                                             <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
-                                            {% endif %}
+                                        {% endif %}
                                     </div>
                                     <div class="answer__utils__down">
                                         <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
@@ -189,6 +199,19 @@
                                         </a>
                                     </div>
                                 </div>
+                                {% else %}
+                                    <div class="question__title__util">
+                                    {% if answer.is_chosen %}
+                                    <span>
+                                        채택 - {{ question.ques_point }}
+                                    </span>
+                                    {% endif %}
+                                    <a class="report-button col-auto" href="" data-toggle="modal" data-target="#reportModal"
+                                       role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
+                                        <i class="far fa-bell"></i> 신고하기
+                                    </a>
+                                </div>
+                                {% endif %}
                             </div>
                             <hr>
                             <div class="mid__row">
@@ -210,30 +233,42 @@
                                         0
                                         {% endif %}
                                         <i class="far fa-comments"></i></a>
-                                    {% if user in answer.vote_user.iterator %}
-                                    <a class="vote__deactive__button"
-                                       href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}">
-                                            {% if answer.vote_user.exists %}
-                                                {{ answer.vote_user.count }}
-                                            {% else %}
-                                            0
-                                            {% endif %}
-                                        <i class="fas fa-heart"></i>
-                                    </a>
+
+                                    {% if user.is_authenticated %}
+                                        {% if user in answer.vote_user.iterator %}
+                                        <a class="vote__deactive__button"
+                                           href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}">
+                                                {% if answer.vote_user.exists %}
+                                                    {{ answer.vote_user.count }}
+                                                {% else %}
+                                                0
+                                                {% endif %}
+                                            <i class="fas fa-heart"></i>
+                                        </a>
+                                        {% else %}
+                                        <a class="vote__active__button"
+                                           href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}">
+                                                {% if answer.vote_user.exists %}
+                                                    {{ answer.vote_user.count }}
+                                                {% else %}
+                                                0
+                                                {% endif %}
+                                            <i class="far fa-heart"></i>
+                                        </a>
+                                        {% endif %}
                                     {% else %}
-                                    <a class="vote__active__button"
-                                       href="{% url 'vote_answer' pk=question.pk answer_pk=answer.pk%}">
-                                            {% if answer.vote_user.exists %}
-                                                {{ answer.vote_user.count }}
-                                            {% else %}
-                                            0
-                                            {% endif %}
-                                        <i class="far fa-heart"></i>
-                                    </a>
+                                        <a class="vote__active__button"
+                                           href="{% url 'login' %}">
+                                                {% if answer.vote_user.exists %}
+                                                    {{ answer.vote_user.count }}
+                                                {% else %}
+                                                0
+                                                {% endif %}
+                                            <i class="far fa-heart"></i>
+                                        </a>
                                     {% endif %}
                                 </div>
                                 <div class="comment__area" id="comment_area_{{ answer.pk }}">
-                                    {% if user.is_authenticated %}
                                     <form id="comment-form" method="POST" action="/comment/{{ question.pk }}/{{ answer.pk }}/new_comment">
                                         {% csrf_token %}
                                         <div class="row">
@@ -243,12 +278,16 @@
                                         </div>
                                         <div>
                                         <div class="comment__submit">
+                                            {% if user.is_authenticated %}
                                             <button type="submit" class="btn">
                                                 <i id="submi-button-i"class="fas fa-bookmark mx-2"> 제출하기</i></button>
+                                            {% else %}
+                                                <a href="{% url "login" %}" class="btn">
+                                                 로그인</a>
+                                            {% endif %}
                                         </div>
                                         </div>
                                     </form>
-                                    {% endif %}
                                     {% if answer.comment_set.exists %}
                                     {% for comment in answer.comment_set.iterator %}
                                     <div class="comment__contain">

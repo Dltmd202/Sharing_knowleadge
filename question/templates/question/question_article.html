@@ -1,6 +1,17 @@
 <div class="question__article">
-    <div class="article__item">오늘 가장 <br/>HOT한<br/> 질문</div>
-    <div class="article__item">오늘 가장 <br/>DIFFICULT한<br/> 질문</div>
-    <div class="article__item">오늘 가장 <br/>RICH한<br/> 질문</div>
-    <div class="article__item">오늘 가장 <br/>SINCERE한<br/> 질문</div>
+    <a class="article__item" href="{{ hot_question.get_absolute_url }}">
+        <div>오늘 가장 <br/>HOT<br/> 질문</div>
+    </a>
+
+    <a class="article__item" href="{{ difficult_question.get_absolute_url }}">
+        <div>오늘 가장 <br/>DIFFICULT<br/> 질문</div>
+    </a>
+
+    <a class="article__item" href="{{ expensive_question.get_absolute_url }}">
+        <div>아직 <br/>EXPENSIVE<br/> 질문</div>
+    </a>
+
+    <a class="article__item" href="{{ pop_question.get_absolute_url }}">
+        <div>오늘 가장 <br/>POP<br/> 질문</div>
+    </a>
 </div>

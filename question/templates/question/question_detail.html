@@ -44,12 +44,18 @@
                 </div>
                 <div class="question__title__util">
                     <span>
+                        {% if question.ques_point %}
                         {{ question.ques_point }}
+                        {% else %}
+                        0
+                        {% endif %}
                     </span>
+                    {% if not user == question.user_id %}
                     <a class="report-button col-auto" href="" data-toggle="modal" data-target="#reportModal"
                        role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
                         <i class="far fa-bell"></i> 신고하기
                     </a>
+                    {% endif %}
                 </div>
             </div>
             <hr>
@@ -192,12 +198,14 @@
                                             <i class="fas fa-check-square" style="color:#357380;"> 채택됨</i></a>
                                         {% endif %}
                                     </div>
+                                    {% if not user == answer.user_id %}
                                     <div class="answer__utils__down">
                                         <a class="report-button" href="" data-toggle="modal" data-target="#reportModal"
                                             role="button" style="padding: 6px" onclick="checkReportType('answer', '{{ answer.pk }}')">
                                             <i class="far fa-bell"></i> 신고하기
                                         </a>
                                     </div>
+                                    {% endif %}
                                 </div>
                                 {% else %}
                                     <div class="question__title__util">
@@ -206,10 +214,12 @@
                                         채택 - {{ question.ques_point }}
                                     </span>
                                     {% endif %}
+                                    {% if not user == answer.user_id %}
                                     <a class="report-button col-auto" href="" data-toggle="modal" data-target="#reportModal"
                                        role="button" style="padding: 6px" onclick="checkReportType('question', '{{ question.pk }}')">
                                         <i class="far fa-bell"></i> 신고하기
                                     </a>
+                                    {% endif %}
                                 </div>
                                 {% endif %}
                             </div>

@@ -83,25 +83,27 @@ Q & A
                     <h5>채택 수</h5>
                     <h5>채택률</h5>
                 </div>
+                {% for rank in ranks %}
                 <div class="rank__items">
                     <div class="rank__item">
                         <div class="order">
-                            <span>1</span>
+                            <span> 1 </span>
                         </div>
                         <div class="user">
-                            <span>이승환</span>
+                            <span>{{rank}}</span>
                         </div>
                         <div class="point">
-                            <span>1200</span>
+                            <span>{{ rank.answer_point }}</span>
                         </div>
                         <div class="choosen">
-                            <span>32</span>
+                            <span>12</span>
                         </div>
                         <div class="채택률">
                             <span>58.4%</span>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -23,6 +23,7 @@ from rest_framework import status
 from .serializer import QuestionSerializer
 from category.models import Category
 from user.models import CustomUser
+from answer.models import Answer
 from answer.forms import AnswerForm
 from .forms import QuestionForm
 from .models import Question, Tag
@@ -109,6 +110,8 @@ class QuestionList(ListView):
         start_index = int((context['page_obj'].number - 1) / page_size) * page_size
         end_index = min(start_index + page_size, len(context['paginator'].page_range))
         context['page_range'] = context['paginator'].page_range[start_index: end_index]
+
+        context['ranks'] = CustomUser.objects.all().order_by('-answer_point')[:10]
         return context
 
 

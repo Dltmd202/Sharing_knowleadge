@@ -1,6 +1,7 @@
 from typing import Text
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from django.db.models.fields.files import ImageField
 from django.forms.widgets import TextInput, PasswordInput
 from .models import CustomUser
 from allauth.socialaccount.forms import SignupForm
@@ -186,6 +187,16 @@ class UserPasswordEditForm(UserCreationForm1):
                 "placeholder": "비밀번호 입력", "class": classValue + " password-input", "style": styleValue
             })
         }
+
+
+class UserPictureEditForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['user_pic']
+
+    def __init__(self, *args, **kwargs):
+        super(UserPictureEditForm, self).__init__(*args, **kwargs)
+        self.fields['user_pic'].widget.attrs['class'] = "form-control-file"
 
 
 class CustomLoginForm(AuthenticationForm):

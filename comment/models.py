@@ -3,6 +3,8 @@ from answer.models import Answer
 from user.models import CustomUser
 
 class Comment(models.Model):
+    class Meta:
+        ordering = ['comment_date']
     answer_id = models.ForeignKey(Answer, null=True, on_delete=models.SET_NULL)
     comment_date = models.DateTimeField(auto_now_add=True)
     user_id = models.ForeignKey(CustomUser, null=True, blank=True, on_delete=models.SET_NULL)

@@ -59,20 +59,38 @@
                 <button class="button search-button me-3" onclick="searchQuestion(2)">검색</button>
             </div>
             {% if pop_question %}
-            <div class="pop_question">
+                <div class="pop_question">
+                    <a href="{% url 'res' pk=pop_question.pk %}">
+                        <div class="pop_question__title">
+                            <div class="pop__badge">인기</div>
+                            {{ pop_question.brief }}
+                        </div>
+                        <div class="pop_question__info">
+                            <div class="pop__hitcount">
+                                조회수
+                                {% load hitcount_tags %}
+                                {% get_hit_count for pop_question %}
+                            </div>
+                            <div class="pop__answer">
+                                <i class="far fa-comments"></i> {{ pop_question.answer_set.count }}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="pop_question">
                 <a href="{% url 'res' pk=pop_question.pk %}">
                     <div class="pop_question__title">
-                        <div class="pop__badge">인기</div>
-                        {{ pop_question.brief }}
+                        <div class="current__badge">최근</div>
+                        {{ current_question.brief }}
                     </div>
                     <div class="pop_question__info">
                         <div class="pop__hitcount">
                             조회수
                             {% load hitcount_tags %}
-                            {% get_hit_count for pop_question %}
+                            {% get_hit_count for current_question %}
                         </div>
                         <div class="pop__answer">
-                            <i class="far fa-comments"></i> {{ pop_question.answer_set.count }}
+                            <i class="far fa-comments"></i> {{ current_question.answer_set.count }}
                         </div>
                     </div>
                 </a>

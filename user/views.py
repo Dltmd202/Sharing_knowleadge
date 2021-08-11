@@ -202,3 +202,11 @@ def exchangeView(request):
         return render(request, 'user/exchange.html', {'form':form, 'success':success})
     else:
         return HttpResponseForbidden()
+
+
+def show_me_the_money(request):
+    if request.user.is_authenticated:
+        current_user = request.user
+        current_user.ques_point = str(int(current_user.left_ques()) + 4000)
+        current_user.save()
+    return redirect('home')

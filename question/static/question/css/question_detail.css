@@ -2,7 +2,7 @@
     display: none;
 }
 
-.contain-all{
+#main-container{
     margin-top: 10em;
 }
 
@@ -22,6 +22,7 @@
     text-align: center;
     padding: 8px 5px;
     font-size: 18px;
+    min-width: 80.28px;
 }
 
 .question__detail .question__title__util{
@@ -30,6 +31,8 @@
     align-content: flex-start;
     align-items: center;
 }
+
+
 
 #post-area .top__row{
     display: flex;
@@ -77,6 +80,11 @@
 
 .mid__row p{
     margin-bottom: 0 !important;
+}
+
+.mid__row .mid__info p:nth-child(2){
+    font-size: 0.8rem;
+    color: gray;
 }
 
 #post-area div .mid__row .update a{

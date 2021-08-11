@@ -115,8 +115,21 @@ class QuestionList(ListView):
         start_index = int((context['page_obj'].number - 1) / page_size) * page_size
         end_index = min(start_index + page_size, len(context['paginator'].page_range))
         context['page_range'] = context['paginator'].page_range[start_index: end_index]
-
-        context['ranks'] = CustomUser.objects.all().order_by('-answer_point')[:10]
+        context['ranks'] = CustomUser.objects.filter(answer_count__gt=0).order_by('-answer_point', '-chosen_count')[:10]
+        if Question.objects.all():
+            pop_question = Question.objects.order_by("-hit_count_generic__hits")[0]
+            if pop_question:
+                context['pop_question'] = pop_question
+            hot_question = Question.objects.order_by("-answer")[0]
+            if hot_question:
+                context['hot_question'] = hot_question
+            expensive_question = Question.objects.order_by("-ques_point")[0]
+            if expensive_question:
+                context['expensive_question'] = expensive_question
+            if Question.objects.filter(who_chosen=None):
+                difficult_question = Question.objects.filter(who_chosen=None).order_by("-post_date")[0]
+                if difficult_question:
+                    context['difficult_question'] = difficult_question
         return context
 
 

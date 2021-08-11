@@ -161,11 +161,23 @@ line{
 }
 
 .search__detail .pop__badge{
+    color: red !important;
+    border-radius: 4px;
+    padding: 1px 2px;
+    margin-right: 3%;
+}
+
+.search__detail .current__badge{
     color: teal !important;
     border-radius: 4px;
     padding: 1px 2px;
     margin-right: 3%;
 }
+
+.search__detail .pop_question{
+    margin-top: 5px;
+}
+
 
 .search__detail .pop_question a{
     display: flex;

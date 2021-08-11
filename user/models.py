@@ -11,12 +11,20 @@ class CustomUser(AbstractUser):
     score = models.IntegerField(default=0, null=False, blank=False)
     user_pic = models.ImageField(upload_to='user_pics', null=True, blank=True) # pip install pillow 해야함
     user_pic_url = models.URLField(default=None, null=True, blank=True) # 사진을 url로 저장하기 위함
+    chosen_count = models.PositiveIntegerField(default=0)
+    answer_count = models.PositiveIntegerField(default=0)
 
     REQUIRED_FIELDS = []
 
     # question의 ques_point 문자열 호출용
     def left_ques(self):
         return self.ques_point
+
+    def left_ans_point(self):
+        return self.answer_point
+
+    def get_chosen_rate(self):
+        return str(self.chosen_count / self.answer_count * 100)[:5]
 
 
 ''' 신고 사유 목록(임시)

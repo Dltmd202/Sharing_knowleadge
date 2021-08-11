@@ -49,6 +49,8 @@ def new_answer(request, pk):
                 answer = answer_form.save(commit=False)
                 answer.question_id = question
                 answer.user_id = request.user
+                answer.user_id.answer_count += 1
+                answer.user_id.save()
                 answer.save()
                 return redirect(question.get_absolute_url())
         else:
@@ -72,16 +74,21 @@ def vote_answer(request, pk, answer_pk):
         raise PermissionDenied
 
 
-
 def select_answer(request, pk, answer_pk):
     current_answer = Answer.objects.get(id=answer_pk)
+    answered_user = current_answer.user_id
     question = get_object_or_404(Question, pk=pk)
-    if not question.who_chosen and question.user_id == request.user:
+    if not question.who_chosen and not question.user_id == answered_user:
         question.who_chosen = current_answer.user_id
         current_answer.is_chosen = True
+        answered_user.answer_point = str(int(answered_user.left_ans_point() + int(question.get_ques_point())))
+        answered_user.chosen_count += 1
         current_answer.save()
+        answered_user.save()
         question.save()
-    return redirect(question.get_absolute_url())
+        return redirect(question.get_absolute_url())
+    else:
+        raise PermissionDenied
 
 
 class AnswerEdit(LoginRequiredMixin, UpdateView):

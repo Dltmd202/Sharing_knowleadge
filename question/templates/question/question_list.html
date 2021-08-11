@@ -7,7 +7,7 @@ Q & A
 
 
 {% block main_area %}
-    <div class="content-box">
+    <div class="content-box" id="question__list__main">
     {% if search_info %}{% endif %}
         <div class="px-3 px-lg-3">
             <div class="question__list__title">
@@ -99,10 +99,10 @@ Q & A
                             <span>{{ rank.answer_point }}</span>
                         </div>
                         <div class="choosen">
-                            <span>12</span>
+                            <span>{{ rank.chosen_count }}</span>
                         </div>
                         <div class="채택률">
-                            <span>58.4%</span>
+                            <span>{{ rank.get_chosen_rate }}%</span>
                         </div>
                     </div>
                 </div>

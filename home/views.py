@@ -17,6 +17,9 @@ def landing(request):
         pop_question = Question.objects.order_by("-hit_count_generic__hits")[0]
         if pop_question:
             context['pop_question'] = pop_question
+        current_question = Question.objects.order_by("-post_date")[0]
+        if current_question:
+            context['current_question'] = current_question
     context['cnt'] = 0
     return render(
         request,

@@ -33,7 +33,10 @@
                 </label>
             </div>
             <div class="col-auto text-end mb-3">
-                <a href="" class="align-middle">비밀번호를 잊으셨나요?</a>
+                <a href="#" class="align-middle" 
+                onclick="((e) => {e.preventDefault(); notFinished();})(event)">
+                    비밀번호를 잊으셨나요?
+                </a>
             </div>
         </div>
     </form>

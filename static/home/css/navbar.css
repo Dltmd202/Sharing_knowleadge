@@ -5,26 +5,31 @@ header
     top: 0;
     left: 0;
     width: 100%;
-    padding: 40px 100px;
+    padding: 4% 10%;
     z-index: 1000;
     display: flex;
-    align-items: center;
+    align-items: baseline;
     transition: 0.5s;
 }
+
+.nav__toggle{
+    visibility: hidden;
+}
+
 header.sticky
 {
     background: #fff;
-    padding: 20px 100px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    padding: 2% 10%;
+    box-shadow: 0 0.3125em 1.25em rgba(0,0,0,0.1);
 }
 header .logo
 {
     color: #111;
-    font-size: 30px;
+    font-size: 1.875em;
     text-transform: uppercase;
     text-decoration: none;
     font-weight: 700;
-    letter-spacing: 0.25px;
+    letter-spacing: 0.015625em;
 }
 header.sticky .logo
 {
@@ -44,7 +49,7 @@ header ul li a
 {
     position: relative;
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 1em;
     color: #111;
     text-decoration: none;
 }
@@ -69,9 +74,9 @@ header.sticky ul li ::placeholder
 
 .search-button{
     border: none;
-    border-radius: 8px;
-    width: 50px;
-    height: 30px;
+    border-radius: 0.5em;
+    width: 3em;
+    height: 2em;
 }
 
 header a:hover
@@ -82,24 +87,95 @@ header a:hover
 
 .form-control
 {
-    padding: 8px 5px;
-    font-size: 18px;
+    padding: 0.5em 0.3125em;
+    font-size: 1em;
     border-radius: 4px;
     border: none;
 }
 
 header .account{
     position: absolute;
-    right: 100px;
+    right: 6.25em;
 }
 
 #search-input{
     vertical-align: middle;
-    height: 30px;
-    width: 250px;
-    font-size: 16px;
+    height: 2em;
+    width: 15.625em;
+    font-size: 1em;
 }
 
 .menu .input-box{
     display: flex;
+}
+
+header .account{
+    padding-top: 1.5rem;
+}
+
+@media screen and (max-width: 1200px){
+    .input-box{
+        visibility: hidden;
+        height: 0;
+    }
+}
+
+@media screen and (max-width: 780px){
+    header{
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    header ul{
+        display: none;
+        flex-direction: column;
+        position: static;
+        padding-left: 0 !important;
+        text-align: center;
+        padding-top: 0 !important;
+    }
+
+    header ul li{
+        position: static;
+    }
+
+    header ul div{
+        flex-direction: column;
+    }
+
+    header ul div li a{
+        width: 100% !important;
+    }
+
+    header ul div li a:hover{
+        background-color: #e3e3e3;
+        transition: 0.5s;
+    }
+
+    .nav-utils{
+        margin-bottom: 0 !important;
+    }
+
+    header .account{
+        position: static;
+        padding-top: 0 !important;
+    }
+
+    .nav__toggle{
+        visibility: visible;
+        color: black;
+    }
+
+    .nav__top{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    header .active{
+        display: flex;
+    }
+
+    header ul div li a{
+        margin-top: 0.5em;
+    }
 }

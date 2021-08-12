@@ -1,18 +1,26 @@
-
-var header;
 var input_box;
 var input_box_height;
 
 window.onload = function () {
     input_box = document.getElementById('input-box');
     header = document.querySelector('header');
+
+    var questionForm = document.querySelector(".question__form");
+    var questionArticle = document.getElementsByClassName("question__article");
+    if (questionForm) {
+        console.log("questionForm " + questionForm);
+        console.log("questionArticle " + questionArticle[0]);
+        questionArticle[0].classList.remove('active');
+    }
 }
 
 window.addEventListener('scroll', function(){
     var header = document.querySelector('header');
     let scrollLocation = document.documentElement.scrollTop;
-
-    header.classList.toggle('sticky', window.scrollY > 0);
+    var toggledNav = document.querySelector("header .active");
+    if (toggledNav === null){
+        header.classList.toggle('sticky', window.scrollY > 0);
+    }
 	// let windowHeight = window.innerHeight;
 	// let fullHeight = document.body.scrollHeight;
     // console.log(input_box.scrollHeight, header.scrollHeight, scrollLocation)
@@ -63,3 +71,31 @@ function searchBox(id){
         }
     }
 }
+
+const toggleBtn = document.querySelector(".nav__toggle");
+const nav_utils = document.querySelector(".nav-utils");
+const account = document.querySelector(".account");
+var header = document.querySelector('header');
+
+toggleBtn.addEventListener("click", ()=> {
+    var toggledNav = document.getElementsByClassName("sticky");
+    console.log(toggledNav[0]);
+    console.log(nav_utils);
+    nav_utils.classList.toggle('active');
+    account.classList.toggle('active');
+    if (toggledNav[0] === undefined){
+        header.classList.toggle('sticky');
+    } else{
+        header.classList.toggle('sticky', window.scrollY > 0);
+    }
+});
+
+var categoryBtn = document.querySelector("#category__toggle__button");
+console.log(categoryBtn);
+categoryBtn.addEventListener("click", ()=>{
+    var categoryList = document.querySelector("#category__list");
+    console.log(categoryList);
+    categoryList.classList.toggle('active');
+})
+
+

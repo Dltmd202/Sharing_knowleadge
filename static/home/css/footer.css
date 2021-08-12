@@ -1,12 +1,19 @@
+
+
 footer{
     padding-left: 30px;
     padding-right: 30px;
     padding-top: 30px;
+    color: white;
 }
 
 .footer-div{
     float: left;
     margin-left: 10px;
+}
+
+footer .footer-div .address{
+    margin-bottom: 0;
 }
 
 .footer-text{
@@ -22,6 +29,61 @@ footer{
 .grass{
     background-image: url(../img/grass2.png) ;
     background-size:contain;
-    background-color: #347F80;
     background-position: right;
+}
+
+footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-div{
+    margin-left: 1%;
+}
+
+.footer-text{
+    color: white;
+    font-size: small;
+}
+
+.footer__all .black{
+    background: black;
+    min-height: 150px;
+    padding: 4em 2.5em;
+}
+
+footer div:nth-child(1) p{
+    font-size: large;
+}
+
+@media screen and (max-width:1000px){
+    footer div:nth-child(2){
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .grass{
+        display: none;
+    }
+
+    .footer__all{
+        margin-top: 12.5em;
+    }
+
+    .footer__all .black{
+        padding: 1.5em 1em;
+    }
+
+    footer{
+        flex-direction: column;
+    }
+
+    footer .footer-div .address{
+        display: inline;
+    }
+
+    footer div:nth-child(1) p{
+        font-size: x-large;
+    }
 }

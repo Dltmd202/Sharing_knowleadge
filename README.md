@@ -26,10 +26,13 @@
 * `pip install django-formtools`
 * `pip install djangorestframework`
 * `pip install markdown`
-* `pip install django-filter` 
+* `pip install django-allauth`
+* `pip install django-cors-headers`
+* `pip install django-filter`
+* `pip install django-hitcount`
 * `pip install pip --upgrade`
 * `pip install -r requirements.txt`
-* `pip3 install django-markdown-deux`
+* `pip install django-markdown-deux`
 
   
 ## 개발

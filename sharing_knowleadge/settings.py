@@ -26,12 +26,15 @@ SESSION_SAVE_EVERY_REQUEST = True
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2lplz5z0vj&m)v*ax-0f7x*tvmu-oe10@d67v2x-skoa^-gm@3'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-2lplz5z0vj&m)v*ax-0f7x*tvmu-oe10@d67v2x-skoa^-gm@3')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', 1))
 
-ALLOWED_HOSTS = []
+if os.environ.get('ALLOWED_HOSTS'):
+    ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split()
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -60,7 +63,6 @@ INSTALLED_APPS = [
     'home',
     'university',
     'company',
-    'markdown_deux',
     'comment',
     'hitcount'
 ]

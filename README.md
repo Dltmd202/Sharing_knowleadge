@@ -11,6 +11,9 @@
 * university - 채호님
 * company - 채호님
 
+# URL
+[OG-LAB](http://www.og-lab.net/)
+
 ## 초기화
 * `git clone https://github.com/Dltmd202/Sharing_knowleadge`
 * `python -m venv venv`

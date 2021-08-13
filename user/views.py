@@ -76,6 +76,8 @@ def mypageView(request):
     if request.user.is_authenticated:
         user = request.user
         answer = user.answer_set.all()
+        chosen_len = len(answer.filter(is_chosen=True))
+        vote_score = len(answer.values('vote_user'))
         question = user.question_set.all()
         university = user.university_set.all()
         company = user.company_set.all()
@@ -85,6 +87,8 @@ def mypageView(request):
         return render(request, 'user/mypage.html', 
             {
                 'answer_list': answer,
+                'chosen_len': chosen_len,
+                'vote_score': vote_score,
                 'question_list': question,
                 'university': university[:total_len],
                 'company': company[:(total_len - uni_len)]

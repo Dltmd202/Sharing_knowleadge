@@ -41,7 +41,7 @@
         </div>
     </form>
     <div class="border-top border-2 mt-5"></div>
-    <div class="row mt-4 pb-5 justify-content-center">
+    <div class="row mt-4 justify-content-center">
         <a href="{% provider_login_url 'google' method='oauth2' %}"
             class="col-auto btn-lg btn-primary mx-2 my-3">구글 로그인</a>
         <a href="{% provider_login_url 'kakao' method='oauth2' %}"
@@ -49,7 +49,7 @@
         <a href="{% provider_login_url 'naver' method='oauth2' %}"
             class="col-auto btn-lg btn-success mx-2 my-3">네이버 로그인</a>
     </div>
-    <div class="row mt-3 mb-5 justify-content-center">
+    <div class="row mt-3 justify-content-center">
         <div class="col-auto text-muted">회원이 아니신가요?</div>
         <a class="col-auto" href="{% url 'register' %}">회원가입</a>
     </div>

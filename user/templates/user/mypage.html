@@ -28,12 +28,12 @@
         </div>
         <div class="col-lg-4 profilebox">
             <div>채택된 답변 개수</div>
-            <div class="h1 text-center bignumber">{{ chosen.count|intcomma }}</div>
+            <div class="h1 text-center bignumber">{{ chosen_len|intcomma }}</div>
         </div>
         <div class="col-lg profilebox">
             <div>누적 득표수</div>
             <div class="h1 text-center bignumber">
-                {% if user.score >= 0 %}+{% endif %}{{ user.score|intcomma }}
+                {% if vote_score >= 0 %}+{% endif %}{{ vote_score|intcomma }}
             </div>
         </div>
     </div>
@@ -65,21 +65,23 @@
             <div>답변 목록</div>
             {% if not answer_list %}
                 <div class="absolute-center">
-                    <div class="bigtext text-center">Empty!</div>
+                    <div class="bigtext font-washed text-center">Empty!</div>
                 </div>
             {% else %}
                 <div class="mx-4">
                     {% for answer in answer_list|dictsortreversed:"answer_date" %}
                         <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
-                            <div class="col-auto" style="font-size: 25pt; font-weight: bolder; color: #7FC4FD;">
-                                {% if answer.vote_count >= 0 %}+{% endif %}{{ answer.vote_count }}
+                            <div class="col-auto font-midnight mypage-tag">
+                                {% if answer.vote_user.count >= 0 %}+{% endif %}{{ answer.vote_user.count }}
                             </div>
                             <div class="col my-auto">
-                                {{ answer.question_id.ques_title }}
+                                {{ answer.answer_title }}
                             </div>
-                            <div class="col my-auto d-flex justify-content-end">
-                                <span class="badge rounded-pill bg-dark border p-2">채택!</span>
-                            </div>
+                            {% if answer.is_chosen %}
+                                <div class="col my-auto d-flex justify-content-end">
+                                    <span class="badge rounded-pill bg-midnight p-2">채택!</span>
+                                </div>
+                            {% endif %}
                             <a href="{% url 'res' answer.question_id.pk %}" class="stretched-link"></a>
                         </div>
                     {% endfor %}
@@ -91,7 +93,7 @@
             <div class="mt-3">
                 {% if not university and not company %}
                 <div class="absolute-center-off">
-                    <div class="bigtext text-center">Empty!</div>
+                    <div class="bigtext font-washed text-center">Empty!</div>
                 </div>
                 {% endif %}
                 {% if university %}
@@ -134,11 +136,18 @@
             <div class="mx-4">
             {% if not question_list %}
                 <div class="absolute-center">
-                    <div class="bigtext text-center">Empty!</div>
+                    <div class="bigtext font-washed text-center">Empty!</div>
                 </div>
             {% else %}
                 {% for question in question_list|dictsortreversed:"modify_date" %}
                     <div class="row border border-teal rounded-pill my-4 px-2 py-1" style="position: relative;">
+                        <div class="col-auto my-auto">
+                            {% if question.category_id %}
+                                <div class="font-midnight mypage-tag">{{ question.category_id }}</div>
+                            {% else %}
+                                <div class="mypage-tag font-washed" style="color: light">None</div>
+                            {% endif %}
+                        </div>
                         <div class="col my-auto">
                             {{ question.ques_title }}
                         </div>

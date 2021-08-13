@@ -16,7 +16,6 @@
 
 .bigtext {
     margin-top: 0px;
-    color: #e0e0e0;
 }
 
 .blank-userpic, .blank-userpic-small, .blank-userpic-smallest, .blank-userpic-smallest-fill {
@@ -71,6 +70,11 @@
     color: midnightblue;
 }
 
+.mypage-tag {
+    font-size: 25px; 
+    font-weight: bolder;
+}
+
 .font-teal {
     color: teal !important;
 }
@@ -83,12 +87,20 @@
     color: wheat !important;
 }
 
+.font-washed {
+    color: #e0e0e0 !important;
+}
+
 .border-teal {
     border-color: teal !important;
 }
 
 .border-midnight {
     border-color: midnightblue !important;
+}
+
+.bg-midnight {
+    background-color: midnightblue !important;
 }
 
 /* i 태그 */

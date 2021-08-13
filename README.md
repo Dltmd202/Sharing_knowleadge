@@ -1,5 +1,8 @@
 # Sharing_knowleadge
 
+# URL
+[OG-LAB](http://www.og-lab.net/)
+
 # 통합 브랜치 
 * main
 
@@ -11,8 +14,6 @@
 * university - 채호님
 * company - 채호님
 
-# URL
-[OG-LAB](http://www.og-lab.net/)
 
 ## 초기화
 * `git clone https://github.com/Dltmd202/Sharing_knowleadge`
